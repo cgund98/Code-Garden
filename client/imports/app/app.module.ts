@@ -8,13 +8,14 @@ import { routes } from './app.routes';
 // import { CollectPageModule } from '../pages/collect/collect-page.module';
 // import { AnalyzePageModule } from '../pages/analyze/analyze-page.module';
 import { LessonPageModule } from '../pages/lessons/lesson-page.module';
-
+import { CoursePageModule } from '../pages/courses/course-page.module';
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     // CollectPageModule,
     LessonPageModule,
+    CoursePageModule,
   ],
   declarations: [
     AppComponent,

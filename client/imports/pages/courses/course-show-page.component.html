@@ -1,0 +1,21 @@
+<template name="ShowCourse">
+    > HeroMain title=(title this.courseID) subtitle="Course"
+    <div class="container">
+        <div class="text-center"><button class="enroll">ENROLL</button></div>
+        <p class="course-description"> fullDesc this.courseID</p>
+        <div class="title-wrapper">
+            <h4>Lessons</h4>
+        </div>
+        <ol class="course-lessons">
+            <li class=" col-xs-12 col-md-3 col-xl-2 new"><a href=" newLessonLink courseID "><div><p>New Lesson</p><i class="fa fa-plus" aria-hidden="true"></i></div></a></li>
+            <!--<li class=" col-xs-12 col-md-3 col-xl-2"><a href='#'><div><p>Variables</p><i class="fa fa-check" aria-hidden="true"></i></div></a></li>-->
+            <!--<li class=" col-xs-12 col-md-3 col-xl-2"><a href='#'><div><p>Attributes</p><i class="fa fa-unlock" aria-hidden="true"></i></div></a></li>-->
+            <!--<li class=" col-xs-12 col-md-3 col-xl-2"><a href='#'><div><p>Attributes</p><i class="fa fa-lock" aria-hidden="true"></i></div></a></li>-->
+            <!--<li class=" col-xs-12 col-md-3 col-xl-2"><a href='#'><div><p>Elements</p><i class="fa fa-lock" aria-hidden="true"></i></div></a></li>-->
+            <!--<li class=" col-xs-12 col-md-3 col-xl-2"><a href='#'><div><p>Attributes</p><i class="fa fa-lock" aria-hidden="true"></i></div></a></li>-->
+            <!-- #each lessons this.courseID -->
+                <!-- > LessonCard 
+            /each -->
+        </ol>
+    </div>
+</template>
