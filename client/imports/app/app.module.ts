@@ -5,16 +5,16 @@ import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { routes } from './app.routes';
-import { CollectPageModule } from '../pages/collect/collect-page.module';
-import { AnalyzePageModule } from '../pages/analyze/analyze-page.module';
-
+// import { CollectPageModule } from '../pages/collect/collect-page.module';
+// import { AnalyzePageModule } from '../pages/analyze/analyze-page.module';
+import { LessonPageModule } from '../pages/lessons/lesson-page.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    CollectPageModule,
-    AnalyzePageModule,
+    // CollectPageModule,
+    LessonPageModule,
   ],
   declarations: [
     AppComponent,
