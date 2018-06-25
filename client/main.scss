@@ -1,0 +1,1229 @@
+// Import Fonts
+@font-face {
+    font-family: GlacialIndifference;
+    font-weight: normal;
+    src: url(fonts/GlacialIndifference-Regular.otf)
+}
+@font-face {
+    font-family: GlacialIndifference;
+    font-weight: bold;
+    src: url(fonts/GlacialIndifference-Bold.otf)
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+* {
+    box-sizing: border-box;
+}
+//Define Colors
+$dark: #222222;
+$black: #222222;
+$green: #3fC380;
+$light-green: #6ef1b5;
+$white: #ffffff;
+$red: #EA5444;
+$off-white: #FBFBFB;
+$footer-black: #0A0A0A;
+$footer-dark: #0C0C0C;
+$white: #FFFFFF;
+$ghost: #F5F5F5;
+
+$breakpoints: (
+  xs: 300px,
+  sm: 480px,
+  md: 750px,
+  lg: 992px,
+  xl: 1260px,
+  xx: 1600px,
+  xxl: 1900px
+);
+
+@mixin break($size) {  
+  @media (min-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+@mixin max-break($size) {  
+  @media (max-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+// Main Styles
+a {
+    text-decoration: none !important;
+    color: $dark;
+    transition: .75s ease-in-out;
+    &:hover {
+        color: $green;
+    }
+}
+textarea {
+    resize: none;
+}
+body {
+    font-size: 16px;
+    font-family: GlacialIndifference,Helvetica, Sans-serif;
+    overflow-x: hidden;
+}
+p {
+    font-size: 2rem;
+}
+.code {
+    font-family: Inconsolata;
+}
+.text-green {
+    color: $green;
+}
+
+// Header
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: .25em;
+}
+
+header.main {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    nav {
+        & > a {
+            float: right;
+            font-weight: bold;
+            margin: 1em 2em;
+            letter-spacing: .05em;
+            font-size: 1.15em;
+            border-bottom: 2px solid white;
+            &:hover {
+                color: $green;
+                border-bottom: 2px solid $green;
+            }
+        }
+        i {
+            font-size: 1.25em;
+        }
+    }
+}
+
+// Section Styles for a Lesson
+.lesson-body {
+    margin: 2em auto;
+    position: relative;
+}
+.prev-next-container {
+    font-weight: bold;
+    font-size: 1.75rem;
+    width: 100%;
+    color: #aeaeae;
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+    i {
+        position: relative;
+        top: .1em;
+        margin: 0 1em;
+    }
+    a {
+        color: #aeaeae;
+    }
+}
+.subtitle {
+    font-weight: bold;
+    font-size: 2.25em;
+    width: 100%;
+    text-align: center;
+    letter-spacing: .05em;
+}
+.section {
+    margin: 2em auto;
+    position: relative;
+    z-index: 10;
+    p {
+        margin: 1.25em 0;
+    }
+}
+
+.card {
+    -webkit-box-shadow: 0px 0px 69px 6px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 69px 6px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 69px 6px rgba(0,0,0,0.1);
+}
+.code-box {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    height: 275px;
+    .code-container {
+        padding: 1em;
+        background: $dark;
+        position: relative;
+        overflow: hidden;
+        .code {
+            background: $dark !important;
+        }
+        .alert {
+            color: white;
+            // font-weight: bold;
+            width: 100%;
+            position: absolute;
+            bottom: -1em;
+            font-size: 1.25em;
+            padding: .5em 1em;
+            left: 0;
+            border-radius: 0px;
+            #close {
+                font-size: 3em;
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                top: -.4em;
+                right: .25em;
+                cursor: pointer;
+            }
+        }
+        .success {
+            background: $green;
+        }
+        .failed {
+            background: $red !important;
+        }
+    }
+    .tasks-container {
+        height: 100%;
+        background: #f8f8f8;
+        padding: .5em;
+        padding-left: 1em;
+        height: inherit;
+        z-index: 10;
+        h5 {
+            font-size: 1.25em;
+            margin-left: .75em;
+            font-weight: bold;
+        }
+        ul {
+           margin: 0; 
+          padding: 0 1em;
+        }
+        li {
+            font-size: 1.1em;
+        }
+    }
+}
+.code {
+    font-family: 'Roboto Mono' !important;
+    letter-spacing: auto;
+}
+@-webkit-keyframes blueGreen {
+    0%{background-position:0% 87%}
+    50%{background-position:100% 14%}
+    100%{background-position:0% 87%}
+}
+@-moz-keyframes blueGreen {
+    0%{background-position:0% 87%}
+    50%{background-position:100% 14%}
+    100%{background-position:0% 87%}
+}
+@-o-keyframes blueGreen {
+    0%{background-position:0% 87%}
+    50%{background-position:100% 14%}
+    100%{background-position:0% 87%}
+}
+@keyframes blueGreen {
+    0%{background-position:0% 87%}
+    50%{background-position:100% 14%}
+    100%{background-position:0% 87%}
+}
+.page-hero {
+    background: linear-gradient(195deg, #3fc380, #4a94dd, #3fc380);
+    background-size: 600% 600%;
+    -webkit-animation: blueGreen 43s ease infinite;
+    -moz-animation: blueGreen 43s ease infinite;
+    -o-animation: blueGreen 43s ease infinite;
+    animation: blueGreen 43s ease infinite;
+    position: relative;
+    margin-bottom: 4em;
+    overflow: hidden;
+    &.profile {
+        padding: 50px 0;
+        margin-bottom: 11em;
+        padding-bottom: 80px;
+    }
+    .wrapper {
+    width: 100%;
+    padding: 120px 0 120px 0;
+    text-align: center;
+    position: relative;
+    }
+    .hero-subtitle {
+        font-weight: regular;
+        letter-spacing: 5px;
+        position: absolute;
+        color: $white;
+        font-size: 1.2em;
+        width: 100%;
+        padding: 50px 0;
+        top: 0;
+        text-transform: uppercase;
+    }
+    .hero-title {
+        text-transform: uppercase;
+        color: $white;
+        font-size: 3em;
+        font-weight: bold;
+        letter-spacing: 2px;
+        padding: 15px 75px 15px 75px;
+        text-align: center;
+        border: 2px solid $white;
+        display: inline;
+        &::placeholder {
+            color: white;
+        }
+    }
+    .image-wrapper {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 50%;
+        height: 17.5em;
+        width: 17.5em;
+        @include transform(translateX(-50%));
+        left: 50%;
+        top: 16em;
+        z-index: 30;
+        img {
+            position: absolute;
+            left: 50%;
+            @include transform(translate(-50%));
+        }
+    }
+}
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+.particles-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+button {
+    background: $dark;
+    // text-transform: uppercase;
+    border: none;
+    color: white;
+    padding: .25em 1.5em;
+    font-size: 1.1em;
+    letter-spacing: .1em;
+    outline: none !important;
+    transition: .5s ease-in-out;
+    &.run {
+        background: $green;
+        float: right;
+    }
+    &.delete {
+        background: none;
+        margin: auto;
+        border: 2px solid $red;
+        color: $red;
+        &:hover {
+            background: $red;
+            color: white;
+        }
+    }
+    &.remove {
+        background: $red;
+        position: absolute;
+        right: -.75em;
+        top: -.75em;
+        padding: 0;
+        height: 2.25em;
+        width: 2.25em;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 1.5em;
+        vertical-align: middle;
+        i {
+            position: relative;
+            left: 2px;
+        }
+    }
+    &.resume {
+        background: $dark;
+        padding: 0;
+        height: 2.25em;
+        width: 2.25em;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 1em;
+        margin-top: .5em;
+        vertical-align: middle;
+        i {
+            position: relative;
+            left: 2px;
+        }
+    }
+    &.add {
+        background: $green;
+        padding: .5em 1.5em;
+        z-index: 550;
+        margin-top: 1em;
+        position: relative;
+        top: 2em;
+    }
+    &.login {
+        top: 0 ;
+    }
+    &.enroll {
+        background: none;
+        color: $green;
+        border: $green solid 2px;
+        font-size: 1.5em;
+        &:hover {
+            color: white;
+            background: $green;
+        }
+    }
+    &.change {
+        background: $light-green;
+    }
+}
+input {
+    background: none;
+    outline: none !important;
+    border: none;
+    border-bottom: 2px solid #aeaeae;
+}
+textarea {
+    width: 100%;
+    outline: none !important;
+    margin: 2em 0;
+    padding: .5em;
+    border: 2px #aeaeae solid;
+    height: 8em;
+    background: none;
+}
+.edit {
+    background: #f8f8f8;
+    padding: 2em;
+    display: inline-block;
+}
+.title-wrapper {
+    border-bottom: 2px solid $dark;
+    h4 {
+        font-size: 1.5em;
+    }
+}
+.resume-master-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 13em;
+    top: 1em;
+}
+.resume-link {
+    @include transform(translateX(-50%));
+    position: absolute;
+    left: 50%;
+}
+.resume-wrapper {
+    margin: auto;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    transition: .25s ease-in-out;
+    &:hover {
+        @include transform(scale(1.1));
+    }
+    h3 {
+        font-weight: bold;
+        font-size: 2em;
+        letter-spacing: .1em;
+    }
+    .icon {
+        display: inline-wrapper;
+        float: left;
+        padding: 1em 2em;
+        vertical-align: middle;
+        background: $dark;
+        color: white;
+        height: inherit;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        i {
+            position: relative;
+            top: .75em;
+        }
+        
+    }
+    .info {
+        padding: 1em 4em;
+        margin-left: 6em;
+        background: $green;
+        color: white;
+        padding-left: 2em;
+        float: right;
+        padding-bottom: 1.5em;
+        h4 {
+            font-size: 1.5em;
+        }
+    }
+}
+.course-description {
+    margin: 2em 0;
+}
+.course-lessons {
+    margin: 1em 0;
+    list-style: none;
+    padding: 0;
+    li {
+        font-size: 1.25em;
+        text-decoration: none;
+        margin: 1em 0;
+        letter-spacing: .05em;
+        text-align: center;
+        display: inline-block;
+        p {
+            color: white;
+            font-size: 1.25em;
+        }
+        div {
+            padding: 2em 0;
+            color: white;
+            transition: .25s ease-in-out;
+            &:hover {
+                @include transform(scale(1.05));
+            }
+        }
+        &.new {
+            div {
+                background: $green !important;
+            }
+        }
+    }
+    li:nth-child(5n+0) div {
+        background-image: linear-gradient(to left, #a770ef 0%, #cf8bf3 50%, #fdb99b 100%);
+    }
+    li:nth-child(5n+1) div {
+        background-image: linear-gradient(to top right, #C33764 0%, #1D2671 100%);
+    }
+    li:nth-child(5n+2) div {
+        background-image: linear-gradient(to top right, #6190E8 0%, #a7bfe8 100%);
+    }
+    li:nth-child(5n+3) div {
+        background-image: linear-gradient(to top right, #43c6ac 0%, #f8ffae 100%);
+    }
+    li:nth-child(5n+4) div {
+        background-image: linear-gradient(to top right, #4568DC 0%, #b06ab3 100%);
+    }
+}
+.dropdown {
+    color: $dark;
+    display: inline-block;
+    float: right;
+    position: relative;
+    
+    &:hover {
+        .children {
+            display: block;
+        }
+    }
+    & > div {
+        pointer: cursor;
+    }
+    .parent {
+        // margin-left: -2em;
+        margin-top: 1.25em;
+        padding-bottom: .5em;
+        padding-left: 4em;
+        padding-right: 4em;
+        margin-right: 0;
+    }
+    .children {
+        width: 10em;
+        display: none;
+        background: $white;
+        border: solid $dark 1px;
+        position: absolute;
+        top: 2.75em;
+        z-index: 10;
+        text-align: center;
+        & > a {
+            padding: .5em 1em;
+            font-weight: bold;
+            display: block;
+            &:hover {
+                color: $green;
+            }
+        }
+    }
+}
+
+@keyframes lessons-nav {
+    0% {
+        left: -20em;
+    }
+    50% {
+        left: -20em;
+    }
+    100% {
+        left: 0;
+    }
+}
+.lessons-nav-wrapper {
+    position: fixed;
+    left: -20em;
+    top: 25vh;
+    background: $dark;
+    border-right: 4px solid $green;
+    z-index: 140;
+    width: 20em;
+    transition: .5s ease-in-out;
+    &.active {
+        animation: lessons-nav 1s ease-in-out forwards;
+        .event {
+            right: -3.25em;
+            .diamond {
+                @include transform(rotate(0deg));
+            }
+        }
+    }
+    .event {
+        float: right;
+        position: absolute;
+        top: 0;
+        right: -5em;
+        transition: .25s ease-in-out;
+        &:hover {
+            // right: -3.25em;
+        }
+        &:hover .diamond {
+            // @include transform(rotate(0deg));
+        }
+        .diamond {
+            transition: .25s ease-in-out;
+            @include transform(rotate(45deg));
+            height: 3em;
+            width: 3em;
+            background: $dark;
+            
+        }
+        i {
+            position: absolute;
+            font-size: 1.5em;
+            top: .5em;
+            left: .5em;
+            background: $dark;
+            color: white;
+        }
+    }
+    .lessons-nav {
+        float: left;
+        color: $green;
+        padding: 2em 1em;
+        padding-top: 1em;
+        margin-top: 0;
+        a {
+            font-size: 1.15em;
+            color: white;
+            display: block;
+            // font-weight: bold;
+            margin: 0 1em;
+            transition: .25s ease-in-out;
+            &:hover {
+                @include transform(scale(1.05))
+            }
+            &.completed {
+                color: $green;
+            }
+            &.locked {
+                color: #aeaeae;
+            }
+            &.current {
+                color: #336E7B;
+            }
+            i {
+                width: 1em;
+                margin: 0 .5em;
+            }
+        }
+    }
+}
+.profile-name {
+    text-align: center;
+    font-size: 3em;
+}
+.profile-username {
+    text-align: center;
+    font-size: 1.75em;
+}
+.gradient-line {
+    width: 50%;
+    margin: auto;
+    background-image: linear-gradient(to top right, #00c9ff 0%, #92fe9d 100%);
+    height: 2px;
+}
+.small-space {
+    height: 10PX;
+    padding: 1px;
+}
+.medium-space {
+    height: 30px;
+    padding: 1px;
+}
+.large-space {
+    height: 55px;
+    padding: 1px;
+}
+.profile-stat {
+    text-align: center;
+    margin-bottom: 2em;
+    p {
+        font-size: 1.65em; 
+    }
+    .num {
+        font-size: 4em;
+        background-image: linear-gradient(to top right, #00c9ff 0%, #92fe9d 70%);
+          color:transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
+    }
+}
+.profile-tab-nav {
+    text-align: center;
+    a {
+        margin: 1em 2em;
+        font-size: 1.25em;
+        padding: .5em 1em;
+        width: 4em;
+        &.active {
+            color: $light-green;
+            border: $light-green solid 2px;
+        }
+        &:hover {
+            color: $light-green;
+        }
+    }
+}
+.profile-tab-content {
+    background: #f8f8f8;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 1em 2em;
+    margin-top: 2em;
+}
+.settings-tab {
+    text-align: center;
+    & > div {
+        padding: .5em 1em;
+        input {
+            text-align: center;
+            width: 100%;
+            padding-left: .5em;
+            margin-bottom: 1em;
+        }
+    }
+}
+.exp {
+  display: table; // to center the item
+  width: 100%;
+  height: 100%;
+  
+  .checkbox {
+    display: table-cell; // to center the item
+    width: 100%;
+    height: 100%;
+    vertical-align: middle; // to center the item
+    text-align: center; // to center the item
+  }
+}
+
+label {
+    display: inline-block; // to make it easier to click
+    color: $green;
+    cursor: pointer;
+    position: relative;
+    font-size: 1.25em;
+    // important
+  
+    // Now we'll create the checkbox object
+  
+    span {
+      display: inline-block;
+      position: relative;
+      background-color: transparent;
+      width: 25px;
+      height: 25px;
+      transform-origin: center;
+      border: 2px solid $green;
+      border-radius: 50%;
+      vertical-align: -6px;
+      margin-right: 10px;
+      transition: background-color 150ms 200ms, transform 350ms cubic-bezier(.78,-1.22,.17,1.89); // custom ease effect for bouncy animation
+  
+  // Now we'll create the "tick" using pseudo elements - those will be basically two lines that will be rotated to form the "tick"
+  
+    &:before {
+      content: "";
+      width: 0px;
+      height: 2px;
+      border-radius: 2px; // so that the tick has nice rounded look
+      background: $green;
+      position: absolute;
+      transform: rotate(45deg);
+      top: 11px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      left: 8px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      transition: width 50ms ease 50ms;
+      transform-origin: 0% 0%;
+    }
+  
+    &:after {
+      content: "";
+      width: 0;
+      height: 2px;
+      border-radius: 2px; // so that the tick has nice rounded look
+      background: $green;
+      position: absolute;
+      transform: rotate(305deg);
+      top: 15px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      left: 9px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      transition: width 50ms ease;
+      transform-origin: 0% 0%;
+    }
+  }
+  // Time to add some life to it
+  
+  &:hover {
+    span {
+      &:before {
+        width: 5px;
+        transition: width 100ms ease;
+      }
+      
+      &:after {
+        width: 10px;
+        transition: width 150ms ease 100ms;
+      }
+    }
+  }
+}
+
+input[type="checkbox"] {
+    display: none; // hide the system checkbox
+  
+  // Let's add some effects after the checkbox is checked
+  
+  &:checked {
+    + label {
+      span {
+        background-color: #fff;
+        transform: scale(1.1); // enlarge the box
+        
+        &:after {
+          width: 10px;
+          background: $green;
+          transition: width 150ms ease 100ms; // enlarge the tick
+        }
+        
+        &:before {
+          width: 5px;
+          background: $green;
+          transition: width 150ms ease 100ms; // enlarge the tick
+        }
+      }
+      
+      &:hover { // copy the states for onMouseOver to avoid flickering
+        span {
+          background-color: #fff;
+          transform: scale(1.1); // enlarge the box
+
+          &:after {
+            width: 10px;
+            background: $green;
+            transition: width 150ms ease 100ms; // enlarge the tick
+          }
+
+          &:before {
+            width: 5px;
+            background: $green;
+            transition: width 150ms ease 100ms; // enlarge the tick
+          }
+        }  
+      }
+    }
+  }
+}
+.login-wrapper {
+    background: linear-gradient(195deg, #3fc380, #4a94dd, #3fc380);
+    background-size: 600% 600%;
+    -webkit-animation: blueGreen 43s ease infinite;
+    -moz-animation: blueGreen 43s ease infinite;
+    -o-animation: blueGreen 43s ease infinite;
+    animation: blueGreen 43s ease infinite;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    text-align: center;
+    .wrapper {
+        background: white;
+        padding: 2em;
+        position: absolute;
+        @include transform(translate(-50%));
+        left: 50%;
+        top: 20%;
+        input {
+            width: 100%;
+            text-align: center;
+            margin: 1em 0;
+        }
+        form {
+            margin-bottom: 1em;
+        }
+        p {
+            margin-top: 1.5em;
+            font-size: 1em;
+            &.error {
+                color: $red;
+            }
+            a {
+                color: $green;
+                &:hover {
+                    color: $light-green;
+                }
+            }
+        }
+    }
+    .signup {
+        top: 10%;
+        input {
+            margin: .5em 0;
+        }
+    }
+}
+.error {
+    color: $red;
+}
+.radio-wrapper{
+  color: #AAAAAA;
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.radio-wrapper input[type=radio]{
+  position: absolute;
+  visibility: hidden;
+}
+
+.radio-wrapper label{
+    color: $dark;
+  display: block;
+  position: relative;
+  top: .6em;
+  font-weight: 300;
+  font-size: 1.25em;
+  padding: .5em 0px 0px 60px;
+  margin: 5px auto;
+  height: 30px;
+  z-index: 9;
+  cursor: pointer;
+  -webkit-transition: all 0.25s linear;
+}
+
+.radio-wrapper:hover label{
+	color: $green;
+}
+
+.radio-wrapper .check{
+  display: block;
+  position: absolute;
+  border: 2px solid #AAAAAA;
+  border-radius: 100%;
+  height: 23px;
+  width: 23px;
+  top: 30px;
+  left: 20px;
+	z-index: 5;
+	transition: border .25s linear;
+	-webkit-transition: border .25s linear;
+}
+
+.radio-wrapper:hover .check {
+//   border: 5px solid $dark;
+}
+
+.radio-wrapper .check::before {
+  display: block;
+  position: absolute;
+	content: '';
+  border-radius: 100%;
+  height: 10px;
+  width: 10px;
+  top: 5px;
+	left: 5px;
+  margin: auto;
+	transition: background 0.25s linear;
+	-webkit-transition: background 0.25s linear;
+}
+
+input[type=radio]:checked ~ .check {
+  border: 2px solid $green;
+}
+
+input[type=radio]:checked ~ .check::before{
+  background: $green;
+}
+
+input[type=radio]:checked ~ label{
+  color: $green;
+}
+.course-card {
+        height: 200px;
+        padding: 20px;
+        position: relative;
+    
+    .wrapper {
+        position: relative;
+        background: $off-white;
+        overflow: hidden;
+        padding: 10px 10px 0px 15px;
+        transition: .25s ease-in-out;
+        height: 165px;
+        
+        &:hover {
+        -webkit-box-shadow: 2px 5px 63px -42px rgba(0,0,0,0.9);
+        -moz-box-shadow: 2px 5px 63px -42px rgba(0,0,0,0.9);
+        box-shadow: 2px 5px 63px -42px rgba(0,0,0,0.9);
+            transform: scale(1.02);
+            cursor: pointer;
+            height: 250px;
+            z-index: 999;
+            
+            
+            .description {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .gradient-wrapper {
+        position: relative;
+        padding: 10px;
+        height: 100px;
+        width: 500px;
+        -ms-transform: rotate(-5deg); /* IE 9 */
+        -webkit-transform: rotate(-5deg); /* Safari */
+        transform: rotate(-5deg);
+        margin: -30px 0 0 -50px;
+        
+        -webkit-box-shadow: 2px 5px 63px -42px rgba(0,0,0,0.76);
+        -moz-box-shadow: 2px 5px 63px -42px rgba(0,0,0,0.76);
+        box-shadow: 2px 5px 63px -42px rgba(0,0,0,0.76);
+        
+        background: #A1FFCE;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left bottom, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left bottom, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+        @include max-break(lg){
+            width: 1000px;
+            height: 200px;
+            margin-top: -130px;
+            -ms-transform: rotate(-2deg); /* IE 9 */
+            -webkit-transform: rotate(-2deg); /* Safari */
+            transform: rotate(-2deg);
+        }
+        
+    }
+    
+    .resume {
+        background: $white;
+        border: none;
+        padding: 0;
+        height: 2.25em;
+        width: 2.25em;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 1em;
+        margin-top: .5em;
+        vertical-align: middle;
+        right: 20px;
+        top: 50px;
+        z-index: 20;
+        position: absolute;
+        margin-top: -28px;
+        outline: none !important;
+        
+        i {
+            position: relative;
+            color: $black;
+            left: 0;
+            z-index: 20;
+        }
+        
+    }
+    
+    .title {
+        position: relative;
+        font-size: 1.5em;
+        color: $black;
+        margin-top: -60px;
+    }
+    
+    .author {
+        position: relative;
+        font-size: 0.9em;
+        color: $black;
+        margin-top: -10px;
+    }
+    
+    .description {
+        position: relative;
+        font-size: 1.1em;
+        text-align: center;
+        color: $black;
+        transition: .3s ease-in-out;
+        opacity: 0;
+        margin: 35px;
+    }
+    
+    .date {
+        float: left;
+        position: absolute;
+        font-size: 0.8em;
+        color: $black;
+        transition: .3s ease-in-out;
+        opacity: 1;
+        bottom: 5px;
+    }
+    
+    .star-holder {
+        position: absolute;
+        padding-right: 15px;
+        right: 0;
+        margin-top: -10px;
+        bottom: 15px;
+    }
+    
+    .star {
+        padding-right: 4px;
+        margin: 0;
+        float: right;
+        opacity: 1;
+        color: $dark;
+    }
+}
+.footer-top {
+    background: $footer-black;
+    width: 100%;
+    height: 200px;
+    margin-top: 4em;
+    .padding {
+        padding: 15px;
+    }
+    
+    .logo {
+        font-size: 2em;
+        font-weight: bold;
+        color: $white;
+        text-align: center;
+        margin-top: 75px;
+    }
+    
+    .link-parent {
+        margin-top: 40px;
+        padding: 0 45px;
+    }
+    
+    .title {
+        color: $ghost;
+        border: 2px;
+        border-bottom: 2px solid $ghost;
+    }
+    
+}
+
+.footer-bottom {
+    background: $footer-dark;
+    width: 100%;
+    height: 50px;
+}
+.loading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $white;
+    height: 10em;
+    width: 10em;
+    border-radius: 50%;
+    position: absolute;
+    margin-left: -5em;
+    margin-top: 0;
+    padding-top: 0;
+    left: 50%;
+    margin-top: 10%;
+}
+
+// Here is where the magic happens
+
+$offset: 187;
+$duration: 1.4s;
+
+.spinner {
+  animation: rotator $duration linear infinite;
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+.path {
+  stroke-dasharray: $offset;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation:
+    dash $duration ease-in-out infinite, 
+    colors ($duration*4) ease-in-out infinite;
+}
+
+@keyframes colors {
+	0% { stroke: #4285F4; }
+	25% { stroke: #DE3E35; }
+	50% { stroke: #F7C223; }
+	75% { stroke: #1B9A59; }
+  100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+ 0% { stroke-dashoffset: $offset; }
+ 50% {
+   stroke-dashoffset: $offset/4;
+   transform:rotate(135deg);
+ }
+ 80% {
+     opacity: 1;
+ }
+ 100% {
+   stroke-dashoffset: $offset;
+   transform:rotate(440deg);
+   opacity: 0;
+ }
+}

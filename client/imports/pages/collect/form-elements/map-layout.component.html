@@ -1,0 +1,41 @@
+<div class="data-collect-element">
+	<div class="map-layout-wrapper">
+
+		<h3>MAP LAYOUT</h3>
+
+    <div class="field-wrapper">
+
+      <div class="box-place left" id="left-side-powerup" (click)="powerUpInteraction($event)">
+        <img class="noselect" src="graphics/box-down.png">
+      </div>
+
+      <field-block position="left" (change)="blockInteraction($event)"></field-block>
+      <field-block position="middle" (change)="blockInteraction($event)" 
+      [class.climbed]="climbed"></field-block>
+      <field-block position="right" (change)="blockInteraction($event)"></field-block>
+
+      <div class="box-place right" id="right-side-powerup" (click)="powerUpInteraction($event)">
+        <img class="noselect" src="graphics/box-down.png">
+      </div>
+
+    </div>
+
+    <nav class="map-nav">
+      <p class="pickup">
+        <img class="material-icons noselect" src="graphics/pickup.png"></img>
+        Picked up: {{ totalPickedUp }}
+      </p>
+      <button type="button" id="undo" (click)="undo()">UNDO</button>
+      <button [class.active]="defendedAgainst" [class.hidden]="isAuton" 
+        type="button" id="defended" (click)="toggleDefended($event)">DEF'D AGAINST</button>
+      <button [class.active]="lineCrossed" [class.hidden]="!isAuton" type="button" id="line-crossed"
+        (click)="toggleLineCrossed($event)">LINE CROSSED</button>
+      <button [class.active]="missedShot" type="button" id="missed" 
+        (click)="toggleMissed($event)">MISSED SHOT</button>
+      <p class="placed">
+        Placed: {{ totalPlaced }}
+        <img class="noselect" src="graphics/box-down.png">
+      </p>
+    </nav>
+	</div>
+</div>
