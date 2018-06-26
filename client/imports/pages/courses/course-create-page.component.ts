@@ -13,7 +13,6 @@ import template from './course-create-page.component.html';
 
 export class CourseCreatePageComponent implements OnInit {
 
-    private course: Course;
     private languages: Array<string>;
     private newCourseForm: FormGroup;
 

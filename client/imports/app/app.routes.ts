@@ -17,7 +17,7 @@ export const routes: Route[] = [
   // { path: 'create-lesson', component: LessonCreatePageComponent },
   // { path: 'dashboard', component: DashboardPageComponent },
   // { path: 'courses', component: CoursesShowPageComponent },
-  { path: 'course', component: CourseShowPageComponent },
+  { path: 'course/:_id', component: CourseShowPageComponent },
   { path: 'create-course', component: CourseCreatePageComponent },
   { path: 'login', component: LoginShowPageComponent },
   // { path: 'signup', component: SignupPageComponent },
