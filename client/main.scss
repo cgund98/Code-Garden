@@ -881,6 +881,7 @@ input[type="checkbox"] {
     left: 0;
     overflow: hidden;
     text-align: center;
+    z-index: 100;
     .wrapper {
         background: white;
         padding: 2em;

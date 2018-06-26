@@ -4,7 +4,7 @@ import { Route } from '@angular/router';
 // import { AnalyzePageComponent } from '../pages/analyze/analyze-page.component';
 import { LessonShowPageComponent } from '../pages/lessons/lesson-show-page.component';
 import { CourseShowPageComponent } from '../pages/courses/course-show-page.component';
-import { LoginShowPageComponent } from '../pages/courses/login-show-page.compenent';
+import { LoginShowPageComponent } from '../pages/login/login-show-page.component';
 export const routes: Route[] = [
 	// { path: '/', component: LessonShowPageComponent }
 	{ path: 'courses/lesson', component: LessonShowPageComponent },
@@ -15,6 +15,6 @@ export const routes: Route[] = [
   // { path: 'courses', component: CoursesShowPageComponent },
  { path: 'course', component: CourseShowPageComponent },
   // { path: 'create-course', component: CourseCreatePageComponent },
- { path: 'login', component: LoginPageComponent },
+ { path: 'login', component: LoginShowPageComponent },
   // { path: 'signup', component: SignupPageComponent },
 ];
