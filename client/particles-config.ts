@@ -1,7 +1,4 @@
-function renderParticles() {
-    /* ---- particles.js config ---- */
-
-particlesJS("particles-js", {
+export const PARTICLES_CONFIG = {
   "particles": {
     "number": {
       "value": 120,
@@ -110,7 +107,4 @@ particlesJS("particles-js", {
     }
   },
   "retina_detect": true
-});
-console.log('Loading particles...');
 }
-renderParticles();
