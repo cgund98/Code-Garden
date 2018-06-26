@@ -14,9 +14,11 @@ import { MISC_ELEMENTS_DECLARATIONS } from './';
   ],
   entryComponents: [
     // LessonShowPageComponent,
+    ...MISC_ELEMENTS_DECLARATIONS,
   ],
   exports: [
     // LessonShowPageComponent,
+    ...MISC_ELEMENTS_DECLARATIONS,
   ]
 })
 
