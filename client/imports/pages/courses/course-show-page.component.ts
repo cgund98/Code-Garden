@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import template from './course-show-page.component.html';
 
@@ -7,4 +7,6 @@ import template from './course-show-page.component.html';
   template
 })
 
-export class CourseShowPageComponent {}
+export class CourseShowPageComponent implements OnInit {
+    _id: string;
+}
