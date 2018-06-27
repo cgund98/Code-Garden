@@ -18,12 +18,12 @@ export class LessonCreatePageComponent implements OnInit {
     courseObj: Object;
     title = new FormControl('', [Validators.required, Validators.minLength(3)]);
     course_title: string;
-    sectionNum: number;
+    seqNum: number;
     private sub: any;
     private newSection: FormGroup;
     private sectionGroups: Array<FormGroup>;
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit() {
         this.sectionGroups = [];
@@ -86,7 +86,7 @@ export class LessonCreatePageComponent implements OnInit {
                 title: this.title.value,
                 seqNum: this.seqNum,
                 courseID: this._course_id,
-                course: this._course_title,
+                course: this.course_title,
             });
 
             for (var i=0; i < this.sectionGroups.length; i++) {
@@ -102,6 +102,7 @@ export class LessonCreatePageComponent implements OnInit {
                 });
             }
             console.log('Created');
+            this.router.navigate(['/courses/'+this._course_id]);
         }
     }
 

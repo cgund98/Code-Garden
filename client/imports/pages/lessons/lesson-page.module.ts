@@ -24,10 +24,12 @@ import { LESSON_ELEMENTS_DECLARATIONS } from './lesson-elements';
   entryComponents: [
     LessonShowPageComponent,
     LessonCreatePageComponent,
+    ...LESSON_ELEMENTS_DECLARATIONS,
   ],
   exports: [
     LessonShowPageComponent,
     LessonCreatePageComponent,
+    ...LESSON_ELEMENTS_DECLARATIONS,
   ]
 })
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import template from './lesson-card.component.html';
 
@@ -7,6 +7,14 @@ import template from './lesson-card.component.html';
   template
 })
 
-export class LessonCardComponent {
+export class LessonCardComponent implements OnInit {
   @Input() title;
+  @Input() course_id;
+  @Input() lesson_id;
+  link: string;
+
+  ngOnInit() {
+      this.link = "/courses/" + this.course_id + "/lessons/" + this.lesson_id;
+  }
+
 }

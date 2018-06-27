@@ -517,19 +517,19 @@ textarea {
             }
         }
     }
-    li:nth-child(5n+0) div {
+    lesson-card:nth-child(5n+0) div {
         background-image: linear-gradient(to left, #a770ef 0%, #cf8bf3 50%, #fdb99b 100%);
     }
-    li:nth-child(5n+1) div {
+    lesson-card:nth-child(5n+1) div {
         background-image: linear-gradient(to top right, #C33764 0%, #1D2671 100%);
     }
-    li:nth-child(5n+2) div {
+    lesson-card:nth-child(5n+2) div {
         background-image: linear-gradient(to top right, #6190E8 0%, #a7bfe8 100%);
     }
-    li:nth-child(5n+3) div {
+    lesson-card:nth-child(5n+3) div {
         background-image: linear-gradient(to top right, #43c6ac 0%, #f8ffae 100%);
     }
-    li:nth-child(5n+4) div {
+    lesson-card:nth-child(5n+4) div {
         background-image: linear-gradient(to top right, #4568DC 0%, #b06ab3 100%);
     }
 }
