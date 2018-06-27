@@ -1,0 +1,26 @@
+<form class="lesson-form" id="lesson">
+<div class="page-hero">
+    <div class="particles-wrapper"><div id="particles-js"></div></div>
+    <div class="wrapper">
+        <div class="border">
+            <p class="hero-subtitle"> course this.courseID </p>
+            <input class="hero-title" placeholder="LESSON TITLE*">
+        </div>
+    </div>
+</div>
+<div class="lesson-body container">
+        <p class="error text-center"></p>
+    <div class="section edit card">
+        <input id="title" class="subtitle lesson-title" placeholder="Section title*">
+        <textarea class="lesson-content" placeholder="Section content*" id="content"></textarea>
+        <textarea id="expressions" placeholder="Desired Expressions seperated with a semicolon (ex. var name;function noot() {;)" class="col-xs-12 col-md-4 lesson-expressions"></textarea>
+        <textarea id="outputs" placeholder="Desired Console Outputs seperated with a semicolon (ex. 3;4;5)" class="col-xs-12 col-md-3 col-md-offset-1 lesson-outputs"></textarea>
+        <textarea id="tasks" placeholder="Tasks seperated with a semicolon (ex. Define a variable named name;)" class="col-xs-12 col-md-3 col-md-offset-1 lesson-tasks"></textarea>
+        <p style="color: white;padding: none; margin: none; font-size: 1px; color: white;">.</p>
+    </div>
+    <div class="text-center" style="position: absolute; width: 100%; bottom: 0">
+        <button class="add add-section card" type="button" (click)="addSection($event)"><i class="fa fa-plus" aria-hidden="true"></i> Add Section</button>
+        <button class="add card" type="submit" form="lesson" value="Submit">Create</button>
+    </div>
+</div>
+</form>

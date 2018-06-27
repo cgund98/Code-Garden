@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 // import { CollectPageComponent } from '../pages/collect/collect-page.component';
 // import { AnalyzePageComponent } from '../pages/analyze/analyze-page.component';
 import { LessonShowPageComponent } from '../pages/lessons/lesson-show-page.component';
+import { LessonCreatePageComponent } from '../pages/lessons/lesson-create-page.component';
 
 import { CourseShowPageComponent } from '../pages/courses/course-show-page.component';
 import { CourseCreatePageComponent } from '../pages/courses/course-create-page.component';
@@ -18,12 +19,9 @@ export const routes: Route[] = [
     // { path: 'create-lesson', component: LessonCreatePageComponent },
     { path: 'dashboard', component: DashboardShowPageComponent },
     // { path: 'courses', component: CoursesShowPageComponent },
-    { path: 'courses/:_id', component: CourseShowPageComponent,
-        children: [
-            { path: 'lesson/:_id', component: LessonShowPageComponent },
-            { path: 'create-lesson', component: LessonShowPageComponent },
-        ]
-    },
+    { path: 'courses/:_id', component: CourseShowPageComponent,},
+    { path: 'courses/:_course_id/lesson/:_lesson_id', component: LessonShowPageComponent },
+    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent },
     { path: 'create-course', component: CourseCreatePageComponent },
     { path: 'login', component: LoginShowPageComponent },
     // { path: 'signup', component: SignupPageComponent },
