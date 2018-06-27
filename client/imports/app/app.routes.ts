@@ -12,13 +12,18 @@ import { DashboardShowPageComponent } from '../pages/dashboard/dashboard-show-pa
 
 export const routes: Route[] = [
 	// { path: '/', component: LessonShowPageComponent }
-	{ path: 'courses/lesson', component: LessonShowPageComponent },
+	// { path: 'courses/lesson', component: LessonShowPageComponent },
     // { path: 'lesson', component: DashboardPageComponent },
     // { path: 'courses/lessons/create', component: LessonCreatePageComponent},
     // { path: 'create-lesson', component: LessonCreatePageComponent },
     { path: 'dashboard', component: DashboardShowPageComponent },
     // { path: 'courses', component: CoursesShowPageComponent },
-    { path: 'course/:_id', component: CourseShowPageComponent,},
+    { path: 'courses/:_id', component: CourseShowPageComponent,
+        children: [
+            { path: 'lesson/:_id', component: LessonShowPageComponent },
+            { path: 'create-lesson', component: LessonShowPageComponent },
+        ]
+    },
     { path: 'create-course', component: CourseCreatePageComponent },
     { path: 'login', component: LoginShowPageComponent },
     // { path: 'signup', component: SignupPageComponent },
