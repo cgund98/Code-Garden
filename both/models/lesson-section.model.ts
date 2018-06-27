@@ -6,6 +6,6 @@ export interface LessonSection extends CollectionObject {
   expressions: string;
   outputs: string;
   tasks: string;
-  sectionNum: number;
+  seqNum: number;
   lessonID: string;
 }
