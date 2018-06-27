@@ -2,13 +2,14 @@ import { Route } from '@angular/router';
 
 // import { CollectPageComponent } from '../pages/collect/collect-page.component';
 // import { AnalyzePageComponent } from '../pages/analyze/analyze-page.component';
-import { LessonShowPageComponent } from '../pages/lessons/lesson-show-page.component';
-import { LessonCreatePageComponent } from '../pages/lessons/lesson-create-page.component';
+ import { LessonShowPageComponent } from '../pages/lessons/lesson-show-page.component';
+// import { LessonCreatePageComponent } from '../pages/lessons/lesson-create-page.component';
 
 import { CourseShowPageComponent } from '../pages/courses/course-show-page.component';
 import { CourseCreatePageComponent } from '../pages/courses/course-create-page.component';
 
 import { LoginShowPageComponent } from '../pages/login/login-show-page.component';
+import { SignupShowPageComponent } from '../pages/signup/signup-show-page.component';
 import { DashboardShowPageComponent } from '../pages/dashboard/dashboard-show-page.component';
 
 export const routes: Route[] = [
@@ -21,8 +22,8 @@ export const routes: Route[] = [
     // { path: 'courses', component: CoursesShowPageComponent },
     { path: 'courses/:_id', component: CourseShowPageComponent,},
     { path: 'courses/:_course_id/lesson/:_lesson_id', component: LessonShowPageComponent },
-    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent },
+  //  { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent },
     { path: 'create-course', component: CourseCreatePageComponent },
     { path: 'login', component: LoginShowPageComponent },
-    // { path: 'signup', component: SignupPageComponent },
+    { path: 'signup', component: SignupShowPageComponent },
 ];
