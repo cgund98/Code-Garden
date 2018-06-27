@@ -1,9 +1,9 @@
-<main-hero title="NUT" subtitle="how to"></main-hero>
+<main-hero title="{{ title }}" subtitle=""></main-hero>
 <div class="container">
     <div class="text-center"><button class="enroll">ENROLL</button></div>
-    <p class="course-description"> fullDesc this.courseID</p>
+    <p class="course-description">{{ fullDesc }}</p>
     <div class="title-wrapper">
-        <h4>Lessons</h4>
+        <h4 (click)="ngOnInit()">Lessons</h4>
     </div>
     <ol class="course-lessons">
         <li class=" col-xs-12 col-md-3 col-xl-2 new"><a href=" newLessonLink courseID "><div><p>New Lesson</p><i class="fa fa-plus" aria-hidden="true"></i></div></a></li>

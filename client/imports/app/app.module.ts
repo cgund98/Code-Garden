@@ -7,6 +7,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { routes } from './app.routes';
 import { LessonPageModule } from '../pages/lessons/lesson-page.module';
 import { CoursePageModule } from '../pages/courses/course-page.module';
+import { DashboardPageModule } from '../pages/dashboard/dashboard-page.module';
 import { LoginPageModule } from '../pages/login/login-page.module';
 import { MiscCompsModule } from '../pages/misc/misc-comps.module';
 
@@ -16,6 +17,7 @@ import { MiscCompsModule } from '../pages/misc/misc-comps.module';
     RouterModule.forRoot(routes),
     // CollectPageModule,
     LessonPageModule,
+    DashboardPageModule,
     CoursePageModule,
     MiscCompsModule,
     LoginPageModule,
@@ -28,7 +30,7 @@ import { MiscCompsModule } from '../pages/misc/misc-comps.module';
     AppComponent
   ],
   providers: [
-  {provide: APP_BASE_HREF, useValue : '/' }
+      { provide: APP_BASE_HREF, useValue : '/' },
   ]
 })
 

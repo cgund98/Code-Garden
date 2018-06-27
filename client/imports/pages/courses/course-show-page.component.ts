@@ -1,5 +1,6 @@
+import { Meteor } from 'meteor/meteor';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import template from './course-show-page.component.html';
 import { Courses } from '../../../../both/collections/courses.collection';
@@ -14,13 +15,19 @@ export class CourseShowPageComponent implements OnInit {
     private sub: any;
     private courseObj: Object;
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this._id = params['_id'];
         })
-        this.courseObjs = Courses.findOne({_id: this._id});
+        this.courseObj = Courses.findOne({_id: this._id});
+        try {
+            this.title = this.courseObj.title;
+            this.fullDesc = this.courseObj.fullDesc;
+            this.shortDesc = this.courseObj.shortDesc;
+        } catch(err) {}
+
     }
     ngOnDestroy() {
         this.sub.unsubscribe();
