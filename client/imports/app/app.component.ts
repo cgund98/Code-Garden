@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
-import { Courses } from '../../../both/collections/courses.collection';
-import { Lessons } from '../../../both/collections/lessons.collection';
+// import { Courses } from '../../../both/collections/courses.collection';
+// import { Lessons } from '../../../both/collections/lessons.collection';
 
 import template from './app.component.html';
 
@@ -19,7 +19,8 @@ export class AppComponent {
     ngOnInit() {
         function checkForData(router) {
             console.log('Checking...');
-            if (Courses.find({}).fetch().length > 0 && Courses.find({}).fetch().length > 0) {
+            if (Meteor.user()) {
+            // if (Courses.find({}).fetch().length > 0 && Courses.find({}).fetch().length > 0) {
                 // console.log(Courses.find({}).fetch());
                 url = router.url;
                 router.navigateByUrl('/create-course', {skipLocationChange: true}).then(()=>
@@ -37,7 +38,7 @@ export class AppComponent {
                 await sleep(10);
             }
         }
-        if (Courses.find({}).fetch().length == 0 && Lessons.find({}).fetch().length == 0) {
+        if (Meteor.user() == null) {
             waitForData(this.router);
         }
 

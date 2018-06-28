@@ -1,0 +1,10 @@
+<main-hero title="Courses"></main-hero>
+<div class="container">
+    <div class="title-wrapper">
+        <h4>Available Courses</h4>
+    </div>
+    <course-card *ngFor="let c of courseObjs"
+    title="{{c.title}}" author="Nut" shortDesc="{{c.shortDesc}}"
+    date="Dongus 8, 2018" _id="{{c._id}}">
+    </course-card>
+</div>
