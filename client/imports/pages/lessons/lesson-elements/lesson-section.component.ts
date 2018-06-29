@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http/';
 
 import template from './lesson-section.component.html';
 
@@ -23,6 +24,10 @@ export class LessonSectionComponent implements OnInit {
    expressions: any;
    outputs: any;
    tasks: any;
+   success:boolean = false;
+   ran: boolean = false;
+
+   constructor(private http: HttpClient) {}
 
    ngOnInit() {
        this.content = this.sectionObj.content;
@@ -34,4 +39,24 @@ export class LessonSectionComponent implements OnInit {
        this.tasks = this.sectionObj.tasks ? this.sectionObj.tasks : "";
        this.tasks = this.tasks.split(";");
    }
+
+   runCode() {
+       this.http.post('http://localhost:8080/compile', {
+           code: this.text,
+           language:"4"
+       }).subscribe(
+           res => {
+               console.log(res);
+               this.ran = true;
+               if (this.outputs.includes(res.output)) {
+                   this.success = true;
+               } else { this.success = false }
+           },
+           err => {
+               console.log(err);
+               this.ran = true;
+           }
+       );
+   }
+
 }

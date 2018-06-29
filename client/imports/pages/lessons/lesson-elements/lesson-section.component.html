@@ -11,9 +11,9 @@
             [options]="options"
             [(text)]="text"
            ></div>
-            <button class="run">RUN</button>
-            <!--<div class="alert success">Correct, good job!<span id="close">&#215;</span></div>-->
-            <!--<div class="alert failed">Sorry, something didn't work.<span id="close">&#215;</span></div>-->
+            <button class="run" (click)="runCode()">RUN</button>
+            <div *ngIf="success && ran" class="alert success">Correct, good job!<span id="close" (click)="this.ran=false">&#215;</span></div>
+            <div *ngIf="!success && ran" class="alert failed">Sorry, something didn't work.<span id="close" (click)="this.ran=false">&#215;</span></div>
         </div>
         <div class="tasks-container col-xs-12 col-md-4">
             <h5>Tasks:</h5>
