@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractC
 import { Router } from '@angular/router';
 import { Accounts } from 'meteor/accounts-base';
 import { MiscCompsModule } from '../../misc/misc-comps.module';
+import { validateEqual } from '../../misc/validate-equal';
 
 import template from './signup-show-page.component.html';
 
@@ -18,6 +19,7 @@ export class SignupShowPageComponent implements OnInit {
 
   constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {}
 
+
     ngOnInit() {
 
       this.signupForm = new FormGroup ({
@@ -25,31 +27,37 @@ export class SignupShowPageComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      confirm: new FormControl('', [Validators.required, this.validatePasswordConfirmation])
-      });
+      confirm: new FormControl('', [this.validateEqual])
+    // }. { validator: this.validateEqual
+    });
+    console.log(this.error);
+    this.error='';
 
-
-      this.signupForm = this.formBuilder.group({
-        "password":this.signupForm,
-        "confirm":this.signupForm.confirm
-      }, {
-        validator: this.validatePasswordConfirmation
-      });
-    }
-
-  validatePasswordConfirmation(group: FormGroup) {
-    var pw = group.controls['password'];
-    var pw2 = group.controls['confirm'];
-
-    if (pw2.errors) { pw2.errors['validatePasswordConfirmation'] = null }
-    if (pw.value !== pw2.value) { // this is the trick
-      pw2.setErrors({validatePasswordConfirmation: true});
   }
 
-  // even though there was an error, we still return null
-  // since the new error state was set on the individual field
-  return null;
-}
+
+
+
+
+    //
+    //   this.signupForm = this.formBuilder.group({
+    //     "password":this.signupForm,
+    //     "confirm":this.signupForm.confirm
+    //   }, {
+    //     validator: this.validatePasswordConfirmation
+    //   });
+    // }
+  //
+  // validatePasswordConfirmation(group: FormGroup) {
+  //   return (control: AbstractControl): {[key: string]: any} | null{
+  //     const confirm = group.value.password;
+  //     if (confirm && control !== control.value) {
+  //       return { 'mismatch': true};
+  //     }
+  //     return null;
+  //   };
+  // }
+
 
 //   ngOnInit() {
 //
@@ -63,19 +71,21 @@ export class SignupShowPageComponent implements OnInit {
 //     this.error='';
 //
 //
-// validateEqual() {
-//   return (confirm: AbstractControl): { [key: string]: any } | null{
-//     const pass = this.signupForm.value.password;
-//     if (pass && confirm !== confirm.value) {
-//       return { 'mismatch': true};
-//     }
-//     return null;
-//   };
-// }
-// }
+validateEqual(): ValidatorFn {
+    return(confirm: AbstractControl): { [key: string]: any } | null => {
+    console.log(confirm);
+    const pass = confirm.get('password');
+    console.log(pass);
+    if (pass && confirm !== confirm.value) {
+      return { 'mismatch': true};
+    }
+    return null;
+  };
+}
 
-// pwdMatchValidator(frm: FormGroup) {
-//    return frm.get('password').value === frm.get('confirm').value
+
+// validateEqual() {
+//    return this.signupForm.get('password') === this.signupForm.get('confirm')
 //       ? null : {'mismatch': true};
 // }
     // checkPasswords(this.signupForm) { // here we have the 'passwords' group

@@ -1,15 +1,16 @@
 import { AbstractControl, FormGroup, ValidatorFn, FormControl, Validators } from '@angular/forms';
 
 
-export function validateEqual(frm: FormControl): ValidatorFn{
-  return (control: AbstractControl): {[key: string]: any} | null{
-    const confirm = frm.value.password;
+export function validateEqual(): ValidatorFn{
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const confirm = control.parent.value.password;
     if (confirm && control !== control.value) {
       return { 'mismatch': true};
     }
     return null;
   };
 }
+
 //   constructor( @Attribute('validateEqual') public validateEqual: string) {}
 //   validate(c: AbstractControl): { [key: string]: any } {
 //     // self value (e.g. retype password)
