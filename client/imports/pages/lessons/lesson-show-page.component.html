@@ -1,12 +1,12 @@
 <main-hero title="{{title}}" subtitle="{{course}}"></main-hero>
 <div class="lesson-body container">
-    <div class="lessons-nav-wrapper card">
+    <div class="lessons-nav-wrapper card" [class.active]="toggleNav">
         <div class="lessons-nav">
-            <a href="#" style="margin-bottom: .25em;margin-left: 0"><i class="fa fa-chevron-left" aria-hidden="true"></i>Back to Course</a>
-            <a href="#" class="completed"><i class="fa fa-check" aria-hidden="true"></i>Jimbo's sexy memes</a>
-            <a href="#" class="current"><i class="fa fa-bookmark" aria-hidden="true"></i>Lesson 2</a>
-            <a href="#" class="locked"><i class="fa fa-lock" aria-hidden="true"></i>Lesson 3</a>
-            <div class="event" onclick="this.parentElement.parentElement.className += ' active'"><div class="diamond"></div><i class="fa fa-book" aria-hidden="true"></i></div>
+            <a href="../" style="margin-bottom: .25em;margin-left: 0"><i class="fa fa-chevron-left" aria-hidden="true"></i>Back to Course</a>
+            <a *ngFor="let l of linkObjs" href="#{{l.seqNum}}" class="{{l.class}}"><i class="fa {{l.icon}}" aria-hidden="true"></i>{{l.sectionTitle}}</a>
+            <!-- <a href="#" class="current"><i class="fa fa-bookmark" aria-hidden="true"></i>Lesson 2</a> -->
+            <!-- <a href="#" class="locked"><i class="fa fa-lock" aria-hidden="true"></i>Lesson 3</a> -->
+            <div class="event" (click)="this.toggleNav=!this.toggleNav"><div class="diamond"></div><i class="fa fa-book" aria-hidden="true"></i></div>
         </div>
     </div>
     <div class="prev-next-container">
@@ -14,6 +14,6 @@
         <a class="right">Next Lesson <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
     </div>
 
-    <lesson-section *ngFor="let s of sectionObjs" [sectionObj]="s"></lesson-section>
+    <lesson-section *ngFor="let s of sectionObjs; index as i" [sectionObj]="s" [progressObj]="progressObjs[i]" id="{{ s.seqNum }}"></lesson-section>
 
 </div>

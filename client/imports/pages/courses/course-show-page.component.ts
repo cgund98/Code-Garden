@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import template from './course-show-page.component.html';
 import { Courses } from '../../../../both/collections/courses.collection';
 import { Lessons } from '../../../../both/collections/lessons.collection';
+import { SectionProgresses } from '../../../../both/collections/section-progresses.collection';
 
 @Component({
   selector: 'course-show-page',
@@ -30,8 +31,22 @@ export class CourseShowPageComponent implements OnInit {
         })
         this.newLessonLink = "/courses/" + this._course_id + "/create-lesson";
         this.courseObj = Courses.findOne({_id: this._course_id});
-        this.lessonObjs = Lessons.find({courseID: this._course_id}).fetch();
-        console.log(this.lessonObjs);
+        this.lessonObjs = Lessons.find({courseID: this._course_id}, {sort: {seqNum: 1}}).fetch();
+        // console.log(this.lessonObjs);
+
+        for (var i=0; i < this.lessonObjs.length; i++ ) {
+            var lessonID = this.lessonObjs[i]._id;
+            var progressObjs = SectionProgresses.find({lessonID: lessonID}).fetch();
+            var complete = true;
+            for (var j=0; j < progressObjs.length; j++) {
+                if (progressObjs[j].sectionProgress < 1) {
+                    complete = false;
+                    break;
+                }
+            }
+            this.lessonObjs[i].icon = complete ? "fa-check" : "fa-unlock";
+        }
+
         try {
             this.title = this.courseObj.title;
             this.fullDesc = this.courseObj.fullDesc;

@@ -145,7 +145,8 @@ header.main {
     letter-spacing: .05em;
 }
 .section {
-    margin: 2em auto;
+    margin: 4em auto;
+    margin-bottom: 6em;
     position: relative;
     z-index: 10;
     p {
@@ -595,8 +596,9 @@ textarea {
     z-index: 140;
     width: 20em;
     transition: .5s ease-in-out;
+
     &.active {
-        animation: lessons-nav 1s ease-in-out forwards;
+        animation: lessons-nav .75s ease-in-out forwards;
         .event {
             right: -3.25em;
             .diamond {

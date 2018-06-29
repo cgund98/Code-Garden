@@ -8,9 +8,10 @@ import template from './lesson-card.component.html';
 })
 
 export class LessonCardComponent implements OnInit {
-  @Input() title;
-  @Input() course_id;
-  @Input() lesson_id;
+  @Input() title:string;
+  @Input() course_id:string;
+  @Input() lesson_id:string;
+  @Input() icon:string;
   link: string;
 
   ngOnInit() {

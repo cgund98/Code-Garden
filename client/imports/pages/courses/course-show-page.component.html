@@ -8,6 +8,6 @@
     <ol class="course-lessons">
         <li class=" col-xs-12 col-md-3 col-xl-2 new"><a href="{{ newLessonLink }}"><div><p>New Lesson</p><i class="fa fa-plus" aria-hidden="true"></i></div></a></li>
         <lesson-card *ngFor="let l of lessonObjs" title="{{ l.title }}"
-        course_id="{{ _course_id }}" lesson_id="{{ l._id }}"></lesson-card>
+        course_id="{{ _course_id }}" lesson_id="{{ l._id }}" icon="{{ l.icon }}"></lesson-card>
     </ol>
 </div>
