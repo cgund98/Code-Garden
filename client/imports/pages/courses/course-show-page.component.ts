@@ -44,7 +44,7 @@ export class CourseShowPageComponent implements OnInit {
                     break;
                 }
             }
-            this.lessonObjs[i].icon = complete ? "fa-check" : "fa-lock-open";
+            this.lessonObjs[i].icon = complete ? "fa-check" : "fa-unlock";
         }
 
         try {
