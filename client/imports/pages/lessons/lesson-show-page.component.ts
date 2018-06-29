@@ -13,9 +13,12 @@ import { SectionProgresses } from '../../../../both/collections/section-progress
 
 export class LessonShowPageComponent implements OnInit {
     _lesson_id: string;
+    _course_id: string;
     title: string;
     course: string;
     sub: any;
+    prevLessonLink: string;
+    nextLessonLink: string;
     lessonObj: any;
     sectionObjs: Array<any>;
     progressObjs: Array<any>;
@@ -27,8 +30,13 @@ export class LessonShowPageComponent implements OnInit {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this._lesson_id = params['_lesson_id'];
-        })
+            this._course_id = params['_course_id'];
+        });
         this.lessonObj = Lessons.findOne({_id: this._lesson_id});
+        var prevLesson = Lessons.findOne({courseID: this._course_id, seqNum: this.lessonObj.seqNum-1});
+        this.prevLessonLink = prevLesson ? '/courses/' + this._course_id + '/lessons/' + prevLesson._id : null
+        var nextLesson = Lessons.findOne({courseID: this._course_id, seqNum: this.lessonObj.seqNum+1});
+        this.nextLessonLink = nextLesson ? '/courses/' + this._course_id + '/lessons/' + nextLesson._id : null
         this.sectionObjs = LessonSections.find({lessonID: this._lesson_id}, {sort: {seqNum: 1}}).fetch();
         this.progressObjs = SectionProgresses.find({lessonID: this._lesson_id}, {sort: {seqNum: 1}}).fetch();
 

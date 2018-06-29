@@ -26,7 +26,7 @@ export class AppComponent {
             // if (Courses.find({}).fetch().length > 0 && Courses.find({}).fetch().length > 0) {
                 // console.log(Courses.find({}).fetch());
                 url = router.url;
-                router.navigateByUrl('/create-course', {skipLocationChange: true}).then(()=>
+                router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
                 router.navigate([url]));
                 return true;
             }
