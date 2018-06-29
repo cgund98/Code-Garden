@@ -9,10 +9,11 @@
                 <input type="text" id="name" placeholder="Name" formControlName="name">
                 <input type="text" id="username"  placeholder="Username" formControlName="username">
                 <input type="password" id="password" placeholder="Password" formControlName="password">
-                <span class="error text-center" *ngIf="signupForm.get('password').invalid && signupForm.get('password').touched">Password is {{signupForm.value.Error}}</span>
+                <span class="error text-center" *ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').touched">Password is required</span>
+                <span class="error text-center" *ngIf="signupForm.get('password').hasError('minlength') && signupForm.get('password').touched">Password is too short</span>
                 <input type="password" id="password-confirm" placeholder="Confirm Password" formControlName="confirm">
-                <!-- <span class="error text-center" *ngIf="signupForm.get('confirm').errors?.required && signupForm.get('confirm').touched">Confirm passwords is required</span> -->
-                <span class="error text-center" *ngIf="signupForm.get('confirm').invalid && signupForm.get('confirm').touched">Passwords do not much</span>
+                <span class="error text-center" *ngIf="signupForm.get('confirm').errors?.required && signupForm.get('confirm').touched">Confirm passwords is required</span>
+                <span class="error text-center" *ngIf="signupForm.get('confirm').hasError('mismatch') && signupForm.get('confirm').touched">Passwords do not much</span>
             </form>
             <!-- <div class="col-xs-12 col-md-3 col-md-offset-1" style="color: white;"></div>
             <p style="color: white;padding: none; margin: none; font-size: 1px; color: white;">.</p>

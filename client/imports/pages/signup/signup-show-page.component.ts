@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, Attribute} from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Accounts } from 'meteor/accounts-base';
 import { MiscCompsModule } from '../../misc/misc-comps.module';
@@ -14,28 +14,55 @@ import template from './signup-show-page.component.html';
 
 export class SignupShowPageComponent implements OnInit {
 
-  private signupForm: FormGroup;
+  signupForm: FormGroup;
   error: string;
 
   constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {}
 
 
+
+  validateEqual(): ValidatorFn {
+      console.log("test");
+      return (confirm: FormControl): { [key: string]: any } | null => {
+      console.log("confirm", confirm);
+      console.log("confirm-parent", confirm.parent);
+      console.log("password", this.signupForm.get('password'));
+    //   if (confirm){
+    //   console.log(this.signupForm.value.password);
+    // }
+      // const  = confirm.value;
+      const password = this.signupForm.get('password').value;
+      console.log("pass", password);
+      console.log("value", confirm.value);
+      if (password && confirm !== confirm.value) {
+        console.log("check-tew");
+        return {'mismatch': true};
+      }
+      console.log("nul-tew");
+      return null;
+    };
+}
     ngOnInit() {
+      this.signupForm = this.formBuilder.group({
+        email: ['', Validators.required],
+        name: ['', Validators.required],
+        username: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirm: ['', [Validators.required, this.validateEqual.bind(this)]]
+      });
+      console.log(this.validateEqual);
+      // this.signupForm = new FormGroup ({
+      // email: new FormControl('', [Validators.required]),
+      // name: new FormControl('', [Validators.required]),
+      // username: new FormControl('', [Validators.required]),
+      // password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      // confirm: new FormControl('', [Validators.required, this.validateEqual(this.signupForm.controls['password'].value)])
+      // // }. { validator: this.validateEqual
+      // });
 
-      this.signupForm = new FormGroup ({
-      email: new FormControl('', [Validators.required]),
-      name: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      confirm: new FormControl('', [this.validateEqual])
-    // }. { validator: this.validateEqual
-    });
-    console.log(this.error);
-    this.error='';
+      this.error='';
 
-  }
-
-
+}
 
 
 
@@ -71,17 +98,9 @@ export class SignupShowPageComponent implements OnInit {
 //     this.error='';
 //
 //
-validateEqual(): ValidatorFn {
-    return(confirm: AbstractControl): { [key: string]: any } | null => {
-    console.log(confirm);
-    const pass = confirm.get('password');
-    console.log(pass);
-    if (pass && confirm !== confirm.value) {
-      return { 'mismatch': true};
-    }
-    return null;
-  };
-}
+
+
+
 
 
 // validateEqual() {
@@ -96,6 +115,7 @@ validateEqual(): ValidatorFn {
     // this.error = '';
   // }
   signup() {
+
       console.log('Creating...');
     if (this.signupForm.valid) {
         Accounts.createUser({
