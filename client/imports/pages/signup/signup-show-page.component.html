@@ -10,9 +10,9 @@
                 <input type="text" id="username"  placeholder="Username" formControlName="username">
                 <input type="password" id="password" placeholder="Password" formControlName="password" pattern=".{8,12}">
                 <span class="error text-center" *ngIf="signupForm.get('password').errors?.required && signupForm.get('password').touched">Password is required</span>
-                <input type="password" id="password-confirm"  appConfirmEqualValidator="password" placeholder="Confirm Password" formControlName="confirm">
-                <span class="error text-center" *ngIf="signupForm.get('confirm').errors?.required && signupForm.get('confirm').touched">Confirm passwords is required</span>
-                <span class="error text-center" *ngIf="signupForm.get('confirm').errors?.notEqual && signupForm.get('confirm').touched">Passwords do not much</span>
+                <input type="password" id="password-confirm" placeholder="Confirm Password" formControlName="confirm">
+                <!-- <span class="error text-center" *ngIf="signupForm.get('confirm').errors?.required && signupForm.get('confirm').touched">Confirm passwords is required</span> -->
+                <span class="error text-center" *ngIf="signupForm.get('confirm').hasError('validatePasswordConfirmation') && signupForm.get('confirm').touched">Passwords do not much</span>
             </form>
             <!-- <div class="col-xs-12 col-md-3 col-md-offset-1" style="color: white;"></div>
             <p style="color: white;padding: none; margin: none; font-size: 1px; color: white;">.</p>
@@ -27,5 +27,6 @@
             <button type="submit" form="login" class="card add login" (click)="signup()" value="Submit">Submit</button>
             <p>If you already have an account you can login <a href="/login"> here</a>.</p>
         </div>
+        <p>{{signupForm.value | json}}<p>
     </div>
 <!-- </template> -->

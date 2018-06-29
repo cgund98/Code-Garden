@@ -1,9 +1,8 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, NgZone, Attribute} from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Accounts } from 'meteor/accounts-base';
 import { MiscCompsModule } from '../../misc/misc-comps.module';
-
 
 import template from './signup-show-page.component.html';
 
@@ -19,18 +18,73 @@ export class SignupShowPageComponent implements OnInit {
 
   constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {}
 
-  ngOnInit() {
+    ngOnInit() {
 
-    this.signupForm = new FormGroup ({
+      this.signupForm = new FormGroup ({
       email: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      confirm: new FormControl('', [Validators.required, Validators.appConfirmEqualValidator(password)]),
-    });
+      confirm: new FormControl('', [Validators.required, this.validatePasswordConfirmation])
+      });
 
-    this.error = '';
+
+      this.signupForm = this.formBuilder.group({
+        "password":this.signupForm.password.group,
+        "confirm":this.signupForm.confirm
+      }, {
+        validator: this.validatePasswordConfirmation
+      });
+    }
+
+  validatePasswordConfirmation(group: FormGroup) {
+    var pw = group.controls['password'];
+    var pw2 = group.controls['confirm'];
+
+    if (pw2.errors) { pw2.errors['validatePasswordConfirmation'] = null }
+    if (pw.value !== pw2.value) { // this is the trick
+      pw2.setErrors({validatePasswordConfirmation: true});
   }
+
+  // even though there was an error, we still return null
+  // since the new error state was set on the individual field
+  return null;
+}
+
+//   ngOnInit() {
+//
+//     this.signupForm = new FormGroup ({
+//       email: new FormControl('', [Validators.required]),
+//       name: new FormControl('', [Validators.required]),
+//       username: new FormControl('', [Validators.required]),
+//       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+//       confirm: new FormControl('', [Validators.required, validateEqual()])
+//     })
+//     this.error='';
+//
+//
+// validateEqual() {
+//   return (confirm: AbstractControl): { [key: string]: any } | null{
+//     const pass = this.signupForm.value.password;
+//     if (pass && confirm !== confirm.value) {
+//       return { 'mismatch': true};
+//     }
+//     return null;
+//   };
+// }
+// }
+
+// pwdMatchValidator(frm: FormGroup) {
+//    return frm.get('password').value === frm.get('confirm').value
+//       ? null : {'mismatch': true};
+// }
+    // checkPasswords(this.signupForm) { // here we have the 'passwords' group
+    // let pass = this.signupForm.value.password;
+    // let confirmPass = this.signupForm.value.confirm;
+    //
+    // return pass === confirmPass ? null : { notSame: true }
+    // this.error = '';
+  // }
   signup() {
       console.log('Creating...');
     if (this.signupForm.valid) {
