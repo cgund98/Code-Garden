@@ -1,4 +1,4 @@
-<main-hero title="Functions" subtitle="Intro to Javascript"></main-hero>
+<main-hero title="{{title}}" subtitle="{{course}}"></main-hero>
 <div class="lesson-body container">
     <div class="lessons-nav-wrapper card">
         <div class="lessons-nav">
@@ -14,23 +14,6 @@
         <a class="right">Next Lesson <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
     </div>
 
-    <div class="section">
-        <h3 class="subtitle">What is a Function?</h3>
-        <p>A function is simply just a process.  You can easily define a function by declaring the type of return value, followed by the name, then parentheses () containing the parameters, and curly brackets containing the content of the function.  In the code below, crate a function named noot.</p>
-        <div class="code-box card">
-            <div class="code-container col-xs-12 col-md-8">
-                <div id="editor" class="code">var noot;</div>
-                <button class="run">RUN</button>
-                <!--<div class="alert success">Correct, good job!<span id="close">&#215;</span></div>-->
-                <!--<div class="alert failed">Sorry, something didn't work.<span id="close">&#215;</span></div>-->
-            </div>
-            <div class="tasks-container col-xs-12 col-md-4">
-                <h5>Tasks:</h5>
-                <ul>
-                    <li>Define a function named noot that will not return a value</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <lesson-section *ngFor="let s of sectionObjs" [sectionObj]="s"></lesson-section>
 
 </div>

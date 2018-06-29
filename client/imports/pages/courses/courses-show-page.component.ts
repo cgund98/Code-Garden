@@ -15,6 +15,6 @@ export class CoursesShowPageComponent implements OnInit {
 
     ngOnInit() {
         this.courseObjs = Courses.find({}).fetch();
-        
+
     }
 }

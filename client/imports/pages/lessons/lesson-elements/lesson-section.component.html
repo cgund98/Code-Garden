@@ -1,0 +1,25 @@
+<div class="section">
+    <h3 class="subtitle">{{ title }}</h3>
+    <p>{{ content }}</p>
+    <div class="code-box card">
+        <div class="code-container col-xs-12 col-md-8">
+            <!-- <div id="editor" class="code">var noot;</div> -->
+            <div ace-editor id="editor" class="code"
+            style="min-height: 200px; width:100%; overflow: auto;"
+            [mode]="'javascript'"
+            [theme]="'monokai'"
+            [options]="options"
+            [(text)]="text"
+           ></div>
+            <button class="run">RUN</button>
+            <!--<div class="alert success">Correct, good job!<span id="close">&#215;</span></div>-->
+            <!--<div class="alert failed">Sorry, something didn't work.<span id="close">&#215;</span></div>-->
+        </div>
+        <div class="tasks-container col-xs-12 col-md-4">
+            <h5>Tasks:</h5>
+            <ul>
+                <li *ngFor="let t of tasks">{{ t }}</li>
+            </ul>
+        </div>
+    </div>
+</div>

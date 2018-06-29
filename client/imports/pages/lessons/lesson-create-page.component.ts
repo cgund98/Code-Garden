@@ -82,7 +82,7 @@ export class LessonCreatePageComponent implements OnInit {
 
     submit() {
         if (this.checkValids()) {
-            var lessonID = Lessons.insert({
+            var lessonID = Lessons.collection.insert({
                 title: this.title.value,
                 seqNum: this.seqNum,
                 courseID: this._course_id,
@@ -91,7 +91,8 @@ export class LessonCreatePageComponent implements OnInit {
 
             for (var i=0; i < this.sectionGroups.length; i++) {
                 var group = this.sectionGroups[i];
-                LessonSections.insert({
+                // console.log(lessonID);
+                var newLesson = LessonSections.collection.insert({
                     title: group.value.title,
                     content: group.value.content,
                     expressions: group.value.expressions,
@@ -100,6 +101,7 @@ export class LessonCreatePageComponent implements OnInit {
                     seqNum: group.index,
                     lessonID: lessonID,
                 });
+                // console.log('Lesson created: ' + newLesson);
             }
             console.log('Created');
             this.router.navigate(['/courses/'+this._course_id]);
