@@ -30,7 +30,7 @@ export class SignupShowPageComponent implements OnInit {
 
 
       this.signupForm = this.formBuilder.group({
-        "password":this.signupForm.password.group,
+        "password":this.signupForm,
         "confirm":this.signupForm.confirm
       }, {
         validator: this.validatePasswordConfirmation
