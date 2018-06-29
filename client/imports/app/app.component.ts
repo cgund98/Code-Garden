@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 
 import template from './app.component.html';
 
+declare var particleJS: any;
+
 @Component({
   selector: 'app',
   template
@@ -17,6 +19,7 @@ export class AppComponent {
     }
 
     ngOnInit() {
+        particlesJS.load('particles-js', '/assets/particles.json', null);
         function checkForData(router) {
             console.log('Checking...');
             if (Meteor.user()) {
