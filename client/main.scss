@@ -160,6 +160,22 @@ header.main {
     -moz-box-shadow: 0px 0px 69px 6px rgba(0,0,0,0.1);
     box-shadow: 0px 0px 69px 6px rgba(0,0,0,0.1);
 }
+
+.console {
+    border-left: 1px solid #2f2f2f;
+    .ace_cursor-layer {
+        display: none;
+    }
+}
+
+.code-box {
+    .code-container  div#editor {
+        margin: 0;
+        display: inline-block;
+        overflow: auto;
+        min-height: 200px;
+    }
+}
 .code-box {
     width: 100%;
     margin: 0;

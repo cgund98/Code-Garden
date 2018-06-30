@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http/';
 
 import template from './lesson-section.component.html';
@@ -14,15 +14,23 @@ var QuillDeltaToHtmlConverter = require('quill-delta-to-html');
 })
 
 export class LessonSectionComponent implements OnInit {
-    text:string = "";
-    options:any = {
-       // enableBasicAutocompletion: true, // the editor completes the statement when you hit Ctrl + Space
-       // enableLiveAutocompletion: true, // the editor completes the statement while you are typing
+    editorText:string = "";
+    consoleText:string = "";
+    editorOptions:any = {
        showPrintMargin: false, // hides the vertical limiting strip
        maxLines: 10,
        minLines: 10,
-       fontSize: "100%" // ensures that the editor fits in the environment
+       fontSize: "100%", // ensures that the editor fits in the environment
    };
+   consoleOptions:any = {
+      showPrintMargin: false, // hides the vertical limiting strip
+      maxLines: 10,
+      minLines: 10,
+      fontSize: "100%", // ensures that the editor fits in the environment
+      showGutter: false,
+      highlightActiveLine: false,
+      highlightGutterLine: false
+  };
    @Input() sectionObj:any;
    @Input() progressObj:any;
    title: string;
@@ -33,6 +41,8 @@ export class LessonSectionComponent implements OnInit {
    success:boolean = false;
    ran: boolean = false;
    error:string = "";
+   @ViewChild('editor') editor;
+   @ViewChild('consol') consol;
 
    constructor(private http: HttpClient) {}
 
@@ -46,7 +56,7 @@ export class LessonSectionComponent implements OnInit {
        this.outputs = this.outputs.split(";");
        this.tasks = this.sectionObj.tasks ? this.sectionObj.tasks : "";
        this.tasks = this.tasks.split(";").filter(task => task.trim() !== "");
-       this.text = this.sectionObj.starterCode ? this.sectionObj.starterCode : "";
+       this.editorText = this.sectionObj.starterCode ? this.sectionObj.starterCode : "";
 
        this.outputs = this.outputs.map(function(s) {
            s = s.replace(/"/g,"").trim();
@@ -55,6 +65,20 @@ export class LessonSectionComponent implements OnInit {
 
        // console.log(this.progressObj);
    }
+   // ngAfterViewInit() {
+   //     console.log(this.editor);
+   //     this.editor.getEditor().setOptions({
+   //          enableBasicAutocompletion: true
+   //      });
+   //
+   //      this.editor.getEditor().commands.addCommand({
+   //          name: "showOtherCompletions",
+   //          bindKey: "Ctrl-s",
+   //          exec: function (editor) {
+   //
+   //          }
+   //      })
+   // }
 
    runCode() {
        if (this.outputs == "") {
@@ -67,7 +91,7 @@ export class LessonSectionComponent implements OnInit {
            return;
        }
        this.http.post('http://localhost:8080/compile', {
-           code: this.text,
+           code: this.editorText,
            language:"4"
        }).subscribe(
            res => {
@@ -75,13 +99,17 @@ export class LessonSectionComponent implements OnInit {
                this.ran = true;
                var output = res.output.replace("↵", "").trim();
                console.log([output], this.outputs);
+               this.consoleText = output;
                if (this.outputs.includes(output)) {
                    this.success = true;
                    this.progressObj.sectionProgress = 1;
                    SectionProgresses.update(this.progressObj._id, { $set: {
                        sectionProgress: 1,
                    } });
-               } else { this.success = false }
+               } else {
+                   this.error = "Oops, that's not it";
+                   this.success = false;
+               }
            },
            err => {
                // console.log(err);
@@ -90,6 +118,7 @@ export class LessonSectionComponent implements OnInit {
                    this.error = "There was an error on the server side";
                } else {
                    this.error = "Oops, that didn't work.";
+                   // this.consoleText = err.nam
                }
            }
        );
