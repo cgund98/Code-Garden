@@ -21,36 +21,38 @@ export class SignupShowPageComponent implements OnInit {
 
 
 
-  validateEqual(): ValidatorFn {
-      console.log("test");
-      return (confirm: FormControl): { [key: string]: any } | null => {
-      console.log("confirm", confirm);
-      console.log("confirm-parent", confirm.parent);
-      console.log("password", this.signupForm.get('password'));
-    //   if (confirm){
-    //   console.log(this.signupForm.value.password);
-    // }
-      // const  = confirm.value;
-      const password = this.signupForm.get('password').value;
-      console.log("pass", password);
-      console.log("value", confirm.value);
-      if (password && confirm !== confirm.value) {
-        console.log("check-tew");
-        return {'mismatch': true};
-      }
-      console.log("nul-tew");
-      return null;
-    };
-}
+//   validateEqual(): ValidatorFn {
+//       console.log("test");
+//       return (confirm: FormControl): { [key: string]: any } | null => {
+//       console.log("confirm", confirm);
+//       console.log("confirm-parent", confirm.parent);
+//       console.log("password", this.signupForm.get('password'));
+//     //   if (confirm){
+//     //   console.log(this.signupForm.value.password);
+//     // }
+//       // const  = confirm.value;
+//       const password = this.signupForm.get('password').value;
+//       console.log("pass", password);
+//       console.log("value", confirm.value);
+//       if (password && confirm !== confirm.value) {
+//         console.log("check-tew");
+//         return {'mismatch': true};
+//       }
+//       console.log("nul-tew");
+//       return {'mismatch': null};
+//     };
+// }
     ngOnInit() {
       this.signupForm = this.formBuilder.group({
         email: ['', Validators.required],
         name: ['', Validators.required],
         username: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirm: ['', [Validators.required, this.validateEqual.bind(this)]]
-      });
-      console.log(this.validateEqual);
+        // confirm: ['', [Validators.required, this.validateEqual.bind(this)]],
+        confirm: ['', Validators.required]
+      },{validator: [this.checkPasswords]});
+      // });
+      console.log(this.checkPasswords);
       // this.signupForm = new FormGroup ({
       // email: new FormControl('', [Validators.required]),
       // name: new FormControl('', [Validators.required]),
@@ -64,6 +66,16 @@ export class SignupShowPageComponent implements OnInit {
 
 }
 
+checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+  const pass = group.controls['password'].value;
+  const confirmPass = group.controls['confirm'].value;
+  console.log("pass", pass);
+  console.log("confirm", confirmPass)
+
+  console.log("test", pass === confirmPass ? null : { notSame: true });
+  console.log("ah", group);
+  return (pass === confirmPass ? null : { notSame: true })
+}
 
 
     //
