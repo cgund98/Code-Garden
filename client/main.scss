@@ -413,11 +413,24 @@ input {
 textarea {
     width: 100%;
     outline: none !important;
-    margin: 2em 0;
+    // margin: 2em 0;
     padding: .5em;
     border: 2px #aeaeae solid;
     height: 8em;
     background: none;
+}
+.section.edit {
+    .code-wrapper {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        textarea {
+            height: 210px;
+        }
+    }
+    .code-label {
+        margin: .5em 0;
+        text-align: center;
+    }
 }
 .edit {
     background: #f8f8f8;
@@ -621,6 +634,7 @@ textarea {
             // @include transform(rotate(0deg));
         }
         .diamond {
+            cursor: pointer;
             transition: .25s ease-in-out;
             @include transform(rotate(45deg));
             height: 3em;
@@ -629,6 +643,7 @@ textarea {
 
         }
         i {
+            cursor: pointer;
             position: absolute;
             font-size: 1.5em;
             top: .5em;
@@ -1236,4 +1251,9 @@ $duration: 1.4s;
    transform:rotate(440deg);
    opacity: 0;
  }
+}
+
+code {
+    font-family: "Roboto Mono";
+    font-size: 14px;
 }

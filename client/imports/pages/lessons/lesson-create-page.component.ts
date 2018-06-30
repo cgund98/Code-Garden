@@ -27,6 +27,15 @@ export class LessonCreatePageComponent implements OnInit {
     private newSection: FormGroup;
     private sectionGroups: Array<FormGroup>;
     // @ViewChild('editor') editor: QuillEditorComponent;
+    options:any = {
+       // enableBasicAutocompletion: true, // the editor completes the statement when you hit Ctrl + Space
+       // enableLiveAutocompletion: true, // the editor completes the statement while you are typing
+       showPrintMargin: false, // hides the vertical limiting strip
+       showGutter: false,
+       maxLines: 10,
+       minLines: 10,
+       fontSize: "100%" // ensures that the editor fits in the environment
+   };
 
     constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -42,7 +51,7 @@ export class LessonCreatePageComponent implements OnInit {
         })
 
         newSection.index = 0;
-
+        newSection.close = false;
         this.sectionGroups.push(newSection);
 
         this.sub = this.route.params.subscribe(params => {
@@ -54,6 +63,10 @@ export class LessonCreatePageComponent implements OnInit {
             this.course_title = this.courseObj.title;
         } catch(err) {}
 
+    }
+
+    test(inp:any) {
+        console.log(inp);
     }
 
     addSection(event) {
@@ -118,7 +131,8 @@ export class LessonCreatePageComponent implements OnInit {
                     title: group.value.title,
                     content: group.content,
                     expressions: group.value.expressions,
-                    outputs: group.value.outputs,
+                    outputs: group.outputs,
+                    starterCode: group.starterCode,
                     tasks: group.value.tasks,
                     seqNum: group.index,
                     lessonID: lessonID,

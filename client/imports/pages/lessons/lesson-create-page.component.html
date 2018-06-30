@@ -16,9 +16,36 @@
         <input formControlName="title" id="title" class="subtitle lesson-title" placeholder="Section title*">
         <!-- <textarea formControlName="content" class="lesson-content" placeholder="Section content*" id="content"></textarea> -->
         <quill-editor (onTextChange)="contentChange($event, s)" (click)="quillClick(s)"></quill-editor>
-        <textarea formControlName="expressions" id="expressions" placeholder="Desired Expressions seperated with a semicolon (ex. var name;function noot() {;)" class="col-xs-12 col-md-4 lesson-expressions"></textarea>
-        <textarea formControlName="outputs" id="outputs" placeholder="Desired Console Outputs seperated with a semicolon (ex. 3;4;5)" class="col-xs-12 col-md-3 col-md-offset-1 lesson-outputs"></textarea>
-        <textarea formControlName="tasks" id="tasks" placeholder="Tasks seperated with a semicolon (ex. Define a variable named name;)" class="col-xs-12 col-md-3 col-md-offset-1 lesson-tasks"></textarea>
+        <!-- <textarea formControlName="expressions" id="expressions" placeholder="Desired Expressions seperated with a semicolon (ex. var name;function noot() {;)" class="col-xs-12 col-md-4 lesson-expressions"></textarea> -->
+        <!-- <textarea formControlName="outputs" id="outputs" placeholder="Desired Console Outputs seperated with a semicolon (ex. 3;4;5)" class="col-xs-12 col-md-3 col-md-offset-1 lesson-outputs"></textarea> -->
+
+        <div class="col-xs-12 col-md-4 code-wrapper">
+            <p class="code-label">Starter code</p>
+            <div ace-editor id="editor" class="code"
+            style="overflow: auto;"
+            [mode]="'javascript'"
+            [theme]="'monokai'"
+            [options]="options"
+            [(text)]="s.starterCode"
+            (click)="test(s.starterCode)"
+            ></div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 code-wrapper">
+            <p class="code-label">Outputs</p>
+            <div ace-editor id="editor" class="code"
+            style="overflow: auto;"
+            [mode]="'javascript'"
+            [theme]="'monokai'"
+            [options]="options"
+            [(text)]="s.outputs"
+            (click)="test(s.outputs)"
+            ></div>
+        </div>
+        <div class="col-xs-12 col-md-4 code-wrapper">
+            <p class="code-label">Tasks</p>
+            <textarea formControlName="tasks" id="tasks" placeholder="Tasks seperated with a semicolon (ex. Define a variable named name;)"></textarea>
+        </div>
         <p style="color: white;padding: none; margin: none; font-size: 1px; color: white;">.</p>
 
         <p class="error text-center" *ngIf="s.get('title').invalid && s.get('title').touched">

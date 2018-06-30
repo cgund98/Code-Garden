@@ -45,17 +45,27 @@ export class LessonSectionComponent implements OnInit {
        this.outputs = this.sectionObj.outputs ? this.sectionObj.outputs : "";
        this.outputs = this.outputs.split(";");
        this.tasks = this.sectionObj.tasks ? this.sectionObj.tasks : "";
-       this.tasks = this.tasks.split(";");
+       this.tasks = this.tasks.split(";").filter(task => task.trim() !== "");
+       this.text = this.sectionObj.starterCode ? this.sectionObj.starterCode : "";
 
        this.outputs = this.outputs.map(function(s) {
            s = s.replace(/"/g,"").trim();
            return s;
        });
 
-       console.log(this.progressObj);
+       // console.log(this.progressObj);
    }
 
    runCode() {
+       if (this.outputs == "") {
+           this.ran = true;
+           this.success = true;
+           this.progressObj.sectionProgress = 1;
+           SectionProgresses.update(this.progressObj._id, { $set: {
+               sectionProgress: 1,
+           } });
+           return;
+       }
        this.http.post('http://localhost:8080/compile', {
            code: this.text,
            language:"4"
