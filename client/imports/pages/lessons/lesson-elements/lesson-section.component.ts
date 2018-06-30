@@ -5,6 +5,9 @@ import template from './lesson-section.component.html';
 
 import { SectionProgresses } from '../../../../../both/collections/section-progresses.collection';
 
+declare function require(name:string);
+var QuillDeltaToHtmlConverter = require('quill-delta-to-html');
+
 @Component({
     selector: 'lesson-section',
     template
@@ -29,11 +32,13 @@ export class LessonSectionComponent implements OnInit {
    tasks: any;
    success:boolean = false;
    ran: boolean = false;
+   error:string = "";
 
    constructor(private http: HttpClient) {}
 
    ngOnInit() {
        this.content = this.sectionObj.content;
+       this.content = this.procContent(this.content);
        this.title = this.sectionObj.title;
        this.expressions = this.sectionObj.expressions ? this.sectionObj.expressions : "";
        this.expressions = this.expressions.split(";");
@@ -56,7 +61,7 @@ export class LessonSectionComponent implements OnInit {
            language:"4"
        }).subscribe(
            res => {
-               console.log(res);
+               // console.log(res);
                this.ran = true;
                var output = res.output.replace("↵", "").trim();
                console.log([output], this.outputs);
@@ -69,10 +74,20 @@ export class LessonSectionComponent implements OnInit {
                } else { this.success = false }
            },
            err => {
-               console.log(err);
+               // console.log(err);
                this.ran = true;
+               if (err.name == "HttpErrorResponse") {
+                   this.error = "There was an error on the server side";
+               } else {
+                   this.error = "Oops, that didn't work.";
+               }
            }
        );
    }
+
+   procContent(text) {
+        let converter = new QuillDeltaToHtmlConverter(text, {});
+        return converter.convert();
+    }
 
 }

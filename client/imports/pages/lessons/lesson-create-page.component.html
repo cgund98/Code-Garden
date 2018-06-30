@@ -14,7 +14,8 @@
     <div class="section edit card" *ngFor="let s of sectionGroups">
         <form [formGroup]="s">
         <input formControlName="title" id="title" class="subtitle lesson-title" placeholder="Section title*">
-        <textarea formControlName="content" class="lesson-content" placeholder="Section content*" id="content"></textarea>
+        <!-- <textarea formControlName="content" class="lesson-content" placeholder="Section content*" id="content"></textarea> -->
+        <quill-editor (onTextChange)="contentChange($event, s)" (click)="quillClick(s)"></quill-editor>
         <textarea formControlName="expressions" id="expressions" placeholder="Desired Expressions seperated with a semicolon (ex. var name;function noot() {;)" class="col-xs-12 col-md-4 lesson-expressions"></textarea>
         <textarea formControlName="outputs" id="outputs" placeholder="Desired Console Outputs seperated with a semicolon (ex. 3;4;5)" class="col-xs-12 col-md-3 col-md-offset-1 lesson-outputs"></textarea>
         <textarea formControlName="tasks" id="tasks" placeholder="Tasks seperated with a semicolon (ex. Define a variable named name;)" class="col-xs-12 col-md-3 col-md-offset-1 lesson-tasks"></textarea>
@@ -24,7 +25,7 @@
             Section title must be longer than 3 characters
         </p>
         <p class="error text-center" *ngIf="s.get('content').invalid && s.get('content').touched">
-            Content must be longer than 20 characters
+            Content must be longer than that
         </p>
         <p class="error text-center" *ngIf="s.get('tasks').invalid && s.get('tasks').touched">
             Must have a task to accomplish

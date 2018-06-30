@@ -1,6 +1,6 @@
 <div class="section">
     <h3 class="subtitle">{{ title }}</h3>
-    <p>{{ content }}</p>
+    <p [innerHTML]="content"></p>
     <div class="code-box card">
         <div class="code-container col-xs-12 col-md-8">
             <!-- <div id="editor" class="code">var noot;</div> -->
@@ -13,7 +13,7 @@
            ></div>
             <button class="run" (click)="runCode()">RUN</button>
             <div *ngIf="success && ran" class="alert success">Correct, good job!<span id="close" (click)="this.ran=false">&#215;</span></div>
-            <div *ngIf="!success && ran" class="alert failed">Sorry, something didn't work.<span id="close" (click)="this.ran=false">&#215;</span></div>
+            <div *ngIf="!success && ran" class="alert failed">{{error}}<span id="close" (click)="this.ran=false">&#215;</span></div>
         </div>
         <div class="tasks-container col-xs-12 col-md-4">
             <h5>Tasks:</h5>

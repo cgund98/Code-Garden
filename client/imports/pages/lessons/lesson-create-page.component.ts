@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+// import Quill from 'quill';
 
 import template from './lesson-create-page.component.html';
 import { Courses } from '../../../../both/collections/courses.collection';
 import { Lessons } from '../../../../both/collections/lessons.collection';
 import { LessonSections } from '../../../../both/collections/lesson-sections.collection';
 import { SectionProgresses } from '../../../../both/collections/section-progresses.collection';
+
+declare function require(name:string);
+var QuillDeltaToHtmlConverter = require('quill-delta-to-html');
 
 @Component({
     selector: 'lesson-create-page',
@@ -22,6 +26,7 @@ export class LessonCreatePageComponent implements OnInit {
     private sub: any;
     private newSection: FormGroup;
     private sectionGroups: Array<FormGroup>;
+    // @ViewChild('editor') editor: QuillEditorComponent;
 
     constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -48,6 +53,7 @@ export class LessonCreatePageComponent implements OnInit {
         try {
             this.course_title = this.courseObj.title;
         } catch(err) {}
+
     }
 
     addSection(event) {
@@ -82,6 +88,20 @@ export class LessonCreatePageComponent implements OnInit {
         return true;
     }
 
+    contentChange(text: any, section: any) {
+        section.content = text;
+        var converter = new QuillDeltaToHtmlConverter(text, {});
+        text = converter.convert();
+        if (text.length > 20) {
+            section.get('content').setErrors(null);
+        } else {
+            section.get('content').setErrors({incorrect: true});
+        }
+    }
+    quillClick(section) {
+        section.get('content').touched = true;
+    }
+
     submit() {
         if (this.checkValids()) {
             var lessonID = Lessons.collection.insert({
@@ -93,9 +113,10 @@ export class LessonCreatePageComponent implements OnInit {
 
             for (var i=0; i < this.sectionGroups.length; i++) {
                 var group = this.sectionGroups[i];
+                // console.log(group.text);
                 var sectionID = LessonSections.collection.insert({
                     title: group.value.title,
-                    content: group.value.content,
+                    content: group.content,
                     expressions: group.value.expressions,
                     outputs: group.value.outputs,
                     tasks: group.value.tasks,
@@ -108,7 +129,7 @@ export class LessonCreatePageComponent implements OnInit {
                     sectionID,
                     sectionProgress: 0,
                 });
-                // console.log('Progress created: ' + sectionProgressID);
+                console.log('Progress created: ' + sectionProgressID);
             }
             console.log('Created');
             this.router.navigate(['/courses/'+this._course_id]);
