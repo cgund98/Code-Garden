@@ -27,7 +27,9 @@ export class QuillEditorComponent implements OnInit {
                 toolbar: [
                   // [{ header: [1, 2, false] }],
                   ['bold', 'italic', 'underline'],
-                  ['code']]
+                  ['code'],
+                  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ]
             },
             placeholder: 'Content goes here...*',
             theme: 'snow',
