@@ -12,8 +12,16 @@
                 <span class="error text-center" *ngIf="signupForm.get('password').hasError('required') && signupForm.get('password').touched">Password is required</span>
                 <span class="error text-center" *ngIf="signupForm.get('password').hasError('minlength') && signupForm.get('password').touched">Password is too short</span>
                 <input type="password" id="password-confirm" placeholder="Confirm Password" formControlName="confirm">
+<<<<<<< HEAD
                 <span class="error text-center" *ngIf="signupForm.get('confirm').errors?.required && signupForm.get('confirm').touched">Confirm passwords is required</span>
                 <span class="error text-center" *ngIf="!passMatch() && signupForm.get('confirm').touched">Passwords do not much</span>
+=======
+                <span>
+                  {{signupForm.get('confirm').hasError('notSame')}}</span>
+                  {{signupForm.get('confirm')}}
+                <!-- <span class="error text-center" *ngIf="signupForm.get('confirm').hasError('required') && signupForm.get('confirm').touched">Confirm {{signupForm.get('confirm').hasError('notSame')}}</span> -->
+                <span class="error text-center" *ngIf="signupForm.get('confirm').hasError('notSame') && !signupForm.get('confirm').touched">Passwords do not much</span>
+>>>>>>> 86b2396146ca5d89a4371fdaea11940184dd1646
             </form>
             <!-- <div class="col-xs-12 col-md-3 col-md-offset-1" style="color: white;"></div>
             <p style="color: white;padding: none; margin: none; font-size: 1px; color: white;">.</p>
