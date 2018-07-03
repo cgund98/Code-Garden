@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 
 import template from './login-show-page.component.html';
 
@@ -13,6 +14,7 @@ import template from './login-show-page.component.html';
 export class LoginShowPageComponent implements OnInit {
 
   private loginForm: FormGroup;
+  user: Meteor.User;
   error: string;
 
    constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {}
@@ -24,9 +26,10 @@ export class LoginShowPageComponent implements OnInit {
      });
 
      this.error='';
-   }
 
+}
    login(){
+     var self= this;
      console.log("Signing In...")
      if (this.loginForm.valid){
        Meteor.loginWithPassword(this.loginForm.value.email, this.loginForm.value.password, (err) => {
@@ -34,7 +37,8 @@ export class LoginShowPageComponent implements OnInit {
            if (err) {
              this.error = err;
            } else {
-             this.router.navigate(['/dashboard']);
+        //     console.log(Meteor.user());
+             self.router.navigate(['/dashboard']);
            }
          });
        });

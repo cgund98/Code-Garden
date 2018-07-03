@@ -51,7 +51,7 @@ export class SignupShowPageComponent implements OnInit {
     if (this.checkValids()) {
         Accounts.createUser({
           email: this.signupForm.value.email,
-          name: this.signupForm.value.name,
+    //      name: this.signupForm.value.name,
           username: this.signupForm.value.username,
           password: this.signupForm.value.password
         }, (err) => {
