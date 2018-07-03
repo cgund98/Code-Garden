@@ -4,7 +4,7 @@
         <div class="dropdown">
             <div class="parent"><a href="#" style="color: white;"><i class="fa fa-user-circle text-green" aria-hidden="true"></i>.<i class="fa fa-chevron-down" style="font-size: .75em; color: #222222 !important;" aria-hidden="true"></i></a></div>
             <div class="children">
-                <a href="/login">Login</a>
+                <a *ngIf="!Meteor.User()" href="/login">Login</a>
                 <a href="/signup">Signup</a>
             </div>
         </div>
