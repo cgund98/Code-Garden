@@ -17,7 +17,7 @@ export class LoginShowPageComponent implements OnInit {
   user: Meteor.User;
   error: string;
 
-   constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {}
+   constructor(private router: Router,private zone: NgZone, private formBuilder: FormBuilder) {}
 
    ngOnInit() {
      this.loginForm = new FormGroup ({
@@ -28,6 +28,7 @@ export class LoginShowPageComponent implements OnInit {
      this.error='';
 
 }
+
    login(){
      var self= this;
      console.log("Signing In...")
@@ -36,12 +37,16 @@ export class LoginShowPageComponent implements OnInit {
          this.zone.run(() =>{
            if (err) {
              this.error = err;
+             console.log(err);
            } else {
-        //     console.log(Meteor.user());
+             var user: Meteor.User;
+             console.log(Meteor.user());
+             // console.log(Meteor.loggingIn())
              self.router.navigate(['/dashboard']);
            }
          });
        });
      }
-   }
+}
+
 }

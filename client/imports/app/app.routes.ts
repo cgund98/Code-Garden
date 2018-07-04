@@ -18,12 +18,13 @@ export const routes: Route[] = [
     // { path: 'lesson', component: DashboardPageComponent },
     // { path: 'courses/lessons/create', component: LessonCreatePageComponent},
     // { path: 'create-lesson', component: LessonCreatePageComponent },
-    { path: 'dashboard', component: DashboardShowPageComponent },
+    { path: 'dashboard', component: DashboardShowPageComponent},
     // { path: 'courses', component: CoursesShowPageComponent },
-    { path: 'courses/:_id', component: CourseShowPageComponent,},
+    { path: 'courses/:_id', component: CourseShowPageComponent},
     { path: 'courses/:_course_id/lesson/:_lesson_id', component: LessonShowPageComponent },
   //  { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent },
     { path: 'create-course', component: CourseCreatePageComponent },
     { path: 'login', component: LoginShowPageComponent },
     { path: 'signup', component: SignupShowPageComponent },
+
 ];
