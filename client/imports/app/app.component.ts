@@ -14,6 +14,7 @@ import template from './app.component.html';
 })
 @InjectUser('user')
 export class AppComponent implements OnInit, OnDestroy {
+
     error: string;
     navigationSubscription;
     constructor(private router: Router, private zone: NgZone) {
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // user: Meteor.User;
     ngOnInit() {
+
     //  let user = Meteor.user();
     var user= Meteor.user();
     if (user != null){
@@ -89,15 +91,14 @@ rDash(){
 
 rLogOut(){
   var self=this;
-  Meteor.logout((err) =>{
-    this.zone.run(() => {
-      if (err){
-        this.error=err;
-        console.log(err);
-      } else {
-      self.router.navigate(['/']);
-    }
-    });
+  Meteor.logout(() => {
+    self.router.navigate(['home'])
+    //   if (err){
+    //     this.error=err;
+    //     console.log(err);
+    //   } else {
+    //   self.router.navigate(['/']);
+    // }
   });
 
 }
