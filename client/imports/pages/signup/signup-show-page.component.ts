@@ -46,7 +46,6 @@ export class SignupShowPageComponent implements OnInit {
     }
 
   signup() {
-
       console.log('Creating...');
     if (this.checkValids()) {
         Accounts.createUser({
