@@ -88,7 +88,7 @@ export class LessonEditPageComponent implements OnInit {
         }
 
         this.courseObj = Courses.findOne({_id: this._course_id});
-        this.seqNum = Lessons.find({courseID: this._course_id}).fetch().length + 1;
+        this.seqNum = Lessons.find({courseID: this._course_id}).fetch().length;
         try {
             this.course_title = this.courseObj.title;
         } catch(err) {}

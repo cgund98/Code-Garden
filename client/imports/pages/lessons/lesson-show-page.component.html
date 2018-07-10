@@ -10,8 +10,8 @@
         </div>
     </div>
     <div class="prev-next-container">
-        <a class="left"><i class="fa fa-chevron-left" aria-hidden="true"></i> Prev. Lesson</a>
-        <a class="right">Next Lesson <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+        <a class="left" *ngIf="prevLessonLink" href="{{prevLessonLink}}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Prev. Lesson</a>
+        <a class="right" *ngIf="nextLessonLink" href="{{nextLessonLink}}">Next Lesson <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
     </div>
 
     <div class="text-center"><button class="edit"><a href="{{ editLink }}"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
