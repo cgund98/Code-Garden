@@ -3,9 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MiscCompsModule } from '../misc/misc-comps.module';
-import { LoginShowPageComponent } from './login-show-page.component';
+import { SignupShowPageComponent } from './signup-show-page.component';
 
-import { LOGIN_ELEMENTS_DECLARATIONS } from './login-elements';
+
+import { SIGNUP_ELEMENTS_DECLARATIONS } from './signup-elements';
 
 @NgModule({
   imports: [
@@ -15,15 +16,15 @@ import { LOGIN_ELEMENTS_DECLARATIONS } from './login-elements';
     MiscCompsModule,
   ],
   declarations: [
-    LoginShowPageComponent,
-    ...LOGIN_ELEMENTS_DECLARATIONS,
+    SignupShowPageComponent,
+    ...SIGNUP_ELEMENTS_DECLARATIONS,
   ],
   entryComponents: [
-    LoginShowPageComponent,
+    SignupShowPageComponent,
   ],
   exports: [
-    LoginShowPageComponent,
+    SignupShowPageComponent,
   ]
 })
 
-export class LoginPageModule {}
+export class SignupPageModule {}
