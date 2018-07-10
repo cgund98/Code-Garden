@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
             if (Meteor.user()) {
             // if (Courses.find({}).fetch().length > 0 && Courses.find({}).fetch().length > 0) {
                 // console.log(Courses.find({}).fetch());
-                url = router.url;
+                var url = router.url;
                 router.navigateByUrl('/create-course', {skipLocationChange: true}).then(()=>
                 router.navigate([url]));
                 return true;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 import template from './quill-editor.component.html';
 // import { QuillDeltaToHtmlConverter } from  'quill-delta-to-html';
@@ -13,13 +13,15 @@ var QuillDeltaToHtmlConverter = require('quill-delta-to-html');
 })
 
 export class QuillEditorComponent implements OnInit {
-
-    text:string = "";
+    @Input() text;
     editor: any;
     @ViewChild('editor') editor: ElementRef;
     @Output() onTextChange: EventEmitter<any> = new EventEmitter<any>();
 
     ngOnInit() {
+        if (!this.text) {this.text = {};}
+        // console.log(this.text);
+        let text = this.text;
 
         var options = {
             // debug: 'info',
@@ -35,14 +37,15 @@ export class QuillEditorComponent implements OnInit {
             theme: 'snow',
         }
         this.editor = new Quill(this.editor.nativeElement, options);
+        this.editor.setContents(text);
         this.editor.on('text-change', this.textChange.bind(this));
         }
 
     public textChange() {
-        var text = this.editor.getContents().ops;
-        var converter = new QuillDeltaToHtmlConverter(text, {});
+        let text = this.editor.getContents().ops;
+        let converter = new QuillDeltaToHtmlConverter(text, {});
         // text = converter.convert();
-        console.log(text);
+        // console.log(text);
         this.onTextChange.emit(text);
     }
 

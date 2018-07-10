@@ -14,6 +14,8 @@
         <a class="right">Next Lesson <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
     </div>
 
+    <div class="text-center"><button class="edit"><a href="{{ editLink }}"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
+
     <lesson-section *ngFor="let s of sectionObjs; index as i" [sectionObj]="s" [progressObj]="progressObjs[i]" id="{{ s.seqNum }}"></lesson-section>
 
 </div>

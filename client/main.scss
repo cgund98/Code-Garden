@@ -58,7 +58,7 @@ $breakpoints: (
 // Main Styles
 a {
     text-decoration: none !important;
-    color: $dark;
+    // color: $dark;
     transition: .75s ease-in-out;
     &:hover {
         color: $green;
@@ -94,6 +94,8 @@ p {
 header.main {
     margin-top: 1em;
     margin-bottom: 1em;
+    font-family: GlacialIndifference;
+    a { color: $dark; }
     nav {
         & > a {
             float: right;
@@ -472,7 +474,7 @@ textarea {
         text-align: center;
     }
 }
-.section .edit {
+div.edit {
     background: #f8f8f8;
     padding: 2em;
     display: inline-block;

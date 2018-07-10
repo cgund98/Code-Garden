@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LessonShowPageComponent } from './lesson-show-page.component';
 import { LessonCreatePageComponent } from './lesson-create-page.component';
+import { LessonEditPageComponent } from './lesson-edit-page.component';
 
 import { LESSON_ELEMENTS_DECLARATIONS } from './lesson-elements';
 
@@ -24,16 +25,19 @@ import { LESSON_ELEMENTS_DECLARATIONS } from './lesson-elements';
   declarations: [
     LessonShowPageComponent,
     LessonCreatePageComponent,
+    LessonEditPageComponent,
     ...LESSON_ELEMENTS_DECLARATIONS,
   ],
   entryComponents: [
     LessonShowPageComponent,
     LessonCreatePageComponent,
+    LessonEditPageComponent,
     ...LESSON_ELEMENTS_DECLARATIONS,
   ],
   exports: [
     LessonShowPageComponent,
     LessonCreatePageComponent,
+    LessonEditPageComponent,
     ...LESSON_ELEMENTS_DECLARATIONS,
   ]
 })

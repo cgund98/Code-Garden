@@ -15,6 +15,7 @@ export class LessonShowPageComponent implements OnInit {
     _lesson_id: string;
     title: string;
     course: string;
+    editLink: string = "#";
     sub: any;
     lessonObj: any;
     sectionObjs: Array<any>;
@@ -29,6 +30,7 @@ export class LessonShowPageComponent implements OnInit {
             this._lesson_id = params['_lesson_id'];
         })
         this.lessonObj = Lessons.findOne({_id: this._lesson_id});
+        this.editLink = './' + this._lesson_id + '/edit';
         this.sectionObjs = LessonSections.find({lessonID: this._lesson_id}, {sort: {seqNum: 1}}).fetch();
         this.progressObjs = SectionProgresses.find({lessonID: this._lesson_id}, {sort: {seqNum: 1}}).fetch();
 
