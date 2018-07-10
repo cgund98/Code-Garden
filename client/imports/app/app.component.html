@@ -1,11 +1,14 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <header class="main container">
     <div class="logo col-xs-9 col-md-2">CODE<span class="text-green">GARDEN</span></div>
     <nav class="col-xs-3 col-md-10">
         <div class="dropdown">
-            <div class="parent"><a href="#" style="color: white;"><i class="fa fa-user-circle text-green" aria-hidden="true"></i>.<i class="fa fa-chevron-down" style="font-size: .75em; color: #222222 !important;" aria-hidden="true"></i></a></div>
-            <div class="children">
-                <a href="#">Login</a>
-                <a href="#">Signup</a>
+            <div class="parent"><a href="#" style="color: white;"><i class="fa fa-user-circle text-green" aria-hidden="true"><span style="display:inline" class="fa text-green" *ngIf="user"> {{ user.username }} </span></i>.<i class="fa fa-chevron-down" style="font-size: .75em; color: #222222 !important;" aria-hidden="true"></i></a></div>
+            <div class="children" [style.right]="user ? '56px' : null">
+                <a type="submit" *ngIf="!user" (click)=(rLogin()) href="">Login</a>
+                <a *ngIf="user" (click)=(rDash()) href="">Dashboard</a>
+                <a *ngIf="user" (click)=(rLogOut()) href="#">Logout</a>
+                <a *ngIf="!user" (click)=(rSignup()) href="">Signup</a>
             </div>
         </div>
         <a href="/courses">Courses</a>
