@@ -1,7 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
-import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
+import { Component } from '@angular/core';
 
 import template from './dashboard-show-page.component.html';
 
@@ -10,20 +7,4 @@ import template from './dashboard-show-page.component.html';
   template
 })
 
-export class DashboardShowPageComponent implements OnInit {
-
-  // user: Meteor.User;
-  error:string;
-
-  constructor(private router: Router, private zone: NgZone){
-
-  }
-  NgZone() {
-
-  }
-  ngOnInit() {
-    var user = Meteor.user();
-    user;
-    // this.user;
-  }
-}
+export class DashboardShowPageComponent {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Course } from '../../../../both/models/course.model';
 import { Courses } from '../../../../both/collections/courses.collection';
@@ -15,6 +16,8 @@ export class CourseCreatePageComponent implements OnInit {
 
     private languages: Array<string>;
     private newCourseForm: FormGroup;
+
+    constructor(private router: Router) {}
 
     ngOnInit() {
         this.languages = ["HTML", "CSS", "Javascript"]
@@ -39,6 +42,7 @@ export class CourseCreatePageComponent implements OnInit {
             var course = this.newCourseForm.value;
             Courses.insert(course);
             console.log("Submitted form");
+            this.router.navigateByUrl('/');
         }
     }
 
