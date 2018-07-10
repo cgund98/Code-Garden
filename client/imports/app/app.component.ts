@@ -16,42 +16,24 @@ import template from './app.component.html';
 export class AppComponent implements OnInit, OnDestroy {
 
     error: string;
-    navigationSubscription;
+    // navigationSubscription;
     constructor(private router: Router, private zone: NgZone) {
-      this.navigationSubscription = this.router.events.subscribe((e: any) => {
-     // If it is a NavigationEnd event re-initalise the component
-     if (e instanceof NavigationEnd) {
-       this.ngOnInit();
-     }
-   });
+     //  this.navigationSubscription = this.router.events.subscribe((e: any) => {
+     // // If it is a NavigationEnd event re-initalise the component
+     // if (e instanceof NavigationEnd) {
+     //       this.ngOnInit();
+     //     }
+     //   });
     }
-    // @InjectUser('user')
-    // user: Meteor.User;
-    // M = Meteor.user();
 
-    // user: Meteor.User;
     ngOnInit() {
-
-    //  let user = Meteor.user();
-    var user= Meteor.user();
-    if (user != null){
-      user;
-    }
-
-      // var username = '';
-      // console.log("ID ", Meteor.userId());
-      // // let M = Meteor.user();
-      // console.log("USER ", M.profile);
-      //   if (M != null){
-      //     console.log("Name ", M);
-      //     var username= M.profile.username;
-      //     return username;
-      //   }
+        particlesJS.load('particles-js', '/assets/particles.json', null);
         function checkForData(router) {
             console.log('Checking...');
-            if (Courses.find({}).fetch().length > 0) {
-                console.log(Courses.find({}).fetch());
-                var url = router.url;
+            if (Meteor.user()) {
+            // if (Courses.find({}).fetch().length > 0 && Courses.find({}).fetch().length > 0) {
+                // console.log(Courses.find({}).fetch());
+                url = router.url;
                 router.navigateByUrl('/create-course', {skipLocationChange: true}).then(()=>
                 router.navigate([url]));
                 return true;
@@ -66,20 +48,20 @@ export class AppComponent implements OnInit, OnDestroy {
                 if (checkForData(router)) {return};
                 await sleep(10);
             }
-        // }
-        if (Courses.find({}).fetch().length == 0) {
+        }
+        if (Meteor.user() == null) {
             waitForData(this.router);
         }
+
     }
-}
 
 ngOnDestroy() {
     // avoid memory leaks here by cleaning up after ourselves. If we
     // don't then we will continue to run our initialiseInvites()
     // method on every navigationEnd event.
-    if (this.navigationSubscription) {
-       this.navigationSubscription.unsubscribe();
-    }
+    // if (this.navigationSubscription) {
+    //    this.navigationSubscription.unsubscribe();
+    // }
   }
 
 rDash(){
