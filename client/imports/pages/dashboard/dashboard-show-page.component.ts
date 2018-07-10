@@ -12,16 +12,18 @@ import template from './dashboard-show-page.component.html';
 
 export class DashboardShowPageComponent implements OnInit {
 
-  user: Meteor.User;
+  // user: Meteor.User;
   error:string;
 
   constructor(private router: Router, private zone: NgZone){
 
   }
   NgZone() {
-    this.user;
+
   }
   ngOnInit() {
-    this.user;
+    var user = Meteor.user();
+    user;
+    // this.user;
   }
 }

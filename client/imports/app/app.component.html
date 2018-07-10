@@ -7,7 +7,7 @@
             <div class="children" [style.right]="user ? '56px' : null">
                 <a type="submit" *ngIf="!user" (click)=(rLogin()) href="">Login</a>
                 <a *ngIf="user" (click)=(rDash()) href="">Dashboard</a>
-                <a *ngIf="user" (click)=(rLogOut()) href="">Logout</a>
+                <a *ngIf="user" (click)=(rLogOut()) href="#">Logout</a>
                 <a *ngIf="!user" (click)=(rSignup()) href="">Signup</a>
             </div>
         </div>

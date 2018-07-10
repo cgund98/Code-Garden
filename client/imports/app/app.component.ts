@@ -91,8 +91,9 @@ rDash(){
 
 rLogOut(){
   var self=this;
-  Meteor.logout(() => {
-    self.router.navigate(['home'])
+  Accounts.logout();
+  Accounts.onLogout(function() {
+    self.router.navigate(['/']);
     //   if (err){
     //     this.error=err;
     //     console.log(err);
