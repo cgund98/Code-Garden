@@ -1,6 +1,7 @@
 <main-hero title="{{ title }}" subtitle="{{ language }}"></main-hero>
 <div class="container">
-    <div class="text-center"><button class="enroll">ENROLL</button></div>
+    <!-- <div class="text-center"><button class="enroll">ENROLL</button></div> -->
+    <div class="text-center"><button class="edit"><a href="{{ editLink }}"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
     <p class="course-description">{{ fullDesc }}</p>
     <div class="title-wrapper">
         <h4 (click)="ngOnInit()">Lessons</h4>

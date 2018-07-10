@@ -19,6 +19,7 @@ export class CourseShowPageComponent implements OnInit {
     shortDesc: string;
     language: string;
     newLessonLink: string;
+    editLink: string;
     private sub: any;
     private courseObj: any;
     lessonObjs: Array<any>;
@@ -30,6 +31,7 @@ export class CourseShowPageComponent implements OnInit {
             this._course_id = params['_course_id'];
         })
         this.newLessonLink = "/courses/" + this._course_id + "/create-lesson";
+        this.editLink = "/courses/" + this._course_id + "/edit";
         this.courseObj = Courses.findOne({_id: this._course_id});
         this.lessonObjs = Lessons.find({courseID: this._course_id}, {sort: {seqNum: 1}}).fetch();
         // console.log(this.lessonObjs);

@@ -36,10 +36,10 @@
 
 
     </div>
-    <p>Form value {{ editCourseForm.value | json }} </p>
-    <p> Form status {{ editCourseForm.status | json}} </p>
+    <p *ngIf="debug">Form value {{ editCourseForm.value | json }} </p>
+    <p *ngIf="debug"> Form status {{ editCourseForm.status | json}} </p>
     <div class="text-center col-xs-12">
-      <button class="add card" type="submit" [disabled]="!editCourseForm.valid" (click)="submit()" value="Submit">Create</button>
+      <button class="add card" type="submit" [disabled]="!editCourseForm.valid" (click)="submit()" value="Submit">Publish Edits</button>
     </div>
 
 </div>

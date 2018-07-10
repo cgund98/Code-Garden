@@ -42,7 +42,7 @@ export class CourseCreatePageComponent implements OnInit {
             var course = this.newCourseForm.value;
             Courses.insert(course);
             console.log("Submitted form");
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/courses');
         }
     }
 

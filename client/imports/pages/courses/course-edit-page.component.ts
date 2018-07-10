@@ -19,6 +19,7 @@ export class CourseEditPageComponent implements OnInit {
     private editCourseForm: FormGroup;
     private course: Course;
     private sub: any;
+    debug: boolean = false;
 
     constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -30,16 +31,24 @@ export class CourseEditPageComponent implements OnInit {
         })
 
         this.course = Courses.findOne({_id: this._course_id})
-
-        this.editCourseForm = new FormGroup ({
-            title: new FormControl(this.course.title, [Validators.required, Validators.minLength(3)]),
-            fullDesc: new FormControl(this.course.fullDesc, [Validators.required, Validators.minLength(20)]),
-            shortDesc: new FormControl(this.course.shortDesc, [Validators.required, Validators.minLength(10)]),
-            private: new FormControl(this.course.private),
-            language: new FormControl(this.course.language, Validators.required),
-        })
+        try {
+            this.editCourseForm = new FormGroup ({
+                title: new FormControl(this.course.title, [Validators.required, Validators.minLength(3)]),
+                fullDesc: new FormControl(this.course.fullDesc, [Validators.required, Validators.minLength(20)]),
+                shortDesc: new FormControl(this.course.shortDesc, [Validators.required, Validators.minLength(10)]),
+                private: new FormControl(this.course.private),
+                language: new FormControl(this.course.language, Validators.required),
+            })
+        } catch(err) {
+            this.editCourseForm = new FormGroup ({
+                title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+                fullDesc: new FormControl('', [Validators.required, Validators.minLength(20)]),
+                shortDesc: new FormControl('', [Validators.required, Validators.minLength(10)]),
+                private: new FormControl(false),
+                language: new FormControl('', Validators.required),
+            })
+        }
     }
-
     get title() { return this.editCourseForm.get('title'); }
     get fullDesc() { return this.editCourseForm.get('fullDesc'); }
     get shortDesc() { return this.editCourseForm.get('shortDesc'); }
@@ -51,7 +60,7 @@ export class CourseEditPageComponent implements OnInit {
             var course = this.editCourseForm.value;
             Courses.update(this._course_id, course);
             console.log("Submitted form");
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/courses/' + this._course_id);
         }
     }
 

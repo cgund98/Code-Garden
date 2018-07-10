@@ -8,6 +8,7 @@ import { LessonPageModule } from '../lessons/lesson-page.module.ts';
 import { CourseShowPageComponent } from './course-show-page.component';
 import { CoursesShowPageComponent } from './courses-show-page.component';
 import { CourseCreatePageComponent } from './course-create-page.component';
+import { CourseEditPageComponent } from './course-edit-page.component';
 
 import { COURSE_ELEMENTS_DECLARATIONS } from './course-elements';
 
@@ -23,18 +24,21 @@ import { COURSE_ELEMENTS_DECLARATIONS } from './course-elements';
   declarations: [
     CourseShowPageComponent,
     CourseCreatePageComponent,
+    CourseEditPageComponent,
     CoursesShowPageComponent,
     ...COURSE_ELEMENTS_DECLARATIONS,
   ],
   entryComponents: [
     CourseShowPageComponent,
     CourseCreatePageComponent,
+    CourseEditPageComponent,
     CoursesShowPageComponent,
     ...COURSE_ELEMENTS_DECLARATIONS,
   ],
   exports: [
     CourseShowPageComponent,
     CourseCreatePageComponent,
+    CourseEditPageComponent,
     CoursesShowPageComponent,
     ...COURSE_ELEMENTS_DECLARATIONS,
   ]
