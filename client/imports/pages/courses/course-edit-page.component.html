@@ -1,0 +1,45 @@
+<main-hero title="Edit Course"></main-hero>
+<div class="lesson-body container">
+    <div class="section edit card">
+        <form class="course-form" id="course" [formGroup]="editCourseForm">
+
+
+          <input class="subtitle" id="title" placeholder="Course title*" formControlName="title" />
+          <textarea id="fullDesc" placeholder="Course description*" formControlName="fullDesc"></textarea>
+          <textarea id="shortDesc" placeholder="Short course description (1 sentence)*" class="col-xs-12 col-md-4" formControlName="shortDesc"></textarea>
+          <div class="col-xs-12 col-md-3 col-md-offset-1 checkbox" style="padding-top: 2em">
+              <input type="checkbox" id="private" name="private" formControlName="private" />
+                      <label for="private">
+                        <span></span>Private
+              </label>
+          </div>
+          <div class="xs-12 col-md-3 col-md-offset-1" style="padding-top: 1em; height: 200px">
+            <div class="radio-wrapper" *ngFor="let l of languages">
+                <input type="radio" [id]='l' [value]="l" name="language" formControlName="language" />
+                <label [for]="l">{{ l }}</label>
+                <div class="check"><div class="inside"></div></div>
+            </div>
+        </div>
+        </form>
+        <div class="col-xs-12 col-md-3 col-md-offset-1" style="color: white;"></div>
+        <p style="color: white;padding: none; margin: none; font-size: 1px; color: white;">.</p>
+
+        <p class="error text-center" *ngIf="title.invalid && title.touched">
+            Title must be longer than 3 characters
+        </p>
+        <p class="error text-center" *ngIf="fullDesc.invalid && fullDesc.touched">
+            Full description must be longer than 20 characters
+        </p>
+        <p class="error text-center" *ngIf="shortDesc.invalid && shortDesc.touched">
+            Short description must be longer than 10 characters
+        </p>
+
+
+    </div>
+    <p>Form value {{ editCourseForm.value | json }} </p>
+    <p> Form status {{ editCourseForm.status | json}} </p>
+    <div class="text-center col-xs-12">
+      <button class="add card" type="submit" [disabled]="!editCourseForm.valid" (click)="submit()" value="Submit">Create</button>
+    </div>
+
+</div>
