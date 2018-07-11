@@ -4,7 +4,7 @@
         <h4>Available Courses</h4>
     </div>
     <course-card *ngFor="let c of courseObjs" class="col-xs-12 col-md-4 col-xl-3"
-    title="{{c.title}}" author="Nut" shortDesc="{{c.shortDesc}}"
+    title="{{c.title}}" author="{{c.author}}" shortDesc="{{c.shortDesc}}"
     date="Dongus 8, 2018" _id="{{c._id}}">
     </course-card>
 </div>

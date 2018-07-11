@@ -6,8 +6,7 @@ export interface Course extends CollectionObject {
   shortDesc: string;
   private: boolean;
   language: string;
-  author: string;
-  admins: Array<string>;
+  authorID: string;
   date: string;
   createdAt: Date;
 }

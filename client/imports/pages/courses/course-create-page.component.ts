@@ -31,7 +31,6 @@ export class CourseCreatePageComponent implements OnInit {
             language: new FormControl('', Validators.required),
         })
 
-        console.log(Meteor.user());
     }
 
     get title() { return this.newCourseForm.get('title'); }
@@ -41,8 +40,9 @@ export class CourseCreatePageComponent implements OnInit {
     get language() { return this.newCourseForm.get('language'); }
 
     submit() {
-        if (this.newCourseForm.valid) {
+        if (this.newCourseForm.valid && Meteor.userId()) {
             var course = this.newCourseForm.value;
+            course.authorID = Meteor.userId();
             Courses.insert(course);
             console.log("Submitted form");
             this.router.navigateByUrl('/courses');
