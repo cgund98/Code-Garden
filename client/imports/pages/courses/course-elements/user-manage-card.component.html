@@ -11,11 +11,11 @@
     </div>
 
     <div class="icon-wrapper">
-        <i class="fas fa fa-edit"></i>
+        <i class="fas fa fa-edit" (click)="editing=true"></i>
     </div>
 </div>
 
-<div class="edit-popup-wrapper card">
+<div class="edit-popup-wrapper card" *ngIf="editing">
     <div class="profile-info-wrapper">
         <div class="profile-img-wrapper">
             <img src="/profileImgs/witch.jpg" />
@@ -38,5 +38,5 @@
         <button class="remove-user">Remove</button>
     </div>
 
-    <button class='remove' (click)="removeSection($event, s.index)"><i class='fa fa-times' aria-hidden='true'></i></button>
+    <button class='remove' (click)="editing=false"><i class='fa fa-times' aria-hidden='true'></i></button>
 </div>

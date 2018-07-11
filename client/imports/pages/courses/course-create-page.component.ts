@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -29,6 +30,8 @@ export class CourseCreatePageComponent implements OnInit {
             private: new FormControl(false),
             language: new FormControl('', Validators.required),
         })
+
+        console.log(Meteor.user());
     }
 
     get title() { return this.newCourseForm.get('title'); }

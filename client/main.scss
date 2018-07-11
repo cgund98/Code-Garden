@@ -1381,6 +1381,7 @@ user-manage-card {
         background: $ghost;
         padding: 2em;
         min-width: 400px;
+        z-index: 660;
 
         button.remove {
             background: $dark;
@@ -1419,11 +1420,98 @@ user-manage-card {
 
         .edits-wrapper {
             margin-top: 1em;
+            // display: inline-block;;
             .radio-wrapper {
                 width: 50%;
                 clear: both;
             }
         }
 
+        .remove-user-wrapper {
+            width: 48%;
+            display: inline-block;
+            // float: right;
+            // margin: auto;
+            button.remove-user {
+                background: $red;
+                margin: auto;
+                margin-top: 1em;
+                margin-left: 1em;
+                padding: .45em 1.25em .65em 1.25em;
+            }
+        }
+
     }
+}
+.new-user-popup-wrapper {
+    z-index: 660;
+    position: fixed;
+    @include transform(translate(-50%));
+    left: 50%;
+    top: 20%;
+    background: $ghost;
+    padding: 2em;
+    min-width: 400px;
+
+    button.remove {
+        background: $dark;
+    }
+
+    .profile-info-wrapper {
+
+        .profile-img-wrapper {
+            margin: auto;
+            overflow: hidden;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            position: relative;
+            img {
+                height: 100%;
+            }
+        }
+
+        .text-wrapper {
+            margin-top: 1em;
+            text-align: center;
+            p {
+                margin: 0;
+            }
+            .name {
+                font-size: 1.45em;
+            }
+            .username {
+                font-size: 1.15em;
+                width: 80%;
+                text-align: center;
+                // font-weight: bold;
+                margin: .5em 0;
+            }
+        }
+
+    }
+
+    .edits-wrapper {
+        margin-top: 1em;
+        // display: inline-block;;
+        .radio-wrapper {
+            width: 50%;
+            clear: both;
+        }
+    }
+
+    .add-user-wrapper {
+        width: 48%;
+        display: inline-block;
+        // float: right;
+        // margin: auto;
+        button.add-user {
+            background: $green;
+            margin: auto;
+            margin-top: 1em;
+            margin-left: 1em;
+            padding: .45em 1.25em .65em 1.25em;
+        }
+    }
+
 }

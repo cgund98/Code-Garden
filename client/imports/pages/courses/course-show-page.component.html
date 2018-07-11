@@ -18,6 +18,36 @@
         <h4>Users</h4>
     </div>
 
+    <div class="text-center">
+        <button class="add add-section card" type="button" (click)="addingUser=true"><i class="fa fa-plus" aria-hidden="true"></i> Add User</button>
+    </div>
+
+    <div class="new-user-popup-wrapper card" *ngIf="addingUser">
+        <div class="profile-info-wrapper">
+            <div class="profile-img-wrapper">
+                <img src="/profileImgs/witch.jpg" />
+            </div>
+            <div class="text-wrapper" style="margin-top: 2em;">
+                <p class="name">Find a user...</p>
+                <input class="username" [formControl]="newUser" name="newUser" type="text" placeholder="email or username"></input>
+            </div>
+        </div>
+
+        <div class="edits-wrapper">
+            <div class="radio-wrapper" *ngFor="let r of roles">
+                <input type="radio" [id]='r' [value]="r" name="role" [formControl]="role" />
+                <label [for]="r">{{ r }}</label>
+                <div class="check"><div class="inside"></div></div>
+            </div>
+        </div>
+
+        <div class="add-user-wrapper">
+            <button class="add-user"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
+        </div>
+
+        <button class='remove' (click)="addingUser=false"><i class='fa fa-times' aria-hidden='true'></i></button>
+    </div>
+
     <div class="user-section-wrapper">
         <div class="students-wrapper col-xs-12 col-md-8">
             <user-manage-card class="col-s-12 col-md-6"> </user-manage-card>

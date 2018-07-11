@@ -11,4 +11,6 @@ import template from './user-manage-card.component.html';
 export class UserManageCardComponent {
     roles: Array<string> = ["Student", "Admin"];
     role = new FormControl('');
+    editing: boolean = false;
+
 }

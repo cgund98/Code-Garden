@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 
 import template from './course-show-page.component.html';
 import { Courses } from '../../../../both/collections/courses.collection';
@@ -23,6 +24,9 @@ export class CourseShowPageComponent implements OnInit {
     private sub: any;
     private courseObj: any;
     lessonObjs: Array<any>;
+    newUser = new FormControl('', Validators.required);
+    roles: Array<string> = ["Student", "Admin"];
+    role = new FormControl('', Validators.required);
 
     constructor(private route: ActivatedRoute, private router: Router) {}
 

@@ -46,20 +46,23 @@ export class SignupShowPageComponent implements OnInit {
     }
 
   signup() {
-      console.log('Creating...');
     if (this.checkValids()) {
+        console.log('Creating...');
         Accounts.createUser({
           email: this.signupForm.value.email,
-    //      name: this.signupForm.value.name,
+          name: this.signupForm.value.name,
           username: this.signupForm.value.username,
           password: this.signupForm.value.password
         }, (err) => {
           if (err) {
+              console.log("Error");
+              console.log(err);
             this.zone.run(() => {
               this.error = err;
             });
           } else {
-            this.router.navigate(['/login']);
+            console.log("Success!");
+            this.router.navigate(['/courses']);
           }
         });
     }
