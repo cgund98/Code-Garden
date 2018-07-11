@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Course } from '../../../../both/models/course.model';
 import { Courses } from '../../../../both/collections/courses.collection';
+import { Lessons } from '../../../../both/collections/lessons.collection';
+import { LessonSections } from '../../../../both/collections/lesson-sections.collection';
+import { SectionProgresses } from '../../../../both/collections/section-progresses.collection';
 
 import template from './course-edit-page.component.html';
 
@@ -19,6 +22,7 @@ export class CourseEditPageComponent implements OnInit {
     private editCourseForm: FormGroup;
     private course: Course;
     private sub: any;
+    error: string;
     debug: boolean = false;
 
     constructor(private router: Router, private route: ActivatedRoute) {}
@@ -61,6 +65,37 @@ export class CourseEditPageComponent implements OnInit {
             Courses.update(this._course_id, course);
             console.log("Submitted form");
             this.router.navigateByUrl('/courses/' + this._course_id);
+        }
+    }
+
+    deleteCourse() {
+        let confirm = window.prompt('Are you sure you want to delete this?  If so enter the course title and hit OK.');
+        // console.log(this.course.title === confirm);
+        if (confirm.toUpperCase() === this.course.title.toUpperCase()) {
+
+            let lessons = Lessons.find({courseID: this._course_id}).fetch();
+
+            for (let l of lessons) {
+                for (s of LessonSections.find({lessonID: l._id}).fetch()) {
+                    LessonSections.remove({_id: s._id});
+                }
+                for (p of SectionProgresses.find({lessonID: l._id}).fetch()) {
+                    SectionProgresses.remove({_id: p._id});
+                }
+                // SectionProgresses.remove({lessonID: l._id});
+                Lessons.remove({_id: l._id});
+            }
+            // Lessons.remove({courseID: this._course_id});
+            Courses.remove({_id: this._course_id});
+
+            console.log("Deleted");
+            this.router.navigateByUrl('/courses');
+
+
+        } else if (confirm == "" ) {
+            window.alert("Delete Aborted.");
+        } else {
+            window.alert("Course title submitted incorrectly");
         }
     }
 

@@ -40,6 +40,7 @@
     <p *ngIf="debug"> Form status {{ editCourseForm.status | json}} </p>
     <div class="text-center col-xs-12">
       <button class="add card" type="submit" [disabled]="!editCourseForm.valid" (click)="submit()" value="Submit">Publish Edits</button>
+      <button class="delete card" (click)="deleteCourse()" value="Submit">Delete Course</button>
     </div>
 
 </div>
