@@ -182,4 +182,19 @@ export class LessonEditPageComponent implements OnInit {
         }
     }
 
+    deleteLesson() {
+        confirm = window.confirm("Are you sure you want to delete the lesson?");
+        if (confirm) {
+            for (let s of this.sectionObjs) {
+                LessonSections.remove({_id: s._id});
+            }
+            for (let p of SectionProgresses.find({lessonID: this._lesson_id}).fetch()) {
+                SectionProgresses.remove({_id: p._id});
+            }
+            Lessons.remove({_id: this._lesson_id});
+
+            this.router.navigate(['/courses/'+ this._course_id])
+        }
+    }
+
 }

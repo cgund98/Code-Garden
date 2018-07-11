@@ -66,7 +66,7 @@ export class LessonCreatePageComponent implements OnInit {
     }
 
     test(inp:any) {
-        console.log(inp);
+        // console.log(inp);
     }
 
     addSection(event) {
@@ -143,9 +143,9 @@ export class LessonCreatePageComponent implements OnInit {
                     sectionID,
                     sectionProgress: 0,
                 });
-                console.log('Progress created: ' + sectionProgressID);
+                // console.log('Progress created: ' + sectionProgressID);
             }
-            console.log('Created');
+            // console.log('Created');
             this.router.navigate(['/courses/'+this._course_id]);
         }
     }

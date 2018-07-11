@@ -69,6 +69,7 @@
     <div class="text-center" style="position: absolute; width: 100%; bottom: 0">
         <button class="add add-section card" type="button" (click)="addSection($event)"><i class="fa fa-plus" aria-hidden="true"></i> Add Section</button>
         <button [disabled]="!checkValids()" class="add card" type="button" form="lesson" (click)="submit()">Publish Edits</button>
+        <button class="delete card" (click)="deleteLesson()" value="Submit">Delete Lesson</button>
     </div>
 </div>
 </form>
