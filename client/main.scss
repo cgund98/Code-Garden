@@ -557,6 +557,8 @@ div.edit {
     list-style: none;
     padding: 0;
     li {
+        float: none;
+        clear: both;
         font-size: 1.25em;
         text-decoration: none;
         margin: 1em 0;
@@ -579,6 +581,16 @@ div.edit {
             div {
                 background: $green !important;
             }
+        }
+    }
+    lesson-card{
+        display: inline-block;
+        clear: both;
+        float: none;
+        li {
+            width: 100%;
+            padding: 0;
+            display: block;
         }
     }
     lesson-card:nth-child(5n+0) div {
@@ -1304,4 +1316,114 @@ $duration: 1.4s;
 code {
     font-family: "Roboto Mono";
     font-size: 14px;
+}
+.user-section-wrapper {
+    margin-top: 2em;
+}
+user-manage-card {
+    &>div.profile-card {
+        padding: 1em;
+        background: $ghost;
+
+        &>div {
+            display: inline-block;
+            position: relative;
+        }
+
+        .profile-img-wrapper {
+            width: 20%;
+            &>div {
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                position: relative;
+                overflow: hidden;
+
+                img {
+                    height: 100%;
+                }
+            }
+        }
+
+        .text-wrapper {
+            max-width: 70%;
+            overflow: hidden;
+            p {
+                margin: 0;
+                &.name {
+                    position: relative;
+                    // top: -.25em;
+                    font-size: 1.15em;
+                }
+                &.username {
+                    position: relative;
+                    top: -.15em;
+                    font-size: .95em;
+                    font-weight: bold;
+                }
+            }
+        }
+        .icon-wrapper {
+            float: right;
+            i {
+                cursor: pointer;
+                margin-top: .75em;
+                font-size: 1.35em;
+            }
+        }
+    }
+
+    &>div.edit-popup-wrapper {
+        position: fixed;
+        @include transform(translate(-50%));
+        left: 50%;
+        top: 20%;
+        background: $ghost;
+        padding: 2em;
+        min-width: 400px;
+
+        button.remove {
+            background: $dark;
+        }
+
+        .profile-info-wrapper {
+
+            .profile-img-wrapper {
+                margin: auto;
+                overflow: hidden;
+                height: 100px;
+                width: 100px;
+                border-radius: 50%;
+                position: relative;
+                img {
+                    height: 100%;
+                }
+            }
+
+            .text-wrapper {
+                margin-top: 1em;
+                text-align: center;
+                p {
+                    margin: 0;
+                }
+                .name {
+                    font-size: 1.45em;
+                }
+                .username {
+                    font-size: 1em;
+                    font-weight: bold;
+                }
+            }
+
+        }
+
+        .edits-wrapper {
+            margin-top: 1em;
+            .radio-wrapper {
+                width: 50%;
+                clear: both;
+            }
+        }
+
+    }
 }

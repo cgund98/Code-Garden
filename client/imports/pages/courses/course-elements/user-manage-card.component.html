@@ -1,0 +1,42 @@
+<div class="card profile-card">
+    <div class="profile-img-wrapper">
+        <div>
+            <img src="/profileImgs/witch.jpg" />
+        </div>
+    </div>
+
+    <div class="text-wrapper">
+        <p class="name">Callum Gundlach</p>
+        <p class="username">cgundlach13</p>
+    </div>
+
+    <div class="icon-wrapper">
+        <i class="fas fa fa-edit"></i>
+    </div>
+</div>
+
+<div class="edit-popup-wrapper card">
+    <div class="profile-info-wrapper">
+        <div class="profile-img-wrapper">
+            <img src="/profileImgs/witch.jpg" />
+        </div>
+        <div class="text-wrapper">
+            <p class="name">Callum Gundlach</p>
+            <p class="username">cgundlach13</p>
+        </div>
+    </div>
+
+    <div class="edits-wrapper">
+        <div class="radio-wrapper" *ngFor="let r of roles">
+            <input type="radio" [id]='r' [value]="r" name="role" [formControl]="role" />
+            <label [for]="r">{{ r }}</label>
+            <div class="check"><div class="inside"></div></div>
+        </div>
+    </div>
+
+    <div class="remove-user-wrapper">
+        <button class="remove-user">Remove</button>
+    </div>
+
+    <button class='remove' (click)="removeSection($event, s.index)"><i class='fa fa-times' aria-hidden='true'></i></button>
+</div>
