@@ -8,6 +8,12 @@ Meteor.methods({
     'Courses.edit'(id, course){
         Courses.update(id, course);
         console.log("Submitted form");
+    },
+
+    'Courses.remove'(id){
+        Courses.remove(id);
+
+        console.log("Deleted");
     }
-    
+
 });

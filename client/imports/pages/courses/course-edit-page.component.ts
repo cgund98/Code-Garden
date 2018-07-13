@@ -85,7 +85,8 @@ export class CourseEditPageComponent implements OnInit {
                 Lessons.remove({_id: l._id});
             }
             // Lessons.remove({courseID: this._course_id});
-            Courses.remove({_id: this._course_id});
+            Meteor.call('Courses.remove', this._course_id);
+            //Courses.remove({_id: this._course_id});
 
             console.log("Deleted");
             this.router.navigateByUrl('/courses');
