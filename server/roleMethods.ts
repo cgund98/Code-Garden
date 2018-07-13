@@ -33,12 +33,59 @@ Meteor.methods({
       if (!loggedInUser ||
           !Roles.userIsInRole(loggedInUser, ['owner', 'admin'], course)) {
         throw new Meteor.Error(403, "Access denied");
-    } else if (Roles.userIsInRole(loggedInUser, ['owner'], course) &&
+    } else if (Roles.userIsInRole(targetUserId, ['owner'], course) &&
                Roles.getUsersInRole('owner', course).fetch().length === 1) {
         throw new Meteor.Error(403, "Access denied, must have at least 1 owner");
     }
 
       Roles.setUserRoles(targetUserId, ['admin'], course);
-  }
+  },
+  'roles.setStudent'({targetUserId, course}) {
+      var loggedInUser = Meteor.user();
+
+      if (!loggedInUser ||
+          !Roles.userIsInRole(loggedInUser, ['owner', 'admin'], course)) {
+        throw new Meteor.Error(403, "Access denied");
+    } else if (Roles.userIsInRole(targetUserId, ['owner'], course) &&
+               Roles.getUsersInRole('owner', course).fetch().length === 1) {
+        throw new Meteor.Error(403, "Access denied, must have at least 1 owner");
+    }
+
+      Roles.setUserRoles(targetUserId, ['admin'], course);
+  },
+
+  'roles.removeFromCourse'({targetUserId, course}) {
+      var loggedInUser = Meteor.user();
+
+      if (!loggedInUser ||
+          !Roles.userIsInRole(loggedInUser, ['owner', 'admin'], course)) {
+        throw new Meteor.Error(403, "Access denied");
+    } else if (!Roles.userIsInRole(loggedInUser, ['owner', 'admin'], course)) {
+        throw new Meteor.Error(403, "Access denied");
+    } else if (Roles.userIsInRole(loggedInUser, ['admin'], course) &&
+               Roles.userIsInRole(targetUserId, ['owner'], course)) {
+        throw new Meteor.Error(403, "Access denied, only an owner may remove themselves");
+    } else if (loggedInUser._id != targetUserId &&
+               Roles.userIsInRole(targetUserId, ['owner'], course)) {
+        throw new Meteor.Error(403, "Access denied, only an owner may remove themselves");
+    } else if (Roles.userIsInRole(loggedInUser, ['owner'], course) &&
+               Roles.getUsersInRole('owner', course).fetch().length === 1 &&
+               loggedInUser._id === targetUserId) {
+        throw new Meteor.Error(403, "Access denied, must have at least 1 owner");
+    }
+
+      Roles.setUserRoles(targetUserId, [], course);
+  },
+
+  'roles.getStudents'({course}) {
+      return Roles.getUsersInRole(['student'], course).fetch();
+  },
+  'roles.getAdmins'({course}) {
+      return Roles.getUsersInRole(['admin'], course).fetch();
+  },
+  'roles.getOwners'({course}) {
+      return Roles.getUsersInRole(['owner'], course).fetch();
+  },
+
 
 })

@@ -52,11 +52,14 @@
 
         <div class="user-section-wrapper">
             <div class="students-wrapper col-xs-12 col-md-8">
-                <user-manage-card class="col-s-12 col-md-6"> </user-manage-card>
-                <user-manage-card class="col-s-12 col-md-6"> </user-manage-card>
+                <user-manage-card *ngFor="let u of studentObjs" [userObj]="u" _course_id="{{_course_id}}"  class="col-s-12 col-md-6"> </user-manage-card>
+                <!-- <user-manage-card class="col-s-12 col-md-6"> </user-manage-card> -->
             </div>
             <div class="admins-wrapper col-xs-12 col-md-4">
-                <user-manage-card class="col-s-12 col-md-12"> </user-manage-card>
+                <user-manage-card *ngFor="let u of ownerObjs" [userObj]="u" _course_id="{{_course_id}}"  class="col-s-12 col-md-12"> </user-manage-card>
+                <user-manage-card *ngFor="let u of adminObjs" [userObj]="u" _course_id="{{_course_id}}"  class="col-s-12 col-md-12"> </user-manage-card>
+
+                <!-- <user-manage-card class="col-s-12 col-md-12"> </user-manage-card> -->
             </div>
         </div>
 
