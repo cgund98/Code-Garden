@@ -44,7 +44,7 @@ export class CourseCreatePageComponent implements OnInit {
             var course = this.newCourseForm.value;
             course.authorID = Meteor.userId();
             course.createdAt = new Date();
-            Courses.insert(course);
+            Meteor.call('Courses.create', course);
             console.log("Submitted form");
             this.router.navigateByUrl('/courses');
         }
