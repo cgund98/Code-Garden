@@ -62,8 +62,7 @@ export class CourseEditPageComponent implements OnInit {
     submit() {
         if (this.editCourseForm.valid && this.course) {
             var course = this.editCourseForm.value;
-            Courses.update(this._course_id, course);
-            console.log("Submitted form");
+            Meteor.call('Courses.edit', this._course_id, course);
             this.router.navigateByUrl('/courses/' + this._course_id);
         }
     }
