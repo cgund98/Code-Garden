@@ -1,7 +1,7 @@
 <main-hero title="{{ title }}" subtitle="{{ language }}"></main-hero>
 <div class="container">
-    <!-- <div class="text-center"><button class="enroll">ENROLL</button></div> -->
-    <div class="text-center"><button class="edit"><a href="{{ editLink }}"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
+    <div class="text-center" *ngIf="!isEnrolled"><button class="enroll" (click)="enrollSelf()">ENROLL</button></div>
+    <div class="text-center" *ngIf="isAdmin"><button class="edit"><a href="{{ editLink }}"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
     <p class="course-description">{{ fullDesc }}</p>
     <div class="title-wrapper">
         <h4>Lessons</h4>
@@ -14,48 +14,52 @@
         class="col-xs-12 col-md-3 col-xl-2"></lesson-card>
     </ol>
 
-    <div class="title-wrapper">
-        <h4>Users</h4>
-    </div>
+    <div *ngIf="isAdmin">
+        <div class="title-wrapper">
+            <h4>Users</h4>
+        </div>
 
-    <div class="text-center">
-        <button class="add add-section card" type="button" (click)="addingUser=true"><i class="fa fa-plus" aria-hidden="true"></i> Add User</button>
-    </div>
+        <div class="text-center">
+            <button class="add add-section card" type="button" (click)="addingUser=true"><i class="fa fa-plus" aria-hidden="true"></i> Add User</button>
+        </div>
 
-    <div class="new-user-popup-wrapper card" *ngIf="addingUser">
-        <div class="profile-info-wrapper">
-            <div class="profile-img-wrapper">
-                <img src="/profileImgs/witch.jpg" />
+        <div class="new-user-popup-wrapper card" *ngIf="addingUser">
+            <div class="profile-info-wrapper">
+                <div class="profile-img-wrapper">
+                    <img src="/profileImgs/witch.jpg" />
+                </div>
+                <div class="text-wrapper" style="margin-top: 2em;">
+                    <p class="name">Find a user...</p>
+                    <input class="username" [formControl]="newUser" name="newUser" type="text" (keyup)="userFieldChange()" placeholder="email or username"></input>
+                    <p class="error" *ngIf="!newUserLookup">No user found</p>
+                </div>
             </div>
-            <div class="text-wrapper" style="margin-top: 2em;">
-                <p class="name">Find a user...</p>
-                <input class="username" [formControl]="newUser" name="newUser" type="text" placeholder="email or username"></input>
+
+            <div class="edits-wrapper">
+                <div class="radio-wrapper" *ngFor="let r of roles">
+                    <input type="radio" [id]='r' [value]="r" name="role" [formControl]="role" />
+                    <label [for]="r">{{ r }}</label>
+                    <div class="check"><div class="inside"></div></div>
+                </div>
+            </div>
+
+            <div class="add-user-wrapper">
+                <button (click)="addUser()" [disabled]="!newUserLookup || newUser.invalid || role.invalid" class="add-user"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
+            </div>
+
+            <button class='remove' (click)="addingUser=false"><i class='fa fa-times' aria-hidden='true'></i></button>
+        </div>
+
+        <div class="user-section-wrapper">
+            <div class="students-wrapper col-xs-12 col-md-8">
+                <user-manage-card class="col-s-12 col-md-6"> </user-manage-card>
+                <user-manage-card class="col-s-12 col-md-6"> </user-manage-card>
+            </div>
+            <div class="admins-wrapper col-xs-12 col-md-4">
+                <user-manage-card class="col-s-12 col-md-12"> </user-manage-card>
             </div>
         </div>
 
-        <div class="edits-wrapper">
-            <div class="radio-wrapper" *ngFor="let r of roles">
-                <input type="radio" [id]='r' [value]="r" name="role" [formControl]="role" />
-                <label [for]="r">{{ r }}</label>
-                <div class="check"><div class="inside"></div></div>
-            </div>
-        </div>
-
-        <div class="add-user-wrapper">
-            <button class="add-user"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
-        </div>
-
-        <button class='remove' (click)="addingUser=false"><i class='fa fa-times' aria-hidden='true'></i></button>
-    </div>
-
-    <div class="user-section-wrapper">
-        <div class="students-wrapper col-xs-12 col-md-8">
-            <user-manage-card class="col-s-12 col-md-6"> </user-manage-card>
-            <user-manage-card class="col-s-12 col-md-6"> </user-manage-card>
-        </div>
-        <div class="admins-wrapper col-xs-12 col-md-4">
-            <user-manage-card class="col-s-12 col-md-12"> </user-manage-card>
-        </div>
     </div>
 
 </div>

@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
@@ -24,9 +25,15 @@ export class CourseShowPageComponent implements OnInit {
     private sub: any;
     private courseObj: any;
     lessonObjs: Array<any>;
+    addingUser: boolean = false;
+
     newUser = new FormControl('', Validators.required);
+    newUserLookup: string = "l";
     roles: Array<string> = ["Student", "Admin"];
     role = new FormControl('', Validators.required);
+
+    isEnrolled: boolean = false;
+    isAdmin: boolean = false;
 
     constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -53,6 +60,9 @@ export class CourseShowPageComponent implements OnInit {
             this.lessonObjs[i].icon = complete ? "fa-check" : "fa-unlock";
         }
 
+        this.isEnrolled = Roles.userIsInRole(Meteor.userId(), ['student', 'admin', 'owner'], this._course_id);
+        this.isAdmin = Roles.userIsInRole(Meteor.userId(), ['admin', 'owner'], this._course_id);
+
         try {
             this.title = this.courseObj.title;
             this.fullDesc = this.courseObj.fullDesc;
@@ -61,6 +71,73 @@ export class CourseShowPageComponent implements OnInit {
         } catch(err) {}
 
     }
+
+    enrollSelf() {
+        if (!Roles.userIsInRole(Meteor.userId(), ['student', 'admin', 'owner'], this._course_id)) {
+            Meteor.call('roles.enroll', {
+            	targetUserId: Meteor.userId(),
+            	course: this._course_id,
+            }, (err, res) => {
+              if (err) {
+                console.log(err);
+              } else {
+                // success!
+              }
+            })
+        }
+        this.isEnrolled = true;
+    }
+    addUser() {
+        let role = this.role.value.toLowerCase();
+        console.log(role);
+        if (!Roles.userIsInRole(this.newUserLookup, ['student', 'admin', 'owner'], this._course_id) && this.newUser.valid && this.role.valid) {
+            if (role == "student") {
+                Meteor.call('roles.enroll', {
+                	targetUserId: this.newUserLookup._id,
+                	course: this._course_id,
+                }, (err, res) => {
+                  if (err) {
+                    console.log(err);
+                  }})
+            } else if (role == "admin") {
+                Meteor.call('roles.setAdmin', {
+                	targetUserId: this.newUserLookup._id,
+                	course: this._course_id,
+                }, (err, res) => {
+                  if (err) {
+                    console.log(err);
+                  }})
+            }
+            this.addingUser = false;
+            this.role.setValue("");
+            this.newUser.setValue("");
+        } else if (!Roles.userIsInRole(this.newUserLookup, ['student', 'admin', 'owner'])){
+            console.log("They are already enrolled")!
+        }
+        this.isEnrolled = true;
+    }
+
+    userFieldChange() {
+        let newUser = this.newUser.value;
+        // console.log(newUser);
+        let userLookup;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(newUser)) {
+            Meteor.call('users.getAccountByEmail', {
+            	email: newUser
+            }, (err, res) => {
+              if (err) {
+                alert(err);
+              } else {
+                this.newUserLookup = res;
+              }
+          })
+      } else {
+          let res = Meteor.users.findOne({username: newUser});
+          this.newUserLookup = res;
+      }
+    }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
