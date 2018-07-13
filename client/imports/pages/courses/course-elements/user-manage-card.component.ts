@@ -45,7 +45,7 @@ export class UserManageCardComponent implements OnInit {
               }
               if (!err) {
                   this.prevRole = this.role.value;
-                  console.log("role changed");
+                  console.log("role changed", this.role.value);
               }
             })
         } else if (this.role.value === "admin") {
@@ -59,7 +59,7 @@ export class UserManageCardComponent implements OnInit {
               }
               if (!err) {
                   this.prevRole = this.role.value;
-                  console.log("role changed");
+                  console.log("role changed", this.role.value);
               }
             })
         } else if (this.role.value === "owner") {
@@ -73,7 +73,7 @@ export class UserManageCardComponent implements OnInit {
               }
               if (!err) {
                   this.prevRole = this.role.value;
-                  console.log("role changed");
+                  console.log("role changed", this.role.value);
               }
             })
         }

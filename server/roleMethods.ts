@@ -51,7 +51,7 @@ Meteor.methods({
         throw new Meteor.Error(403, "Access denied, must have at least 1 owner");
     }
 
-      Roles.setUserRoles(targetUserId, ['admin'], course);
+      Roles.setUserRoles(targetUserId, ['student'], course);
   },
 
   'roles.removeFromCourse'({targetUserId, course}) {
