@@ -76,13 +76,13 @@ export class CourseEditPageComponent implements OnInit {
 
             for (let l of lessons) {
                 for (s of LessonSections.find({lessonID: l._id}).fetch()) {
-                    LessonSections.remove({_id: s._id});
+                    Meteor.call('lessonSection.remove', s._id);
                 }
                 for (p of SectionProgresses.find({lessonID: l._id}).fetch()) {
-                    SectionProgresses.remove({_id: p._id});
+                    Meteor.call('lessonSection.progressRemove', p._id);
                 }
                 // SectionProgresses.remove({lessonID: l._id});
-                Lessons.remove({_id: l._id});
+                Meteor.call('lesson.remove', l._id);
             }
             // Lessons.remove({courseID: this._course_id});
             Meteor.call('Courses.remove', this._course_id);

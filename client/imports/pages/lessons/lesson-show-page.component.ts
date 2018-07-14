@@ -47,6 +47,10 @@ export class LessonShowPageComponent implements OnInit {
             this.nextLessonLink = nextLesson ? '/courses/' + this._course_id + '/lessons/' + nextLesson._id : null
         } catch (err) {}
 
+        console.log(this.lessonObj);
+        console.log(this._lesson_id);
+        console.log(this.sectionObjs);
+
 
         for (var i=0; i < this.sectionObjs.length; i++) {
             var link:any = {};

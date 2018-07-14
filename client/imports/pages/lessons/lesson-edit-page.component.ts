@@ -74,6 +74,7 @@ export class LessonEditPageComponent implements OnInit {
             newSection.starterCode = section.starterCode;
             newSection.outputs = section.outputs;
             newSection.content = section.content;
+            newSection._id = section._id;
 
             let text = section.content;
             var converter = new QuillDeltaToHtmlConverter(text, {});
@@ -156,26 +157,33 @@ export class LessonEditPageComponent implements OnInit {
     submit() {
         if (this.checkValids()) {
             var lessonID = this._lesson_id;
-            Lessons.collection.update(lessonID, {
-                title: this.title.value,
-                seqNum: this.seqNum,
-                courseID: this._course_id,
-                course: this.course_title,
-            });
+            Meteor.call('lesson.update', lessonID, this.title.value, this.seqNum, this._course_id, this.course_title);
+            // Lessons.collection.update(lessonID, {
+            //     title: this.title.value,
+            //     seqNum: this.seqNum,
+            //     courseID: this._course_id,
+            //     course: this.course_title,
+            // });
 
             for (var i=0; i < this.sectionGroups.length; i++) {
                 var group = this.sectionGroups[i];
-                // console.log(group.text);
-                LessonSections.collection.update(this.sectionObjs[i]._id, {
-                    title: group.value.title,
-                    content: group.content,
-                    expressions: group.value.expressions,
-                    outputs: group.outputs,
-                    starterCode: group.starterCode,
-                    tasks: group.value.tasks,
-                    seqNum: group.index,
-                    lessonID: lessonID,
-                });
+                var _id = group._id;
+                if (group._id) {
+                    // console.log(group.text);
+                    Meteor.call('lessonSection.update', _id, group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID);
+                    // LessonSections.collection.update(this.sectionObjs[i]._id, {
+                    //     title: group.value.title,
+                    //     content: group.content,
+                    //     expressions: group.value.expressions,
+                    //     outputs: group.outputs,
+                    //     starterCode: group.starterCode,
+                    //     tasks: group.value.tasks,
+                    //     seqNum: group.index,
+                    //     lessonID: lessonID,
+                    // });
+                } else {
+                    Meteor.call('lessonSection.insert', group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID);
+                }
             }
             console.log('Edited');
             this.router.navigate(['/courses/'+ this._course_id + '/lessons/' + this._lesson_id]);
@@ -186,12 +194,12 @@ export class LessonEditPageComponent implements OnInit {
         confirm = window.confirm("Are you sure you want to delete the lesson?");
         if (confirm) {
             for (let s of this.sectionObjs) {
-                LessonSections.remove({_id: s._id});
+                Meteor.call('lessonSection.remove', s._id);
             }
             for (let p of SectionProgresses.find({lessonID: this._lesson_id}).fetch()) {
-                SectionProgresses.remove({_id: p._id});
+                Meteor.call('lessonSection.progressRemove', p._id);
             }
-            Lessons.remove({_id: this._lesson_id});
+            Meteor.call('lesson.remove',this._lesson_id);
 
             this.router.navigate(['/courses/'+ this._course_id])
         }
