@@ -25,8 +25,11 @@ export class CourseShowPageComponent implements OnInit {
     private sub: any;
     private courseObj: any;
     lessonObjs: Array<any>;
-    addingUser: boolean = false;
+    studentObjs: Array<any>;
+    adminObjs: Array<any>;
+    ownerObjs: Array<any>;
 
+    addingUser: boolean = false;
     newUser = new FormControl('', Validators.required);
     newUserLookup: string = "l";
     roles: Array<string> = ["Student", "Admin"];
@@ -63,6 +66,27 @@ export class CourseShowPageComponent implements OnInit {
         this.isEnrolled = Roles.userIsInRole(Meteor.userId(), ['student', 'admin', 'owner'], this._course_id);
         this.isAdmin = Roles.userIsInRole(Meteor.userId(), ['admin', 'owner'], this._course_id);
 
+        if (this.isAdmin) {
+            Meteor.call('roles.getStudents', { course: this._course_id }, (err, res) => {
+              if (err) {alert(err);} else {
+                // console.log(res);
+                this.studentObjs = res;
+              }
+            });
+            Meteor.call('roles.getAdmins', { course: this._course_id }, (err, res) => {
+              if (err) {alert(err);} else {
+                // console.log(res);
+                this.adminObjs = res;
+              }
+            });
+            Meteor.call('roles.getOwners', { course: this._course_id }, (err, res) => {
+              if (err) {alert(err);} else {
+                // console.log(res);
+                this.ownerObjs = res;
+              }
+            });
+        }
+
         try {
             this.title = this.courseObj.title;
             this.fullDesc = this.courseObj.fullDesc;
@@ -89,7 +113,7 @@ export class CourseShowPageComponent implements OnInit {
     }
     addUser() {
         let role = this.role.value.toLowerCase();
-        console.log(role);
+        // console.log(role);
         if (!Roles.userIsInRole(this.newUserLookup, ['student', 'admin', 'owner'], this._course_id) && this.newUser.valid && this.role.valid) {
             if (role == "student") {
                 Meteor.call('roles.enroll', {

@@ -1,4 +1,4 @@
-<div class="card profile-card">
+<div class="card profile-card" [class.owner]="this.role.value=='owner'" [class.admin]="this.role.value=='admin'">
     <div class="profile-img-wrapper">
         <div>
             <img src="/profileImgs/witch.jpg" />
@@ -6,8 +6,8 @@
     </div>
 
     <div class="text-wrapper">
-        <p class="name">Callum Gundlach</p>
-        <p class="username">cgundlach13</p>
+        <p class="name">{{ name }}</p>
+        <p class="username">{{ username }}</p>
     </div>
 
     <div class="icon-wrapper">
@@ -21,21 +21,22 @@
             <img src="/profileImgs/witch.jpg" />
         </div>
         <div class="text-wrapper">
-            <p class="name">Callum Gundlach</p>
-            <p class="username">cgundlach13</p>
+            <p class="name">{{ name }}</p>
+            <p class="username">{{ username }}</p>
+            <p class="error">{{error}}</p>
         </div>
     </div>
 
     <div class="edits-wrapper">
         <div class="radio-wrapper" *ngFor="let r of roles">
-            <input type="radio" [id]='r' [value]="r" name="role" [formControl]="role" />
+            <input type="radio" [id]='r' [value]="r" name="role" [formControl]="role" (change)="changeRole($event)" />
             <label [for]="r">{{ r }}</label>
             <div class="check"><div class="inside"></div></div>
         </div>
     </div>
 
     <div class="remove-user-wrapper">
-        <button class="remove-user">Remove</button>
+        <button class="remove-user" (click)="remove()">Remove</button>
     </div>
 
     <button class='remove' (click)="editing=false"><i class='fa fa-times' aria-hidden='true'></i></button>

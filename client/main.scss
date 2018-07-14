@@ -1013,6 +1013,9 @@ input[type="checkbox"] {
   width: 100%;
   margin: 0;
   padding: 0;
+  label {
+      text-transform: capitalize;
+  }
 }
 
 .radio-wrapper input[type=radio]{
@@ -1323,9 +1326,17 @@ code {
     margin-top: 2em;
 }
 user-manage-card {
+    margin: 1em 0;
     &>div.profile-card {
         padding: 1em;
         background: $ghost;
+        border: 2px solid $ghost;
+        &.owner {
+            border: 2px solid $green;
+        }
+        &.admin {
+            border: 2px solid $dark;
+        }
 
         &>div {
             display: inline-block;
