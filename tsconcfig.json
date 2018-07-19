@@ -1,71 +1,40 @@
 {
 
   "compilerOptions": {
-
     "allowSyntheticDefaultImports": true,
-
     "baseUrl": ".",
-
     "declaration": false,
-
     "emitDecoratorMetadata": true,
-
     "experimentalDecorators": true,
-
     "lib": [
-
       "dom",
-
-      "es2015"
-
+      "es2015",
+      "es2016"
+      "es2017"
     ],
-
     "module": "commonjs",
-
     "moduleResolution": "node",
-
     "sourceMap": true,
-
-    "target": "es5",
-
+    "target": "es2017",
     "skipLibCheck": true,
-
     "stripInternal": true,
-
     "noImplicitAny": false,
-
     "types": [
-
       "meteor-typings",
-
       "@types/underscore"
-
     ]
-
   },
-
   "include": [
-
     "client/**/*.ts",
-
     "server/**/*.ts",
-
     "imports/**/*.ts"
-
   ],
-
   "exclude": [
-
     "node_modules"
-
   ],
-
   "compileOnSave": false,
-
   "atom": {
-
     "rewriteTsconfig": false
-
   }
 
 }

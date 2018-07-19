@@ -1,6 +1,6 @@
-import { Meteor, NgZone } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -40,12 +40,13 @@ export class CourseShowPageComponent implements OnInit {
     isEnrolled: boolean = false;
     isAdmin: boolean = false;
 
-    constructor(private route: ActivatedRoute, private router: Router) {}
+    constructor(private route: ActivatedRoute, private router: Router, private zone: NgZone) {}
 
     ngOnInit() {
+
         this.sub = this.route.params.subscribe(params => {
             this._course_id = params['_course_id'];
-        })
+        });
         this.newLessonLink = "/courses/" + this._course_id + "/create-lesson";
         this.editLink = "/courses/" + this._course_id + "/edit";
         this.courseObj = Courses.findOne({_id: this._course_id});
@@ -79,6 +80,10 @@ export class CourseShowPageComponent implements OnInit {
             this.language = this.courseObj.language;
         } catch(err) {}
 
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
     }
 
     enrollSelf() {
@@ -111,9 +116,17 @@ export class CourseShowPageComponent implements OnInit {
                 //     console.log("Added");
                 //     this.updateUserArrays();
                 // }})
-                let res = callWithPromise('roles.enroll', {
-                	targetUserId: this.newUserLookup._id,
-                	course: this._course_id,
+                // let jimmy = await Meteor.callPromise('roles.enroll', {
+                // 	targetUserId: this.newUserLookup._id,
+                // 	course: this._course_id,
+                // });
+                console.log("enrolled");
+                this.updateUserArrays();
+                this.zone.run(() => {
+                    let g = Meteor.callPromise('roles.enroll', {
+                    	targetUserId: this.newUserLookup._id,
+                    	course: this._course_id,
+                    });
                 });
                 console.log("Waited");
             } else if (role == "admin") {
@@ -130,6 +143,7 @@ export class CourseShowPageComponent implements OnInit {
                   this.updateUserArrays();
               })
             }
+            console.log("end");
             this.updateUserArrays();
             this.addingUser = false;
             this.role.setValue("");
@@ -162,24 +176,9 @@ export class CourseShowPageComponent implements OnInit {
     }
 
     updateUserArrays() {
-        Meteor.call('roles.getStudents', { course: this._course_id }, (err, res) => {
-          if (err) {alert(err);} else {
-            // console.log(res);
-            this.studentObjs = res;
-          }
-        });
-        Meteor.call('roles.getAdmins', { course: this._course_id }, (err, res) => {
-          if (err) {alert(err);} else {
-            // console.log(res);
-            this.adminObjs = res;
-          }
-        });
-        Meteor.call('roles.getOwners', { course: this._course_id }, (err, res) => {
-          if (err) {alert(err);} else {
-            // console.log(res);
-            this.ownerObjs = res;
-          }
-        });
+        this.studentObjs = Meteor.callPromise('roles.getStudents', { course: this._course_id });
+        this.adminObjs = Meteor.callPromise('roles.getAdmins', { course: this._course_id });
+        this.ownerObjs = Meteor.callPromise('roles.getOwners', { course: this._course_id });
     }
 
     ngOnDestroy() {

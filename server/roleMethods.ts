@@ -40,7 +40,7 @@ Meteor.methods({
 
       Roles.setUserRoles(targetUserId, ['admin'], course);
   },
-  'roles.setStudent'({targetUserId, course}) {
+  async 'roles.setStudent'({targetUserId, course}) {
       var loggedInUser = Meteor.user();
 
       if (!loggedInUser ||
