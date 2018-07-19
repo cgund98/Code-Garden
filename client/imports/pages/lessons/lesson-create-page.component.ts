@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { callWithPromise } from '../../helpers/call-with-promise';
+
 // import Quill from 'quill';
 
 import template from './lesson-create-page.component.html';
@@ -23,6 +25,9 @@ export class LessonCreatePageComponent implements OnInit {
     title = new FormControl('', [Validators.required, Validators.minLength(3)]);
     course_title: string;
     seqNum: number;
+    lessonID: string;
+    sectionID: string;
+    sectionProgressID: string;
     private sub: any;
     private newSection: FormGroup;
     private sectionGroups: Array<FormGroup>;
@@ -115,64 +120,31 @@ export class LessonCreatePageComponent implements OnInit {
         section.get('content').touched = true;
     }
 
-    submit() {
+    async submit() {
         if (this.checkValids()) {
-            Meteor.call('lesson.insert', this.title.value, this.seqNum, this._course_id, this.course_title, function(error, result) {
-                if (result){
-                    var lessonID = result;
-                }
-            });
-            // var lessonID = Lessons.collection.insert({
-            //     title: this.title.value,
-            //     seqNum: this.seqNum,
-            //     courseID: this._course_id,
-            //     course: this.course_title,
-            // });
-            console.log('lessonID:' + lessonID);
+            var lessonID = await callWithPromise('lesson.insert', [this.title.value, this.seqNum, this._course_id, this.course_title]);
+
+            console.log('lessonID:' + this.lessonID);
 
             for (var i=0; i < this.sectionGroups.length; i++) {
                 var group = this.sectionGroups[i];
                 console.log(group);
-                var sectionID = Meteor.call('lessonSection.insert', group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID, function(error, result) {
-                    if (result){
-                        sectionID = result;
-                        console.log(result);
-                        return result;
-                    } else {
-                        console.log(error);
-                        throw new Error("Not implemented yet");
-                    }
-                });
-                // var sectionID = LessonSections.collection.insert({
-                //         title: group.value.title,
-                //         content: group.content,
-                //         expressions: group.value.expressions,
-                //         outputs: group.outputs,
-                //         starterCode: group.starterCode,
-                //         tasks: group.value.tasks,
-                //         seqNum: group.index,
-                //         lessonID: lessonID,
-                //     });
+                await lessonID;
+                var sectionID = await callWithPromise('lessonSection.insert', [group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID]);
+
                 console.log('sectionID:' +sectionID);
-                var sectionProgressID = Meteor.call('lessonSection.progress', group.index, lessonID, sectionID, function(error, result) {
-                    if (result){
-                        return result;
-                    } else {
-                        console.log(error);
-                        throw new Error("Not implemented yet");
-                    }
-                });
-                // var sectionProgressID = SectionProgresses.collection.insert({
-                //         seqNum: group.value.index,
-                //         lessonID,
-                //         sectionID,
-                //         sectionProgress: 0,;
-                //     });
+                var sectionProgressID = await callWithPromise('lessonSection.progress', [group.index, lessonID, sectionID]);
+
                 console.log('Progress created: ' + sectionProgressID);
+                if (i === this.sectionGroups.length - 1) {
+                    this.router.navigate(['/courses/'+this._course_id]);
+                }
             }
             console.log('Created');
-            this.router.navigate(['/courses/'+this._course_id]);
+            try {
+                await lessonID;
+            } catch (err) {alert(err)}
         }
-    }
 
+    }
 }

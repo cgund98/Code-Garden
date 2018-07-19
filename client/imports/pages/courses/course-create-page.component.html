@@ -36,8 +36,8 @@
 
 
     </div>
-    <p>Form value {{ newCourseForm.value | json }} </p>
-    <p> Form status {{ newCourseForm.status | json}} </p>
+    <p *ngIf="debug">Form value {{ newCourseForm.value | json }} </p>
+    <p *ngIf="debug"> Form status {{ newCourseForm.status | json}} </p>
     <div class="text-center col-xs-12">
       <button class="add card" type="submit" [disabled]="!newCourseForm.valid" (click)="submit()" value="Submit">Create</button>
     </div>

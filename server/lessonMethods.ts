@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Courses } from '../both/collections/courses.collection';
 import { Lessons } from '../both/collections/lessons.collection';
 import { LessonSections } from '../both/collections/lesson-sections.collection';
@@ -5,17 +6,19 @@ import { SectionProgresses } from '../both/collections/section-progresses.collec
 
 Meteor.methods({
 // Inserting
-    'lesson.insert'(title, seq, courseID, course){
-        Lessons.collection.insert({
+    'lesson.insert'([title, seq, courseID, course]){
+        var lsson = Lessons.collection.insert({
             title: title,
             seqNum: seq,
             courseID: courseID,
             course: course,
         });
+        console.log("onServer" + lsson);
+        return lsson;
     },
 
-    'lessonSection.insert'(title, content, expressions, outputs, starterCode, tasks, index, lessonID){
-        LessonSections.collection.insert({
+    'lessonSection.insert'([title, content, expressions, outputs, starterCode, tasks, index, lessonID]){
+        return LessonSections.collection.insert({
             title: title,
             content: content,
             expressions: expressions,
@@ -27,8 +30,8 @@ Meteor.methods({
         });
     },
 
-    'lessonSection.progress'(index, lessonID, sectionID){
-        SectionProgresses.collection.insert({
+    'lessonSection.progress'([index, lessonID, sectionID]){
+        return SectionProgresses.collection.insert({
             seqNum: index,
             lessonID,
             sectionID,

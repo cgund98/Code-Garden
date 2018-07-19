@@ -17,6 +17,7 @@ export class CourseCreatePageComponent implements OnInit {
 
     private languages: Array<string>;
     private newCourseForm: FormGroup;
+    debug: boolean = false;
 
     constructor(private router: Router) {}
 
@@ -39,15 +40,20 @@ export class CourseCreatePageComponent implements OnInit {
     get private() { return this.newCourseForm.get('private'); }
     get language() { return this.newCourseForm.get('language'); }
 
-    submit() {
+    async submit() {
         if (this.newCourseForm.valid && Meteor.userId()) {
             var course = this.newCourseForm.value;
             course.authorID = Meteor.userId();
             course.createdAt = new Date();
-            Meteor.call('Courses.create', course);
-            console.log("Submitted form");
-            this.router.navigateByUrl('/courses');
+            try {
+                await Meteor.callPromise('Courses.create', course);
+                console.log("Submitted form");
+
+                this.router.navigateByUrl('/').then(()=>
+                this.router.navigate(['/courses']));
+            } catch(err) {alert(err)}
         }
     }
+
 
 }
