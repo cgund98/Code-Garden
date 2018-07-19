@@ -13,6 +13,9 @@ import { LoginPageModule } from '../pages/login/login-page.module';
 import { SignupPageModule } from '../pages/signup/signup-page.module';
 import { MiscCompsModule } from '../pages/misc/misc-comps.module';
 
+import { CourseAuthGuard } from './auth-guards.service';
+
+
 
 @NgModule({
   imports: [
@@ -38,6 +41,7 @@ import { MiscCompsModule } from '../pages/misc/misc-comps.module';
   ],
   providers: [
       { provide: APP_BASE_HREF, useValue : '/' },
+      CourseAuthGuard,
   ]
 })
 

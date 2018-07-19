@@ -88,7 +88,10 @@ Meteor.methods({
   },
   'roles.userInCourse'({targetUserId, course}) {
       return Roles.userIsInRole(targetUserId, ['student', 'admin', 'owner'], course);
-  }
+  },
+  'roles.userHasPerms'({targetUserId, course, roles}) {
+      return Roles.userIsInRole(targetUserId, roles, course);
+  },
 
 
 })
