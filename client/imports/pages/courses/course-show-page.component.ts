@@ -9,8 +9,6 @@ import { Courses } from '../../../../both/collections/courses.collection';
 import { Lessons } from '../../../../both/collections/lessons.collection';
 import { SectionProgresses } from '../../../../both/collections/section-progresses.collection';
 
-import {callWithPromise } from '../../helpers/call-with-promise';
-
 @Component({
   selector: 'course-show-page',
   template
@@ -88,20 +86,16 @@ export class CourseShowPageComponent implements OnInit {
 
     enrollSelf() {
         if (!Roles.userIsInRole(Meteor.userId(), ['student', 'admin', 'owner'], this._course_id)) {
-            Meteor.call('roles.enroll', {
-            	targetUserId: Meteor.userId(),
-            	course: this._course_id,
-            }, (err, res) => {
-              if (err) {
-                console.log(err);
-              } else {
-                // success!
-              }
-            })
+            try {
+                Meteor.callPromise('roles.enroll', {
+                	targetUserId: Meteor.userId(),
+                	course: this._course_id,
+                })
+            } catch(err) {}
         }
         this.isEnrolled = true;
     }
-    addUser() {
+    async addUser() {
         let role = this.role.value.toLowerCase();
         // console.log(role);
         if (!Roles.userIsInRole(this.newUserLookup, ['student', 'admin', 'owner'], this._course_id) && this.newUser.valid && this.role.valid) {
@@ -116,34 +110,22 @@ export class CourseShowPageComponent implements OnInit {
                 //     console.log("Added");
                 //     this.updateUserArrays();
                 // }})
-                // let jimmy = await Meteor.callPromise('roles.enroll', {
-                // 	targetUserId: this.newUserLookup._id,
-                // 	course: this._course_id,
-                // });
-                console.log("enrolled");
-                this.updateUserArrays();
-                this.zone.run(() => {
-                    let g = Meteor.callPromise('roles.enroll', {
-                    	targetUserId: this.newUserLookup._id,
+                try {
+                    await Meteor.callPromise('roles.enroll', {
+                    	// targetUserId: "dfdfdfdfd",
+                        targetUserId: this.newUserLookup._id,
                     	course: this._course_id,
                     });
-                });
-                console.log("Waited");
+                } catch(err) {alert(err)}
+                console.log("enrolled");
             } else if (role == "admin") {
-                Meteor.call('roles.setAdmin', {
-                	targetUserId: this.newUserLookup._id,
-                	course: this._course_id,
-                }, (err, res) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                      console.log("Added");
-
-                  }
-                  this.updateUserArrays();
-              })
+                try {
+                    await Meteor.callPromise('roles.setAdmin', {
+                    	targetUserId: this.newUserLookup._id,
+                    	course: this._course_id,
+                    })
+                } catch(err) {alert(err)}
             }
-            console.log("end");
             this.updateUserArrays();
             this.addingUser = false;
             this.role.setValue("");
@@ -154,31 +136,27 @@ export class CourseShowPageComponent implements OnInit {
         this.isEnrolled = true;
     }
 
-    userFieldChange() {
+    async userFieldChange() {
         let newUser = this.newUser.value;
         // console.log(newUser);
         let userLookup;
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (re.test(newUser)) {
-            Meteor.call('users.getAccountByEmail', {
-            	email: newUser
-            }, (err, res) => {
-              if (err) {
-                alert(err);
-              } else {
-                this.newUserLookup = res;
-              }
-          })
+            try {
+                this.newUserLookup = await Meteor.callPromise('users.getAccountByEmail', {
+                	email: newUser
+                })
+          } catch(err) {alert(err)}
       } else {
           let res = Meteor.users.findOne({username: newUser});
           this.newUserLookup = res;
       }
     }
 
-    updateUserArrays() {
-        this.studentObjs = Meteor.callPromise('roles.getStudents', { course: this._course_id });
-        this.adminObjs = Meteor.callPromise('roles.getAdmins', { course: this._course_id });
-        this.ownerObjs = Meteor.callPromise('roles.getOwners', { course: this._course_id });
+    async updateUserArrays() {
+        this.studentObjs = await Meteor.callPromise('roles.getStudents', { course: this._course_id });
+        this.adminObjs = await Meteor.callPromise('roles.getAdmins', { course: this._course_id });
+        this.ownerObjs = await Meteor.callPromise('roles.getOwners', { course: this._course_id });
     }
 
     ngOnDestroy() {
