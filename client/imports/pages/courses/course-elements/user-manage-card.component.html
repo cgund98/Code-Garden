@@ -1,4 +1,4 @@
-<div class="card profile-card" [class.owner]="this.role.value=='owner'" [class.admin]="this.role.value=='admin'">
+<div class="card profile-card" [class.owner]="prevRole=='owner'" [class.admin]="prevRole=='admin'">
     <div class="profile-img-wrapper">
         <div>
             <img src="/profileImgs/witch.jpg" />
