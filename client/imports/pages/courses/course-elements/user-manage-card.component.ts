@@ -55,7 +55,7 @@ export class UserManageCardComponent implements OnInit {
                 });
                 if (this.prevRole == "owner" || this.prevRole == "admin") {this.refreshUsers();}
                 this.prevRole = this.role.value;
-                console.log("role changed", this.role.value);
+                // console.log("role changed", this.role.value);
                 this.refreshUsers();
             } catch(err) {
                 this.role.setValue(this.prevRole);
@@ -69,7 +69,7 @@ export class UserManageCardComponent implements OnInit {
                 });
                 if (this.prevRole == "student") {this.refreshUsers();}
                 this.prevRole = this.role.value;
-                console.log("role changed", this.role.value);
+                // console.log("role changed", this.role.value);
             } catch(err) {
                 this.role.setValue(this.prevRole);
                 this.error = err.reason;
@@ -82,7 +82,7 @@ export class UserManageCardComponent implements OnInit {
                 });
                 if (this.prevRole == "student") {this.refreshUsers();}
                 this.prevRole = this.role.value;
-                console.log("role changed", this.role.value);
+                // console.log("role changed", this.role.value);
                 // this.refreshUsers();
             } catch(err) {
                 this.role.setValue(this.prevRole);

@@ -40,7 +40,7 @@ Meteor.methods({
 
       Roles.setUserRoles(targetUserId, ['admin'], course);
   },
-  async 'roles.setStudent'({targetUserId, course}) {
+  'roles.setStudent'({targetUserId, course}) {
       var loggedInUser = Meteor.user();
 
       if (!loggedInUser ||
@@ -86,6 +86,9 @@ Meteor.methods({
   'roles.getOwners'({course}) {
       return Roles.getUsersInRole(['owner'], course).fetch();
   },
+  'roles.userInCourse'({targetUserId, course}) {
+      return Roles.userIsInRole(targetUserId, ['student', 'admin', 'owner'], course);
+  }
 
 
 })

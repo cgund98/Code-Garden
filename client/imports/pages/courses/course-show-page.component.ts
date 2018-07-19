@@ -30,6 +30,7 @@ export class CourseShowPageComponent implements OnInit {
     ownerObjs: Array<any>;
 
     addingUser: boolean = false;
+    addingError: string;
     newUser = new FormControl('', Validators.required);
     newUserLookup: string = "l";
     roles: Array<string> = ["Student", "Admin"];
@@ -97,46 +98,38 @@ export class CourseShowPageComponent implements OnInit {
     }
     async addUser() {
         let role = this.role.value.toLowerCase();
-        // console.log(role);
-        if (!Roles.userIsInRole(this.newUserLookup, ['student', 'admin', 'owner'], this._course_id) && this.newUser.valid && this.role.valid) {
+        if (!this.error && this.newUser.valid && this.role.valid) {
             if (role == "student") {
-                // Meteor.call('roles.enroll', {
-                // 	targetUserId: this.newUserLookup._id,
-                // 	course: this._course_id,
-                // }, (err, res) => {
-                //   if (err) {
-                //     console.log(err);
-                // } else {
-                //     console.log("Added");
-                //     this.updateUserArrays();
-                // }})
                 try {
                     await Meteor.callPromise('roles.enroll', {
                     	// targetUserId: "dfdfdfdfd",
                         targetUserId: this.newUserLookup._id,
                     	course: this._course_id,
                     });
-                } catch(err) {alert(err)}
-                console.log("enrolled");
+                    this.error = "";
+                } catch(err) {this.error = err.reason}
+                // console.log("enrolled");
             } else if (role == "admin") {
                 try {
                     await Meteor.callPromise('roles.setAdmin', {
                     	targetUserId: this.newUserLookup._id,
                     	course: this._course_id,
                     })
-                } catch(err) {alert(err)}
+                    this.error = "";
+                } catch(err) {this.error = err.reason}
             }
+        }
+        if (!this.error) {
             this.updateUserArrays();
             this.addingUser = false;
             this.role.setValue("");
             this.newUser.setValue("");
-        } else if (!Roles.userIsInRole(this.newUserLookup, ['student', 'admin', 'owner'])){
-            console.log("They are already enrolled")!
         }
         this.isEnrolled = true;
     }
 
     async userFieldChange() {
+        this.error = "";
         let newUser = this.newUser.value;
         // console.log(newUser);
         let userLookup;
@@ -150,6 +143,15 @@ export class CourseShowPageComponent implements OnInit {
       } else {
           let res = Meteor.users.findOne({username: newUser});
           this.newUserLookup = res;
+      }
+      if (this.newUserLookup) {
+          let inCourse = await Meteor.callPromise('roles.userInCourse', {
+          	targetUserId: this.newUserLookup._id,
+          	course: this._course_id,
+          });
+          if (inCourse) {
+              this.error = "User already enrolled!";
+          }
       }
     }
 

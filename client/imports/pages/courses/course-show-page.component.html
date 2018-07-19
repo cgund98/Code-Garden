@@ -32,6 +32,7 @@
                     <p class="name">Find a user...</p>
                     <input class="username" [formControl]="newUser" name="newUser" type="text" (keyup)="userFieldChange()" placeholder="email or username"></input>
                     <p class="error" *ngIf="!newUserLookup">No user found</p>
+                    <p class="error" *ngIf="error">{{ this.error }}</p>
                 </div>
             </div>
 
@@ -44,7 +45,7 @@
             </div>
 
             <div class="add-user-wrapper">
-                <button (click)="addUser()" [disabled]="!newUserLookup || newUser.invalid || role.invalid" class="add-user"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
+                <button (click)="addUser()" [disabled]="!newUserLookup || newUser.invalid || role.invalid || error" class="add-user"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
             </div>
 
             <button class='remove' (click)="addingUser=false"><i class='fa fa-times' aria-hidden='true'></i></button>
