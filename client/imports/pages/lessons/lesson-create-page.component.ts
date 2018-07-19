@@ -122,18 +122,34 @@ export class LessonCreatePageComponent implements OnInit {
 
     async submit() {
         if (this.checkValids()) {
-            var lessonID = await callWithPromise('lesson.insert', [this.title.value, this.seqNum, this._course_id, this.course_title]);
+            var lessonID = await callWithPromise('lesson.insert', {
+                    title: this.title.value,
+                    seqNum: this.seqNum,
+                    courseID: this._course_id,
+                    course: this.course_title});
 
-            console.log('lessonID:' + this.lessonID);
+            console.log('lessonID:' + lessonID);
 
             for (var i=0; i < this.sectionGroups.length; i++) {
                 var group = this.sectionGroups[i];
                 console.log(group);
-                await lessonID;
-                var sectionID = await callWithPromise('lessonSection.insert', [group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID]);
+                var sectionID = await callWithPromise('lessonSection.insert', {
+                    title: group.value.title,
+                    content: group.content,
+                    expressions: group.value.expressions,
+                    outputs: group.outputs,
+                    starterCode: group.starterCode,
+                    tasks: group.value.tasks,
+                    seqNum: group.index,
+                    lessonID});
 
                 console.log('sectionID:' +sectionID);
-                var sectionProgressID = await callWithPromise('lessonSection.progress', [group.index, lessonID, sectionID]);
+                var sectionProgressID = await callWithPromise('lessonProgress.insert', {
+                    lessonID,
+                    sectionID,
+                    sectionProgress: 0,
+                    seqNum: group.index,
+                });
 
                 console.log('Progress created: ' + sectionProgressID);
                 if (i === this.sectionGroups.length - 1) {

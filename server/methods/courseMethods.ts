@@ -1,4 +1,4 @@
-import { Courses } from '../both/collections/courses.collection';
+import { Courses } from '../../both/collections/courses.collection';
 Meteor.methods({
     'Courses.create'(course){
         Courses.insert(course);

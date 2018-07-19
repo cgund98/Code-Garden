@@ -154,10 +154,17 @@ export class LessonEditPageComponent implements OnInit {
         }
     }
 
-    submit() {
+    async submit() {
         if (this.checkValids()) {
             var lessonID = this._lesson_id;
-            Meteor.call('lesson.update', lessonID, this.title.value, this.seqNum, this._course_id, this.course_title);
+            await Meteor.callPromise('lesson.update', {
+                lessonID,
+                lessonObj: {
+                    title: this.title.value,
+                    seqNum: this.seqNum,
+                    courseID: this._course_id,
+                    course: this.course_title}
+            });
             // Lessons.collection.update(lessonID, {
             //     title: this.title.value,
             //     seqNum: this.seqNum,
@@ -169,20 +176,30 @@ export class LessonEditPageComponent implements OnInit {
                 var group = this.sectionGroups[i];
                 var _id = group._id;
                 if (group._id) {
-                    // console.log(group.text);
-                    Meteor.call('lessonSection.update', _id, group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID);
-                    // LessonSections.collection.update(this.sectionObjs[i]._id, {
-                    //     title: group.value.title,
-                    //     content: group.content,
-                    //     expressions: group.value.expressions,
-                    //     outputs: group.outputs,
-                    //     starterCode: group.starterCode,
-                    //     tasks: group.value.tasks,
-                    //     seqNum: group.index,
-                    //     lessonID: lessonID,
-                    // });
-                } else {
-                    Meteor.call('lessonSection.insert', group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID);
+                    console.log(group.text);
+                    await Meteor.callPromise('lessonSection.update', {
+                    id: _id,
+                    sectionObj: {
+                        title: group.value.title,
+                        content: group.content,
+                        expressions: group.value.expressions,
+                        outputs: group.outputs,
+                        starterCode: group.starterCode,
+                        tasks: group.value.tasks,
+                        seqNum: group.index,
+                        lessonID}});
+                //     // LessonSections.collection.update(this.sectionObjs[i]._id, {
+                //     //     title: group.value.title,
+                //     //     content: group.content,
+                //     //     expressions: group.value.expressions,
+                //     //     outputs: group.outputs,
+                //     //     starterCode: group.starterCode,
+                //     //     tasks: group.value.tasks,
+                //     //     seqNum: group.index,
+                //     //     lessonID: lessonID,
+                //     // });
+                // } else {
+                //     await Meteor.callPromise('lessonSection.insert', {group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID});
                 }
             }
             console.log('Edited');
