@@ -10,3 +10,18 @@ if (Meteor.isServer) {
         return Courses.find();
     });
 }
+
+Meteor.methods({
+    'Courses.insert'(title, fullDesc, shortDesc, private, language, authorID, date, createdAt,) {
+        return Courses.insert({
+            title,
+            fullDesc,
+            shortDesc,
+            private,
+            language,
+            authorID,
+            date,
+            createdAt,
+        });
+    },
+});

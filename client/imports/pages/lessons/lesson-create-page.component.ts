@@ -122,7 +122,7 @@ export class LessonCreatePageComponent implements OnInit {
 
     async submit() {
         if (this.checkValids()) {
-            var lessonID = await callWithPromise('lesson.insert', {
+            var lessonID = await Meteor.callPromise('lesson.insert', {
                     title: this.title.value,
                     seqNum: this.seqNum,
                     courseID: this._course_id,
@@ -133,7 +133,7 @@ export class LessonCreatePageComponent implements OnInit {
             for (var i=0; i < this.sectionGroups.length; i++) {
                 var group = this.sectionGroups[i];
                 console.log(group);
-                var sectionID = await callWithPromise('lessonSection.insert', {
+                var sectionID = await Meteor.callPromise('lessonSection.insert', {
                     title: group.value.title,
                     content: group.content,
                     expressions: group.value.expressions,
@@ -144,7 +144,7 @@ export class LessonCreatePageComponent implements OnInit {
                     lessonID});
 
                 console.log('sectionID:' +sectionID);
-                var sectionProgressID = await callWithPromise('lessonProgress.insert', {
+                var sectionProgressID = await Meteor.callPromise('lessonProgress.insert', {
                     lessonID,
                     sectionID,
                     sectionProgress: 0,

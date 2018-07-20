@@ -15,7 +15,7 @@ export class CourseAuthGuard implements CanActivate {
             course: route.params._course_id,
             roles: ["admin", "owner"]
         })
-        console.log(hasPerms);
+        // console.log(hasPerms);
         if (!hasPerms) {
           this.router.navigate(["/courses"]);
           return false;

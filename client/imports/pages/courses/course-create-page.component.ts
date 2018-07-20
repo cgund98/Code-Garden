@@ -22,7 +22,7 @@ export class CourseCreatePageComponent implements OnInit {
     constructor(private router: Router) {}
 
     ngOnInit() {
-        this.languages = ["HTML", "CSS", "Javascript"]
+        this.languages = ["Javascript", "Java", "C++"]
 
         this.newCourseForm = new FormGroup ({
             title: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -46,11 +46,13 @@ export class CourseCreatePageComponent implements OnInit {
             course.authorID = Meteor.userId();
             course.createdAt = new Date();
             try {
-                await Meteor.callPromise('Courses.create', course);
+                let courseID = await Meteor.callPromise('Courses.create', course);
+                console.log(courseID)
+                await Meteor.callPromise('roles.setOwner', {targetUserId: Meteor.userId(), course: courseID})
                 console.log("Submitted form");
 
-                this.router.navigateByUrl('/').then(()=>
-                this.router.navigate(['/courses']));
+                // this.router.navigateByUrl('/').then(()=>
+                this.router.navigate(['/courses/' + courseID]);//);
             } catch(err) {alert(err)}
         }
     }
