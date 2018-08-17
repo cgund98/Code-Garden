@@ -25,7 +25,12 @@ export class CourseEditPageComponent implements OnInit {
     error: string;
     debug: boolean = false;
 
-    constructor(private router: Router, private route: ActivatedRoute) {}
+    constructor(private router: Router, private route: ActivatedRoute) {
+        Meteor.subscribe('courses');
+        Meteor.subscribe('lessons');
+        Meteor.subscribe('lessonSections');
+        Meteor.subscribe('sectionProgresses');
+    }
 
     ngOnInit() {
         this.languages = ["HTML", "CSS", "Javascript"];

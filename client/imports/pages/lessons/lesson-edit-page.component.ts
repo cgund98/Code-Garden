@@ -41,7 +41,12 @@ export class LessonEditPageComponent implements OnInit {
        fontSize: "100%" // ensures that the editor fits in the environment
    };
 
-    constructor(private route: ActivatedRoute, private router: Router) {}
+    constructor(private route: ActivatedRoute, private router: Router) {
+        Meteor.subscribe('courses');
+        Meteor.subscribe('lessons');
+        Meteor.subscribe('lessonSections');
+        Meteor.subscribe('sectionProgresses');
+    }
 
     ngOnInit() {
 

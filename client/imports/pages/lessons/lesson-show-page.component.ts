@@ -28,7 +28,12 @@ export class LessonShowPageComponent implements OnInit {
     prevLessonLink: any;
     nextLessonLink: any;
 
-    constructor(private route: ActivatedRoute, private router: Router) {}
+    constructor(private route: ActivatedRoute, private router: Router) {
+        Meteor.subscribe('courses');
+        Meteor.subscribe('lessons');
+        Meteor.subscribe('lessonSections');
+        Meteor.subscribe('sectionProgresses');
+    }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {

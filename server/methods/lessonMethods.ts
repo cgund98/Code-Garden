@@ -42,3 +42,15 @@ Meteor.methods({
 
 
 });
+
+Meteor.publish('lessons', function lessonsPublication() {
+    return Lessons.find({});
+});
+
+Meteor.publish('sectionProgresses', function sectionProgressesPublication() {
+    return SectionProgresses.find({});
+});
+
+Meteor.publish('lessonSections', function lessonSectionsPublication() {
+    return LessonSections.find({});
+});

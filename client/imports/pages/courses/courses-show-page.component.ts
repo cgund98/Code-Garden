@@ -14,6 +14,10 @@ export class CoursesShowPageComponent implements OnInit {
     private sub: any;
     courseObjs: Array<any>;
 
+    constructor() {
+        Meteor.subscribe('courses');
+    }
+
     ngOnInit() {
         this.courseObjs = Courses.find({}).fetch();
         this.courseObjs = this.courseObjs.map(function(c) {

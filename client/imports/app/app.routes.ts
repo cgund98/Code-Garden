@@ -19,10 +19,13 @@ export const routes: Route[] = [
     { path: 'dashboard', component: DashboardShowPageComponent },
     { path: 'courses', component: CoursesShowPageComponent },
     { path: 'courses/:_course_id', component: CourseShowPageComponent,},
-    { path: 'courses/:_course_id/edit', component: CourseEditPageComponent, canActivate: [CourseAuthGuard]},
+    { path: 'courses/:_course_id/edit', component: CourseEditPageComponent, //canActivate: [CourseAuthGuard]
+},
     { path: 'courses/:_course_id/lessons/:_lesson_id', component: LessonShowPageComponent },
-    { path: 'courses/:_course_id/lessons/:_lesson_id/edit', component: LessonEditPageComponent, canActivate: [CourseAuthGuard] },
-    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent, canActivate: [CourseAuthGuard] },
+    { path: 'courses/:_course_id/lessons/:_lesson_id/edit', component: LessonEditPageComponent, //canActivate: [CourseAuthGuard]
+},
+    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent, //canActivate: [CourseAuthGuard] 
+},
     { path: 'create-course', component: CourseCreatePageComponent },
     { path: 'login', component: LoginShowPageComponent },
     { path: 'signup', component: SignupShowPageComponent },

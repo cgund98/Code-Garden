@@ -19,7 +19,9 @@ export class CourseCreatePageComponent implements OnInit {
     private newCourseForm: FormGroup;
     debug: boolean = false;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router) {
+        Meteor.subscribe('courses');
+    }
 
     ngOnInit() {
         this.languages = ["Javascript", "Java", "C++"]
