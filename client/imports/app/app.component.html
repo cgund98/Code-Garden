@@ -1,3 +1,4 @@
+<div *ngIf="ready">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <header class="main container">
     <div class="logo col-xs-9 col-md-2">CODE<span class="text-green">GARDEN</span></div>
@@ -5,10 +6,10 @@
         <div class="dropdown">
             <div class="parent"><a href="#" style="color: white;"><i class="fa fa-user-circle text-green" aria-hidden="true"></i><span style="display:inline" class="text-green" *ngIf="user"> {{ user.username }} </span><i class="fa fa-chevron-down" style="font-size: .75em; color: #222222 !important;" aria-hidden="true"></i></a></div>
             <div class="children" [style.right]="user ? '56px' : null">
-                <a type="submit" *ngIf="!user" (click)=(rLogin()) href="">Login</a>
-                <a *ngIf="user" (click)=(rDash()) href="">Dashboard</a>
-                <a *ngIf="user" (click)=(rLogOut()) href="#">Logout</a>
-                <a *ngIf="!user" (click)=(rSignup()) href="">Signup</a>
+                <a type="submit" *ngIf="!user" href="/login">Login</a>
+                <a *ngIf="user"href="/dashboard">Dashboard</a>
+                <a *ngIf="user" href="/logout">Logout</a>
+                <a *ngIf="!user" href="/signup">Signup</a>
             </div>
         </div>
         <a href="/courses">Courses</a>
@@ -44,3 +45,12 @@
 
     </div>
 </footer>
+</div>
+<div *ngIf="!ready" class="login-wrapper" style="height: 100vh;width: 100vw;padding: none; margin: none;">
+    <div class="loading-wrapper signup col-xs-12 col-md-3">
+        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+           <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+    </div>
+    <div class="particles-wrapper"><div id="particles-js"></div></div>
+</div>

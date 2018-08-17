@@ -16,6 +16,7 @@ import template from './app.component.html';
 export class AppComponent implements OnInit, OnDestroy {
 
     error: string;
+    ready: boolean = false;
     // navigationSubscription;
     constructor(private router: Router, private zone: NgZone) {
      //  this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -27,15 +28,15 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        particlesJS.load('particles-js', '/assets/particles.json', null);
+        // particlesJS.load('particles-js', '/assets/particles.json', null);
         function checkForData(router) {
             console.log('Checking...');
             if (Meteor.user()) {
             // if (Courses.find({}).fetch().length > 0 && Courses.find({}).fetch().length > 0) {
                 // console.log(Courses.find({}).fetch());
-                var url = router.url;
-                router.navigateByUrl('/create-course', {skipLocationChange: true}).then(()=>
-                router.navigate([url]));
+                // var url = router.url;
+                // router.navigateByUrl('/create-course', {skipLocationChange: true}).then(()=>
+                // router.navigate([url]));
                 return true;
             }
             return false;
@@ -43,60 +44,37 @@ export class AppComponent implements OnInit, OnDestroy {
         function sleep(ms) {
           return new Promise(resolve => setTimeout(resolve, ms));
         }
-        async function waitForData(router) {
+        async function waitForData(handles) {
             for (var i=0; i < 200; i++ ) {
-                if (checkForData(router)) {return};
+                var ready = true;
+                Tracker.autorun(() => {
+                  handles.map(handle => {
+                      if (ready) {ready = handle.ready()}
+                      // console.log(ready);
+                  })
+                });
+                if (ready) {return true};
                 await sleep(10);
             }
+            window.alert("Connection timed out.");
         }
         if (Meteor.user() == null) {
-            waitForData(this.router);
+            const cHandle = Meteor.subscribe('courses');
+            const lHandle = Meteor.subscribe('lessons');
+            const lsHandle = Meteor.subscribe('lessonSections');
+            const spHandle = Meteor.subscribe('sectionProgresses');
+            this.ready = waitForData([cHandle, lHandle, lsHandle, spHandle]).then(function() {
+                var url = this.router.url;
+                // console.log(url);
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+                this.router.navigate([url]));
+            }.bind(this));
         }
 
     }
 
-ngOnDestroy() {
-    // avoid memory leaks here by cleaning up after ourselves. If we
-    // don't then we will continue to run our initialiseInvites()
-    // method on every navigationEnd event.
-    // if (this.navigationSubscription) {
-    //    this.navigationSubscription.unsubscribe();
-    // }
-  }
-
-rDash(){
-  var self=this;
-  this.zone.run(() =>{
-    self.router.navigate(['/dashboard']);
-  });
-}
-
-rLogOut(){
-  var self=this;
-  Accounts.logout();
-  Accounts.onLogout(function() {
-    self.router.navigate(['/']);
-    //   if (err){
-    //     this.error=err;
-    //     console.log(err);
-    //   } else {
-    //   self.router.navigate(['/']);
-    // }
-  });
-
-}
-rLogin(){
-  var self=this;
-    this.zone.run(() =>{
-    self.router.navigate(['/login']);
-    });
-}
-rSignup(){
-  var self=this;
-    this.zone.run(() =>{
-    self.router.navigate(['/signup']);
-    });
-}
+    ngOnDestroy() {
+    }
 
 
 }

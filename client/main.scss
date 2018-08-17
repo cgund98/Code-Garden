@@ -558,8 +558,12 @@ div.edit {
     margin: 1em 0;
     list-style: none;
     padding: 0;
+    & > li {
+        float: left;
+    }
     li {
-        float: none;
+        float: left;
+        // float: left;
         clear: both;
         font-size: 1.25em;
         text-decoration: none;

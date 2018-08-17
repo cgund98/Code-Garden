@@ -9,7 +9,9 @@
     </div>
 </div>
 <div class="lesson-body container">
-        <p class="error text-center"></p>
+    <p class="error text-center" *ngIf="title.invalid && title.touched">
+        Lesson title must be longer than 3 characters
+    </p>
 
     <div class="section edit card" *ngFor="let s of sectionGroups">
         <form [formGroup]="s">
@@ -60,9 +62,6 @@
         <button class='remove' *ngIf="s.close" (click)="removeSection($event, s.index)"><i class='fa fa-times' aria-hidden='true'></i></button>
     </div>
 
-    <p class="error text-center" *ngIf="title.invalid && title.touched">
-        Lesson title must be longer than 3 characters
-    </p>
 
     <div class="text-center" style="position: absolute; width: 100%; bottom: 0">
         <button class="add add-section card" type="button" (click)="addSection($event)"><i class="fa fa-plus" aria-hidden="true"></i> Add Section</button>

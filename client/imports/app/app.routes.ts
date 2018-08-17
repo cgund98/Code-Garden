@@ -1,4 +1,5 @@
-import { Route } from '@angular/router';
+import { Route, Resolve } from '@angular/router';
+import { Injectable } from "@angular/core";
 
 import { LessonShowPageComponent } from '../pages/lessons/lesson-show-page.component';
 import { LessonCreatePageComponent } from '../pages/lessons/lesson-create-page.component';
@@ -14,17 +15,19 @@ import { SignupShowPageComponent } from '../pages/signup/signup-show-page.compon
 import { DashboardShowPageComponent } from '../pages/dashboard/dashboard-show-page.component';
 
 import { CourseAuthGuard } from './auth-guards.service';
+import { CourseResolver } from './course.resolver';
 
 export const routes: Route[] = [
     { path: 'dashboard', component: DashboardShowPageComponent },
-    { path: 'courses', component: CoursesShowPageComponent },
-    { path: 'courses/:_course_id', component: CourseShowPageComponent,},
-    { path: 'courses/:_course_id/edit', component: CourseEditPageComponent, //canActivate: [CourseAuthGuard]
+    { path: 'courses', component: CoursesShowPageComponent},
+    { path: 'courses/:_course_id', component: CourseShowPageComponent
+},
+    { path: 'courses/:_course_id/edit', component: CourseEditPageComponent, canActivate: [CourseAuthGuard]
 },
     { path: 'courses/:_course_id/lessons/:_lesson_id', component: LessonShowPageComponent },
-    { path: 'courses/:_course_id/lessons/:_lesson_id/edit', component: LessonEditPageComponent, //canActivate: [CourseAuthGuard]
+    { path: 'courses/:_course_id/lessons/:_lesson_id/edit', component: LessonEditPageComponent, canActivate: [CourseAuthGuard]
 },
-    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent, //canActivate: [CourseAuthGuard] 
+    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent, canActivate: [CourseAuthGuard]
 },
     { path: 'create-course', component: CourseCreatePageComponent },
     { path: 'login', component: LoginShowPageComponent },
