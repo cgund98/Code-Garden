@@ -12,10 +12,11 @@ export class LessonCardComponent implements OnInit {
   @Input() course_id:string;
   @Input() lesson_id:string;
   @Input() icon:string;
+  @Input() newLesson:boolean = false;
   link: string;
 
   ngOnInit() {
-      this.link = "/courses/" + this.course_id + "/lessons/" + this.lesson_id;
+      this.link = this.newLesson ? "create-lesson" : this.lesson_id;
   }
 
 }

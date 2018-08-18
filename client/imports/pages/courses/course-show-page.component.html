@@ -7,12 +7,15 @@
         <h4>Lessons</h4>
     </div>
 
-    <ol class="course-lessons">
-        <li *ngIf="isAdmin" class=" col-xs-12 col-md-3 col-xl-2 new"><a [routerLink]="['/courses',_course_id,'create-lesson']"><div><p>New Lesson</p><i class="fa fa-plus" aria-hidden="true"></i></div></a></li>
+    <div class="course-lessons">
+        <!-- <li class=" col-xs-12 col-md-3 col-xl-2 new"><a [routerLink]="['/courses',_course_id,'create-lesson']"><div><p>New Lesson</p><i class="fa fa-plus" aria-hidden="true"></i></div></a></li> -->
+        <lesson-card title="New Lesson"
+        course_id="" lesson_id="" icon="fa-plus" newLesson="true"
+        class="col-xs-12 col-md-3 col-xl-2"></lesson-card>
         <lesson-card *ngFor="let l of lessonObjs" title="{{ l.title }}"
         course_id="{{ _course_id }}" lesson_id="{{ l._id }}" icon="{{ l.icon }}"
         class="col-xs-12 col-md-3 col-xl-2"></lesson-card>
-    </ol>
+    </div>
 
     <div *ngIf="isAdmin">
         <div class="title-wrapper">

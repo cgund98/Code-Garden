@@ -1,6 +1,6 @@
 
-<li class=" col-xs-12 col-md-3 col-xl-2">
-    <a href='{{ link }}'><div>
+<li class="" [class.new]="newLesson">
+    <a [routerLink]='[link]'><div>
         <p>{{title}}</p>
         <i class="fa {{ icon }}" aria-hidden="true"></i>
     </div></a>
