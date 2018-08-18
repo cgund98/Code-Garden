@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
+import { Course } from '../../../../both/models/course.model';
+import { Courses } from '../../../../both/collections/courses.collection';
+
 import template from './dashboard-show-page.component.html';
 
 @Component({
@@ -12,18 +15,28 @@ import template from './dashboard-show-page.component.html';
 
 export class DashboardShowPageComponent implements OnInit {
 
-  // user: Meteor.User;
-  error:string;
+    enrolledCourseObjs: Array<Course>;
+    taughtCourseObjs: Array<Course>;
+    p1: number = 1;
+    p2: number = 1;
 
-  constructor(private router: Router, private zone: NgZone){
+    constructor() {
+        Meteor.subscribe("courses");
+    }
 
-  }
-  NgZone() {
+    ngOnInit() {
+        // console.log(Meteor.call('roles.getRolesForUser', {targetUserId: Meteor.userId()}));
+        // try {
+        //     var courses = Object.keys(Meteor.user().roles);
+        //     console.log(courses);
+        // } catch (err) {}
+        enrolledCourseIDs = Roles.getGroupsForUser(Meteor.user(), "student");
+        taughtCourseIDs = Roles.getGroupsForUser(Meteor.user(), "owner");
+        taughtCourseIDs.concat(Roles.getGroupsForUser(Meteor.user(), "admin"));
+        // console.log(enrolledCourseIDs);
+        // console.log(taughtCourseIDs);
+        this.enrolledCourseObjs = Courses.find({_id: {"$in": enrolledCourseIDs}}).fetch();
+        this.taughtCourseObjs = Courses.find({_id: {"$in": taughtCourseIDs}}).fetch();
+    }
 
-  }
-  ngOnInit() {
-    var user = Meteor.user();
-    user;
-    // this.user;
-  }
 }

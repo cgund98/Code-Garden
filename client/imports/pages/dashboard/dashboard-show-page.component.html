@@ -1,27 +1,44 @@
-    <!-- {{> HeroMain title="Dashboard" }} -->
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <div class="container">
-        <h3 class="text-center">Last working on:</h3>
-        <div class="resume-master-wrapper">
-            <a href="#" class="resume-link">
-                <div class="resume-wrapper card">
-                    <div class="icon"><i class="fa fa-book fa-3x" fa aria-hidden="true"></i></div>
-                    <div class="info">
-                        <h4>Intro to Java</h4>
-                        <h5>95% Complete</h5>
-                        <button class="resume"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                    </div>
+<main-hero title="DASHBOARD" subtitle=""></main-hero>
+<div class="container">
+    <h3 class="text-center">Last working on:</h3>
+    <div class="resume-master-wrapper">
+        <a href="#" class="resume-link">
+            <div class="resume-wrapper card">
+                <div class="icon"><i class="fa fa-book fa-3x" fa aria-hidden="true"></i></div>
+                <div class="info">
+                    <h4>Intro to Java</h4>
+                    <h5>95% Complete</h5>
+                    <button class="resume"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                 </div>
-            </a>
-        </div>
-        <!-- {{this.user  | json}} -->
-        <div class="title-wrapper">
-            <h4>Recent Courses {{user}}</h4>
-        </div>
-        <div class="title-wrapper">
-            <h4>My Enrolled Courses</h4>
-        </div>
-        <div class="title-wrapper">
-            <h4>My Taught Classes</h4>
-        </div>
+            </div>
+        </a>
     </div>
+    <!-- {{this.user  | json}} -->
+    <!-- <div class="title-wrapper">
+        <h4>Recent Courses</h4>
+    </div> -->
+    <div class="title-wrapper" *ngIf="enrolledCourseObjs.length > 0">
+        <h4>My Enrolled Courses</h4>
+    </div>
+    <div class="course-cards-wrapper">
+        <course-card *ngFor="let c of enrolledCourseObjs | paginate: { itemsPerPage: 24, currentPage: p1 }" class="col-xs-12 col-md-4 col-xl-3"
+        title="{{c.title}}" author="{{c.author}}" shortDesc="{{c.shortDesc}}"
+        date="{{ c.date }}" _id="{{c._id}}">
+        </course-card>
+    </div>
+    <div class="text-center pagination-wrapper" *ngIf="enrolledCourseObjs.length > 24">
+        <pagination-controls (pageChange)="p1 = $event"></pagination-controls>
+    </div>
+    <div class="title-wrapper" *ngIf="taughtCourseObjs.length > 0">
+        <h4>My Taught Classes</h4>
+    </div>
+    <div class="course-cards-wrapper">
+        <course-card *ngFor="let c of taughtCourseObjs | paginate: { itemsPerPage: 24, currentPage: p2 }" class="col-xs-12 col-md-4 col-xl-3"
+        title="{{c.title}}" author="{{c.author}}" shortDesc="{{c.shortDesc}}"
+        date="{{ c.date }}" _id="{{c._id}}">
+        </course-card>
+    </div>
+    <div class="text-center pagination-wrapper" *ngIf="taughtCourseObjs.length > 24">
+        <pagination-controls (pageChange)="p2 = $event"></pagination-controls>
+    </div>
+</div>
