@@ -16,7 +16,7 @@ export class LessonCardComponent implements OnInit {
   link: string;
 
   ngOnInit() {
-      this.link = this.newLesson ? "create-lesson" : this.lesson_id;
+      this.link = this.newLesson ? "create-lesson" : "lessons/" + this.lesson_id;
   }
 
 }

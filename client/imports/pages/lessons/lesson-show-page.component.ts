@@ -45,6 +45,7 @@ export class LessonShowPageComponent implements OnInit {
         this.progressObjs = SectionProgresses.find({lessonID: this._lesson_id}, {sort: {seqNum: 1}}).fetch();
 
         try {
+            this.language = Courses.findOne({_id: this._course_id}).language;
             let prevLesson = Lessons.findOne({courseID: this._course_id, seqNum: this.lessonObj.seqNum-1});
             this.prevLessonLink = prevLesson ? '/courses/' + this._course_id + '/lessons/' + prevLesson._id : null
             let nextLesson = Lessons.findOne({courseID: this._course_id, seqNum: this.lessonObj.seqNum+1});

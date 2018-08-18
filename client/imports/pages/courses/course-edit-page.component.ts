@@ -33,7 +33,7 @@ export class CourseEditPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.languages = ["HTML", "CSS", "Javascript"];
+        this.languages = Object.keys(Meteor.settings.public.languages);
 
         this.sub = this.route.params.subscribe(params => {
             this._course_id = params['_course_id'];

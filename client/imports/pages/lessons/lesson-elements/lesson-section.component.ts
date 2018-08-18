@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http/';
 
 import template from './lesson-section.component.html';
 
+import "brace/mode/java";
+import "brace/mode/ruby";
+import "brace/mode/c_cpp";
+import "brace/mode/php";
+
 import { SectionProgresses } from '../../../../../both/collections/section-progresses.collection';
 
 declare function require(name:string);
@@ -33,6 +38,8 @@ export class LessonSectionComponent implements OnInit {
   };
    @Input() sectionObj:any;
    @Input() progressObj:any;
+   @Input() language:string;
+   aceLanguage: string;
    title: string;
    content: string;
    expressions: any;
@@ -47,6 +54,8 @@ export class LessonSectionComponent implements OnInit {
    constructor(private http: HttpClient) {}
 
    ngOnInit() {
+       // console.log(this.language);
+       this.aceLanguage = Meteor.settings.public.languages[this.language][1];
        this.content = this.sectionObj.content;
        this.content = this.procContent(this.content);
        this.title = this.sectionObj.title;
@@ -92,7 +101,7 @@ export class LessonSectionComponent implements OnInit {
        }
        this.http.post('http://localhost:8080/compile', {
            code: this.editorText,
-           language:"4"
+           language: Meteor.settings.public.languages[this.language][0]
        }).subscribe(
            res => {
                // console.log(res);
@@ -109,7 +118,9 @@ export class LessonSectionComponent implements OnInit {
                } else {
                    this.error = "Oops, that's not it";
                    this.success = false;
+                   // console.log(res);
                }
+               this.consoleText = output + res.errors;
            },
            err => {
                // console.log(err);

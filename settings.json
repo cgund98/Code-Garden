@@ -1,0 +1,11 @@
+{
+    "public": {
+        "_comment": "When you add a lang, don't forget to add syntax highlighting",
+        "languages": {
+            "javascript": [4, "javascript"],
+            "ruby": [1, "ruby"],
+            "c++": [5, "c_cpp"],
+            "php": [3, "php"]
+        }
+    }
+}

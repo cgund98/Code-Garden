@@ -6,9 +6,9 @@ import { Course } from '../models/course.model';
 export const Courses = new MongoObservable.Collection<Course>('courses');
 
 if (Meteor.isServer) {
-    Meteor.publish('courses', function coursesPublication() {
-        return Courses.find();
-    });
+    // Meteor.publish('courses', function coursesPublication() {
+    //     return Courses.find();
+    // });
 }
 
 Meteor.methods({

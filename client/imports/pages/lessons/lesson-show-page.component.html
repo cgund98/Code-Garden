@@ -16,6 +16,6 @@
 
     <div class="text-center"><button class="edit"><a [routerLink]="['edit']"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
 
-    <lesson-section *ngFor="let s of sectionObjs; index as i" [sectionObj]="s" [progressObj]="progressObjs[i]" id="{{ s.seqNum }}"></lesson-section>
+    <lesson-section *ngFor="let s of sectionObjs; index as i" [sectionObj]="s" [progressObj]="progressObjs[i]" id="{{ s.seqNum }}" language="{{ language }}"></lesson-section>
 
 </div>

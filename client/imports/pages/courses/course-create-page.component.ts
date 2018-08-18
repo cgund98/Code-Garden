@@ -24,7 +24,7 @@ export class CourseCreatePageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.languages = ["Javascript", "Java", "C++"]
+        this.languages = Object.keys(Meteor.settings.public.languages);
 
         this.newCourseForm = new FormGroup ({
             title: new FormControl('', [Validators.required, Validators.minLength(3)]),

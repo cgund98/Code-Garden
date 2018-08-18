@@ -2,18 +2,18 @@
     <h3 class="subtitle">{{ title }}</h3>
     <p [innerHTML]="content"></p>
     <div class="code-box card">
-        <div class="code-container col-xs-12 col-md-8">
+        <div class="code-container col-xs-12 col-md-12">
             <!-- <div id="editor" class="code">var noot;</div> -->
             <div ace-editor #editor id="editor" class="code"
-            style="width:75%;"
-            [mode]="'javascript'"
+            style="width:65%;"
+            [mode]="aceLanguage"
             [theme]="'monokai'"
             [options]="editorOptions"
             [(text)]="editorText"
            ></div>
            <div ace-editor #consol id="editor" class="code console"
-           style="width:25%;float: right;"
-           [mode]="'javascript'"
+           style="width:35%;float: right;"
+           [mode]="aceLanguage"
            [theme]="'monokai'"
            [options]="consoleOptions"
            [(text)]="consoleText"
@@ -23,7 +23,7 @@
             <div *ngIf="success && ran" class="alert success">Correct, good job!<span id="close" (click)="this.ran=false">&#215;</span></div>
             <div *ngIf="!success && ran" class="alert failed">{{error}}<span id="close" (click)="this.ran=false">&#215;</span></div>
         </div>
-        <div class="tasks-container col-xs-12 col-md-4">
+        <div class="tasks-container col-xs-12 col-md-12">
             <h5>Tasks:</h5>
             <ul>
                 <li *ngFor="let t of tasks">{{ t }}</li>
