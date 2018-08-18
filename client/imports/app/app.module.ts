@@ -13,8 +13,7 @@ import { LoginPageModule } from '../pages/login/login-page.module';
 import { SignupPageModule } from '../pages/signup/signup-page.module';
 import { MiscCompsModule } from '../pages/misc/misc-comps.module';
 
-import { CourseAuthGuard } from './auth-guards.service';
-import { CourseResolver } from './course.resolver';
+import {CourseAuthGuard, PrivateCourseAuthGuard} from './auth-guards.service';
 
 
 
@@ -43,7 +42,7 @@ import { CourseResolver } from './course.resolver';
   providers: [
       { provide: APP_BASE_HREF, useValue : '/' },
       CourseAuthGuard,
-      CourseResolver,
+      PrivateCourseAuthGuard,
   ]
 })
 

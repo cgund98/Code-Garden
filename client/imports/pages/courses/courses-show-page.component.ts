@@ -20,7 +20,7 @@ export class CoursesShowPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.courseObjs = Courses.find({}).fetch();
+        this.courseObjs = Courses.find({private: false}).fetch();
         this.courseObjs = this.courseObjs.map(function(c) {
             let author = Meteor.users.findOne({_id: c.authorID})
             c.author = author ? author.profile.name : "??";
