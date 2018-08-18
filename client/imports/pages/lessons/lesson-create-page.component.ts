@@ -131,13 +131,15 @@ export class LessonCreatePageComponent implements OnInit {
                     title: this.title.value,
                     seqNum: this.seqNum,
                     courseID: this._course_id,
-                    course: this.course_title});
+                    course: this.course_title,
+                    createdAt: new Date(),
+                });
 
-            console.log('lessonID:' + lessonID);
+            // console.log('lessonID:' + lessonID);
 
             for (var i=0; i < this.sectionGroups.length; i++) {
                 var group = this.sectionGroups[i];
-                console.log(group);
+                // console.log(group);
                 var sectionID = await Meteor.callPromise('lessonSection.insert', {
                     title: group.value.title,
                     content: group.content,
@@ -148,7 +150,7 @@ export class LessonCreatePageComponent implements OnInit {
                     seqNum: group.index,
                     lessonID});
 
-                console.log('sectionID:' +sectionID);
+                // console.log('sectionID:' +sectionID);
                 var sectionProgressID = await Meteor.callPromise('lessonProgress.insert', {
                     lessonID,
                     sectionID,
@@ -156,7 +158,7 @@ export class LessonCreatePageComponent implements OnInit {
                     seqNum: group.index,
                 });
 
-                console.log('Progress created: ' + sectionProgressID);
+                // console.log('Progress created: ' + sectionProgressID);
                 if (i === this.sectionGroups.length - 1) {
                     this.router.navigate(['/courses/'+this._course_id]);
                 }

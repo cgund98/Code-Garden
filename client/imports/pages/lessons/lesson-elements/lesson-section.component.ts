@@ -7,6 +7,7 @@ import "brace/mode/java";
 import "brace/mode/ruby";
 import "brace/mode/c_cpp";
 import "brace/mode/php";
+import "brace/mode/python";
 
 import { SectionProgresses } from '../../../../../both/collections/section-progresses.collection';
 
@@ -90,15 +91,15 @@ export class LessonSectionComponent implements OnInit {
    // }
 
    runCode() {
-       if (this.outputs == "") {
-           this.ran = true;
-           this.success = true;
-           this.progressObj.sectionProgress = 1;
-           SectionProgresses.update(this.progressObj._id, { $set: {
-               sectionProgress: 1,
-           } });
-           return;
-       }
+       // if (this.outputs == "") {
+       //     this.ran = true;
+       //     this.success = true;
+       //     this.progressObj.sectionProgress = 1;
+       //     SectionProgresses.update(this.progressObj._id, { $set: {
+       //         sectionProgress: 1,
+       //     } });
+       //     return;
+       // }
        this.http.post('http://localhost:8080/compile', {
            code: this.editorText,
            language: Meteor.settings.public.languages[this.language][0]

@@ -5,7 +5,8 @@
             "javascript": [4, "javascript"],
             "ruby": [1, "ruby"],
             "c++": [5, "c_cpp"],
-            "php": [3, "php"]
+            "php": [3, "php"],
+            "python": [0, "python"]
         }
     }
 }

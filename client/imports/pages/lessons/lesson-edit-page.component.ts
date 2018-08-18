@@ -212,16 +212,21 @@ export class LessonEditPageComponent implements OnInit {
         }
     }
 
-    deleteLesson() {
+    async deleteLesson() {
         confirm = window.confirm("Are you sure you want to delete the lesson?");
         if (confirm) {
             for (let s of this.sectionObjs) {
-                Meteor.call('lessonSection.remove', s._id);
+                await Meteor.callPromise('lessonSection.remove', s._id);
             }
             for (let p of SectionProgresses.find({lessonID: this._lesson_id}).fetch()) {
-                Meteor.call('lessonSection.progressRemove', p._id);
+                await Meteor.callPromise('lessonSection.progressRemove', p._id);
             }
-            Meteor.call('lesson.remove',this._lesson_id);
+            laterLesssons = Lessons.find({courseID: this._course_id}, {sort: {seqNum: 1}}).fetch().splice(this.lessonObj.seqNum);
+            for (l of laterLesssons) {
+                l.seqNum = l.seqNum - 1;
+                await Meteor.callPromise('lesson.update', {lessonID: l._id, lessonObj: l});
+            }
+            await Meteor.callPromise('lesson.remove',this._lesson_id);
 
             this.router.navigate(['/courses/'+ this._course_id])
         }

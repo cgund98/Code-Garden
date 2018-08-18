@@ -22,6 +22,8 @@ export class CourseEditPageComponent implements OnInit {
     private editCourseForm: FormGroup;
     private course: Course;
     private sub: any;
+    createdAt: Date;
+    author: string;
     error: string;
     debug: boolean = false;
 
@@ -48,15 +50,7 @@ export class CourseEditPageComponent implements OnInit {
                 private: new FormControl(this.course.private),
                 language: new FormControl(this.course.language, Validators.required),
             })
-        } catch(err) {
-            this.editCourseForm = new FormGroup ({
-                title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-                fullDesc: new FormControl('', [Validators.required, Validators.minLength(20)]),
-                shortDesc: new FormControl('', [Validators.required, Validators.minLength(10)]),
-                private: new FormControl(false),
-                language: new FormControl('', Validators.required),
-            })
-        }
+        } catch(err) {}
     }
     get title() { return this.editCourseForm.get('title'); }
     get fullDesc() { return this.editCourseForm.get('fullDesc'); }
@@ -67,6 +61,8 @@ export class CourseEditPageComponent implements OnInit {
     submit() {
         if (this.editCourseForm.valid && this.course) {
             var course = this.editCourseForm.value;
+            course.createdAt = this.course.createdAt;
+            course.authorID = this.course.authorID;
             Meteor.call('Courses.edit', this._course_id, course);
             this.router.navigateByUrl('/courses/' + this._course_id);
         }
