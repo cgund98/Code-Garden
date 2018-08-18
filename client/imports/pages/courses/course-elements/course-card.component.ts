@@ -16,6 +16,5 @@ export class CourseCardComponent implements OnInit {
   link: string;
 
   ngOnInit() {
-      this.link = "/courses/" + this._id
   }
 }

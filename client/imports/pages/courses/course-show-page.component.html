@@ -1,14 +1,14 @@
 <main-hero title="{{ title }}" subtitle="{{ language }}"></main-hero>
 <div class="container">
     <div class="text-center" *ngIf="!isEnrolled"><button class="enroll" (click)="enrollSelf()">ENROLL</button></div>
-    <div class="text-center" *ngIf="isAdmin"><button class="edit"><a href="{{ editLink }}"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
+    <div class="text-center" *ngIf="isAdmin"><button class="edit"><a [routerLink]="['/courses',_course_id,'edit']"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
     <p class="course-description">{{ fullDesc }}</p>
     <div class="title-wrapper">
         <h4>Lessons</h4>
     </div>
 
     <ol class="course-lessons">
-        <li *ngIf="isAdmin" class=" col-xs-12 col-md-3 col-xl-2 new"><a href="{{ newLessonLink }}"><div><p>New Lesson</p><i class="fa fa-plus" aria-hidden="true"></i></div></a></li>
+        <li *ngIf="isAdmin" class=" col-xs-12 col-md-3 col-xl-2 new"><a [routerLink]="['/courses',_course_id,'create-lesson']"><div><p>New Lesson</p><i class="fa fa-plus" aria-hidden="true"></i></div></a></li>
         <lesson-card *ngFor="let l of lessonObjs" title="{{ l.title }}"
         course_id="{{ _course_id }}" lesson_id="{{ l._id }}" icon="{{ l.icon }}"
         class="col-xs-12 col-md-3 col-xl-2"></lesson-card>

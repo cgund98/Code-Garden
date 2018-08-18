@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MiscCompsModule } from '../misc/misc-comps.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AceEditorModule } from 'ng2-ace-editor';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -21,6 +22,7 @@ import { LESSON_ELEMENTS_DECLARATIONS } from './lesson-elements';
     FormsModule,
     AceEditorModule,
     HttpClientModule,
+    RouterModule
   ],
   declarations: [
     LessonShowPageComponent,

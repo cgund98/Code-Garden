@@ -181,7 +181,7 @@ export class LessonEditPageComponent implements OnInit {
                 var group = this.sectionGroups[i];
                 var _id = group._id;
                 if (group._id) {
-                    console.log(group.text);
+                    // console.log(group.text);
                     await Meteor.callPromise('lessonSection.update', {
                     id: _id,
                     sectionObj: {
@@ -207,7 +207,7 @@ export class LessonEditPageComponent implements OnInit {
                 //     await Meteor.callPromise('lessonSection.insert', {group.value.title, group.content, group.value.expressions, group.outputs, group.starterCode, group.value.tasks, group.index, lessonID});
                 }
             }
-            console.log('Edited');
+            // console.log('Edited');
             this.router.navigate(['/courses/'+ this._course_id + '/lessons/' + this._lesson_id]);
         }
     }

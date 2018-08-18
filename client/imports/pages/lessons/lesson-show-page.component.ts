@@ -41,7 +41,6 @@ export class LessonShowPageComponent implements OnInit {
             this._course_id = params['_course_id'];
         })
         this.lessonObj = Lessons.findOne({_id: this._lesson_id});
-        this.editLink = './' + this._lesson_id + '/edit';
         this.sectionObjs = LessonSections.find({lessonID: this._lesson_id}, {sort: {seqNum: 1}}).fetch();
         this.progressObjs = SectionProgresses.find({lessonID: this._lesson_id}, {sort: {seqNum: 1}}).fetch();
 
@@ -52,9 +51,9 @@ export class LessonShowPageComponent implements OnInit {
             this.nextLessonLink = nextLesson ? '/courses/' + this._course_id + '/lessons/' + nextLesson._id : null
         } catch (err) {}
 
-        console.log(this.lessonObj);
-        console.log(this._lesson_id);
-        console.log(this.sectionObjs);
+        // console.log(this.lessonObj);
+        // console.log(this._lesson_id);
+        // console.log(this.sectionObjs);
 
 
         for (var i=0; i < this.sectionObjs.length; i++) {

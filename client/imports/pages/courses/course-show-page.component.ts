@@ -48,15 +48,8 @@ export class CourseShowPageComponent implements OnInit {
         this.sub = this.route.params.subscribe(params => {
             this._course_id = params['_course_id'];
         });
-        // this.route.data.subscribe(data => {
-        //     console.log(data);
-        // });
-        // console.log(this.courseObj);
-        this.newLessonLink = "/courses/" + this._course_id + "/create-lesson";
-        this.editLink = "/courses/" + this._course_id + "/edit";
         this.courseObj = Courses.findOne({_id: this._course_id});
         this.lessonObjs = Lessons.find({courseID: this._course_id}, {sort: {seqNum: 1}}).fetch();
-        console.log(this.courseObj);
 
         for (var i=0; i < this.lessonObjs.length; i++ ) {
             var lessonID = this.lessonObjs[i]._id;
