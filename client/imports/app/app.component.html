@@ -1,19 +1,18 @@
 <div *ngIf="ready">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <header class="main container">
-    <div class="logo col-xs-12 col-sm-2 col-md-2">CODE<span class="text-green">GARDEN</span></div>
+    <div class="logo col-xs-12 col-sm-2 col-md-2" [routerLink]="['/']">CODE<span class="text-green">GARDEN</span></div>
     <nav class="col-xs-12 col-sm-10 col-md-10">
         <div class="dropdown">
             <div class="parent"><a href="#" style="color: white;"><i class="fa fa-user-circle text-green" aria-hidden="true"></i><span style="display:inline" class="text-green" *ngIf="user"> {{ user.username }} </span><i class="fa fa-chevron-down" style="font-size: .75em; color: #222222 !important;" aria-hidden="true"></i></a></div>
             <div class="children" [style.right]="user ? '56px' : null">
                 <a type="submit" *ngIf="!user" [routerLink]="['/login']">Login</a>
-                <a *ngIf="user"[routerLink]="['/dashboard']">Dashboard</a>
                 <a *ngIf="user" [routerLink]="['/logout']">Logout</a>
                 <a *ngIf="!user" [routerLink]="['/signup']">Signup</a>
             </div>
         </div>
-        <a href="/courses">Courses</a>
-        <a href="#">Learn</a>
+        <a [routerLink]="['/courses']">Courses</a>
+        <a [routerLink]="['/']">Home</a>
     </nav>
 </header>
   <router-outlet></router-outlet>

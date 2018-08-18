@@ -18,6 +18,7 @@ import { CourseAuthGuard } from './auth-guards.service';
 import { CourseResolver } from './course.resolver';
 
 export const routes: Route[] = [
+    { path: '', component: DashboardShowPageComponent },
     { path: 'dashboard', component: DashboardShowPageComponent },
     { path: 'courses', component: CoursesShowPageComponent},
     { path: 'courses/:_course_id', component: CourseShowPageComponent

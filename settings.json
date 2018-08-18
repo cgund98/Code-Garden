@@ -1,12 +1,13 @@
 {
     "public": {
-        "_comment": "When you add a lang, don't forget to add syntax highlighting",
+        "_comment0": "When you add a lang, don't forget to add syntax highlighting",
+        "_comment1": "[compilebox_index, ace_mode, abbreviation]",
         "languages": {
-            "javascript": [4, "javascript"],
-            "ruby": [1, "ruby"],
-            "c++": [5, "c_cpp"],
-            "php": [3, "php"],
-            "python": [0, "python"]
+            "javascript": [4, "javascript", "JS"],
+            "ruby": [1, "ruby", "Ruby"],
+            "c++": [5, "c_cpp", "C++"],
+            "php": [3, "php", "PHP"],
+            "python": [0, "python", "Python"]
         }
     }
 }

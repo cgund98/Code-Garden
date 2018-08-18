@@ -3,5 +3,6 @@ Accounts.onCreateUser(function(options, user) {
    user.profile = {};
    user.profile.name = options.name;
    user.roles = {};
+   user.courseActivity = [];
    return user;
 });

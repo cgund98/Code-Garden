@@ -36,7 +36,17 @@ export class DashboardShowPageComponent implements OnInit {
         // console.log(enrolledCourseIDs);
         // console.log(taughtCourseIDs);
         this.enrolledCourseObjs = Courses.find({_id: {"$in": enrolledCourseIDs}}).fetch();
+        this.enrolledCourseObjs = this.enrolledCourseObjs.map(function(c) {
+            let author = Meteor.users.findOne({_id: c.authorID})
+            c.author = author ? author.profile.name : "??";
+            return c;
+        });
         this.taughtCourseObjs = Courses.find({_id: {"$in": taughtCourseIDs}}).fetch();
+        this.taughtCourseObjs = this.taughtCourseObjs.map(function(c) {
+            let author = Meteor.users.findOne({_id: c.authorID})
+            c.author = author ? author.profile.name : "??";
+            return c;
+        });
     }
 
 }

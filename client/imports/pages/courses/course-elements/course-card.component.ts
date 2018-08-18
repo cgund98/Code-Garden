@@ -8,13 +8,18 @@ import template from './course-card.component.html';
 })
 
 export class CourseCardComponent implements OnInit {
-  @Input() _id;
-  @Input() title;
-  @Input() author;
-  @Input() shortDesc;
-  @Input() date;
-  link: string;
+  @Input() _id: string;
+  @Input() title: string;
+  @Input() author: string;
+  @Input() shortDesc: string;
+  @Input() date: Date;
+  @Input() language: string;
+  la: string;
 
   ngOnInit() {
+      this.date = this.date.toDateString().substring(3);
+      try {
+          this.la = Meteor.settings.public.languages[this.language][2];
+      } catch(err) {}
   }
 }

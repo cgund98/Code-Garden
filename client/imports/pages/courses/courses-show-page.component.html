@@ -6,7 +6,7 @@
     <div class="course-cards-wrapper">
         <course-card *ngFor="let c of courseObjs | paginate: { itemsPerPage: 24, currentPage: p }" class="col-xs-12 col-md-4 col-xl-3"
         title="{{c.title}}" author="{{c.author}}" shortDesc="{{c.shortDesc}}"
-        date="{{ c.date }}" _id="{{c._id}}">
+        [date]="c.createdAt" _id="{{c._id}}" language="{{c.language}}">
         </course-card>
     </div>
     <div class="text-center pagination-wrapper">

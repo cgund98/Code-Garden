@@ -56,8 +56,10 @@ $breakpoints: (
 }
 
 // Main Styles
-a {
+a, .logo {
     text-decoration: none !important;
+    outline: none !important;
+    cursor: pointer;
     // color: $dark;
     transition: .75s ease-in-out;
     &:hover {
@@ -1222,6 +1224,15 @@ input[type=radio]:checked ~ label{
         float: right;
         opacity: 1;
         color: $dark;
+    }
+    .language {
+        position: absolute;
+        bottom: 5px;
+        right: 1em;
+        float: right;
+        font-size: 1em;
+        color: $dark !important;
+        display: inline-block;
     }
 }
 .footer-top {
