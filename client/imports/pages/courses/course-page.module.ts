@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { MiscCompsModule } from '../misc/misc-comps.module';
 import { LessonPageModule } from '../lessons/lesson-page.module.ts';
 
@@ -21,7 +22,8 @@ import { COURSE_ELEMENTS_DECLARATIONS } from './course-elements';
     MiscCompsModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule,
   ],
   declarations: [
     CourseShowPageComponent,

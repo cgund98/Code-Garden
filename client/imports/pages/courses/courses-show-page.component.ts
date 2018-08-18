@@ -13,6 +13,7 @@ import { Courses } from '../../../../both/collections/courses.collection';
 export class CoursesShowPageComponent implements OnInit {
     private sub: any;
     courseObjs: Array<any>;
+    p: number = 1;
 
     constructor() {
         Meteor.subscribe('courses');
