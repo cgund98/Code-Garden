@@ -9,7 +9,7 @@
         [date]="c.createdAt" _id="{{c._id}}" language="{{c.language}}">
         </course-card>
     </div>
-    <div class="text-center pagination-wrapper">
+    <div class="text-center pagination-wrapper" *ngIf="courseObjs.length > 24">
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 </div>

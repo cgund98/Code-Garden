@@ -5,31 +5,33 @@ import { Accounts } from 'meteor/accounts-base';
 import { MiscCompsModule } from '../../misc/misc-comps.module';
 import { validateEqual } from '../../misc/validate-equal';
 
-import template from './signup-show-page.component.html';
+import template from './signup-page.component.html';
 
 @Component({
-  selector: 'signup-show-page',
+  selector: 'signup-page',
   template
 })
 
-export class SignupShowPageComponent implements OnInit {
+export class SignupPageComponent implements OnInit {
 
-  signupForm: FormGroup;
-  error: string;
+    signupForm: FormGroup;
+    error: string;
 
-  constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {}
+    constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {
+        if (Meteor.user()) {
+            this.router.navigate(["/"]);
+        }
+    }
 
     ngOnInit() {
-      this.signupForm = this.formBuilder.group({
-        email: ['', Validators.required],
-        name: ['', Validators.required],
-        username: ['', Validators.required],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirm: ['', [Validators.required,]]
-      });
 
-      this.error='';
-
+        this.signupForm = this.formBuilder.group({
+            email: ['', Validators.required],
+            name: ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            confirm: ['', [Validators.required,]]
+        });
     }
 
     checkValids() {
@@ -56,9 +58,9 @@ export class SignupShowPageComponent implements OnInit {
         }, (err) => {
           if (err) {
               console.log("Error");
-              console.log(err);
+              // console.log(err);
             this.zone.run(() => {
-              this.error = err;
+              this.error = err.reason;
             });
           } else {
             console.log("Success!");

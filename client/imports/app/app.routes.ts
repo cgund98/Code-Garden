@@ -10,8 +10,9 @@ import { CoursesShowPageComponent } from '../pages/courses/courses-show-page.com
 import { CourseCreatePageComponent } from '../pages/courses/course-create-page.component';
 import { CourseEditPageComponent } from '../pages/courses/course-edit-page.component';
 
-import { LoginShowPageComponent } from '../pages/login/login-show-page.component';
-import { SignupShowPageComponent } from '../pages/signup/signup-show-page.component';
+import { LoginPageComponent } from '../pages/users/login-page.component';
+import { SignupPageComponent } from '../pages/users/signup-page.component';
+import { LogoutComponent } from '../pages/users/logout.component';
 import { DashboardShowPageComponent } from '../pages/dashboard/dashboard-show-page.component';
 
 import {CourseAuthGuard, PrivateCourseAuthGuard } from './auth-guards.service';
@@ -30,7 +31,8 @@ export const routes: Route[] = [
     { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent, canActivate: [CourseAuthGuard]
 },
     { path: 'create-course', component: CourseCreatePageComponent },
-    { path: 'login', component: LoginShowPageComponent },
-    { path: 'signup', component: SignupShowPageComponent },
+    { path: 'login', component: LoginPageComponent },
+    { path: 'signup', component: SignupPageComponent },
+    { path: 'logout', component: LogoutComponent },
 
 ];

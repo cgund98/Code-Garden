@@ -47,6 +47,7 @@ export class CourseCreatePageComponent implements OnInit {
             var course = this.newCourseForm.value;
             course.authorID = Meteor.userId();
             course.createdAt = new Date();
+            course.published = false;
             try {
                 let courseID = await Meteor.callPromise('Courses.create', course);
                 console.log(courseID)
