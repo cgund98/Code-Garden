@@ -14,5 +14,11 @@ Meteor.methods({
             text: 'test',
         });
         return mail;
+    },
+    'user.updateName'({name}) {
+        Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.name": name}});
+    },
+    'user.updateUsername'({username}) {
+        Meteor.users.update({_id: Meteor.userId()}, {$set: {"username": username}});
     }
 });

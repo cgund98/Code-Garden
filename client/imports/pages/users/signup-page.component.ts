@@ -2,8 +2,6 @@ import { Component, OnInit, NgZone, Attribute} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Accounts } from 'meteor/accounts-base';
-import { MiscCompsModule } from '../../misc/misc-comps.module';
-import { validateEqual } from '../../misc/validate-equal';
 
 import template from './signup-page.component.html';
 

@@ -4,10 +4,31 @@
         <p *ngFor="let t of tabs" [class.active]="currentTab==t" (click)="changeTab($event)">{{ t }}</p>
     </div>
     <div class="account-tabs-wrapper col-xs-12 col-md-9">
+        <form [formGroup]='updateForm' #f="ngForm">
         <div class="summary-tab" *ngIf="currentTab==='summary'">
             <h2 *ngIf="user">Name: {{ user.profile.name }}</h2>
             <h3 *ngIf="user">Username: {{ user.username }}</h3>
             <h3 *ngIf="user">Email: {{ user.emails[0].address }}</h3>
         </div>
+        <div class="name-tab" *ngIf="currentTab==='name'">
+            <h2 *ngIf="user">Name: {{ user.profile.name }}</h2>
+            <input *ngIf="user" formControlName="name"></input>
+            <button class="submit" (click)="updateName()">Update</button>
+        </div>
+        <div class="username-tab" *ngIf="currentTab==='username'">
+            <h2 *ngIf="user">Username: {{ user.username }}</h2>
+            <input *ngIf="user" formControlName="username"></input>
+            <button class="submit" (click)="updateUsername()">Update</button>
+            <p class="error" *ngIf="userLookup">User with that username already exists</p>
+        </div>
+        <div class="email-tab" *ngIf="currentTab==='email'">
+            <h2 *ngIf="user">Email: {{ user.emails[0].address }}</h2>
+            <input *ngIf="user" formControlName="email"></input>
+            <button class="submit">Update</button>
+        </div>
+        <div class="password-tab" *ngIf="currentTab==='password'">
+            <p *ngIf="user">Go <a [routerLink]="['/forgot-password']">here</a> to reset your password.</p>
+        </div>
+        </form>
     </div>
 </div>
