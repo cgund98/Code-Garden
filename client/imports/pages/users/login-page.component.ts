@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Meteor } from 'meteor/meteor';
+import { Email } from 'meteor/email';
 import { Accounts } from 'meteor/accounts-base';
 
 import template from './login-page.component.html';
@@ -20,7 +21,7 @@ export class LoginPageComponent implements OnInit {
 
    constructor(private router: Router,private zone: NgZone, private formBuilder: FormBuilder) {
        if (Meteor.user()) {
-           this.router.navigate(["/"]);
+           // this.router.navigate(["/"]);
        }
    }
 
@@ -52,6 +53,11 @@ export class LoginPageComponent implements OnInit {
             });
         });
         }
+    }
+
+    async sendEmail() {
+        // console.log(await Meteor.callPromise('user.sendEmail', {email: 'gundlachcallum@gmail.com'}));
+        console.log(Accounts.forgotPassword({email: 'gundlachcallum@gmail.com'}));
     }
 
 }

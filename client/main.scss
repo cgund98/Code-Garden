@@ -1569,3 +1569,19 @@ user-manage-card {
 .course-cards-wrapper {
     overflow: hidden;
 }
+.accounts-dialog {
+    & * {
+        font-family: GlacialIndifference, Helvetica, sans-serif !important;
+        font-size: 1.25em !important;
+        text-transform: capitalize;
+    }
+    .login-button {
+        background: $green;
+        border-radius: 0;
+        border: 0;
+        &:hover {
+            background: $green;
+            border: 0;
+        }
+    }
+}
