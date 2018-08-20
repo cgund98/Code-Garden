@@ -10,6 +10,7 @@ import { CoursesShowPageComponent } from '../pages/courses/courses-show-page.com
 import { CourseCreatePageComponent } from '../pages/courses/course-create-page.component';
 import { CourseEditPageComponent } from '../pages/courses/course-edit-page.component';
 
+import { ManageAccountPageComponent } from '../pages/users/manage-account-page.component';
 import { LoginPageComponent } from '../pages/users/login-page.component';
 import { SignupPageComponent } from '../pages/users/signup-page.component';
 import { ForgotPasswordPageComponent } from '../pages/users/forgot-password-page.component';
@@ -36,5 +37,6 @@ export const routes: Route[] = [
     { path: 'forgot-password', component: ForgotPasswordPageComponent },
     { path: 'signup', component: SignupPageComponent },
     { path: 'logout', component: LogoutComponent },
+    { path: 'account', component: ManageAccountPageComponent },
 
 ];

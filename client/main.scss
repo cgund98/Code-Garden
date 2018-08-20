@@ -1585,3 +1585,23 @@ user-manage-card {
         }
     }
 }
+.account-nav-wrapper {
+    border-right: #d8d8d8 2px solid;
+    p {
+        text-transform: capitalize;
+        cursor: pointer;
+        color: $green;
+        border-bottom: 2px solid white;
+        &.active {
+            border-bottom: 2px solid $green;
+        }
+    }
+}
+.account-tabs-wrapper {
+    div.summary-tab {
+        h2 {
+            font-weight: bold;
+            
+        }
+    }
+}

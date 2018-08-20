@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MiscCompsModule } from '../misc/misc-comps.module';
+import { ManageAccountPageComponent } from './manage-account-page.component';
 import { LoginPageComponent } from './login-page.component';
 import { SignupPageComponent } from './signup-page.component';
 import { ForgotPasswordPageComponent } from './forgot-password-page.component';
@@ -24,6 +25,7 @@ import { USER_ELEMENTS_DECLARATIONS } from './user-elements';
     SignupPageComponent,
     LogoutComponent,
     ForgotPasswordPageComponent,
+    ManageAccountPageComponent,
     ...USER_ELEMENTS_DECLARATIONS,
   ],
   entryComponents: [
@@ -31,12 +33,14 @@ import { USER_ELEMENTS_DECLARATIONS } from './user-elements';
     SignupPageComponent,
     LogoutComponent,
     ForgotPasswordPageComponent,
+    ManageAccountPageComponent,
   ],
   exports: [
     LoginPageComponent,
     SignupPageComponent,
     LogoutComponent,
     ForgotPasswordPageComponent,
+    ManageAccountPageComponent,
   ]
 })
 

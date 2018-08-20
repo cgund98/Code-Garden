@@ -1,0 +1,13 @@
+<main-hero title="MY ACCOUNT"></main-hero>
+<div class="container">
+    <div class="account-nav-wrapper col-xs-12 col-md-3">
+        <p *ngFor="let t of tabs" [class.active]="currentTab==t" (click)="changeTab($event)">{{ t }}</p>
+    </div>
+    <div class="account-tabs-wrapper col-xs-12 col-md-9">
+        <div class="summary-tab" *ngIf="currentTab==='summary'">
+            <h2 *ngIf="user">Name: {{ user.profile.name }}</h2>
+            <h3 *ngIf="user">Username: {{ user.username }}</h3>
+            <h3 *ngIf="user">Email: {{ user.emails[0].address }}</h3>
+        </div>
+    </div>
+</div>
