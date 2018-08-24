@@ -1,8 +1,11 @@
 <main-hero title="{{ title }}" subtitle="{{ language }}"></main-hero>
 <div class="container">
     <div class="text-center" *ngIf="!isEnrolled"><button class="enroll" (click)="enrollSelf()">ENROLL</button></div>
-    <div class="text-center" *ngIf="isAdmin"><button class="edit"><a [routerLink]="['/courses',_course_id,'edit']"><i class="fas fa fa-edit"></i>EDIT</a></button></div>
-    <div class="text-center" ><button *ngIf="isAdmin && !courseObj.published" class="edit" (click)="publishCourse">PUBLISH</button></div>
+    <div class="text-center" *ngIf="isAdmin">
+        <button class="edit"><a [routerLink]="['/courses',_course_id,'edit']"><i class="fas fa fa-edit"></i>EDIT</a></button>
+        <button *ngIf="isAdmin && !courseObj.published" class="edit" (click)="publishCourse()">PUBLISH</button>
+        <button *ngIf="isAdmin && courseObj.published" class="edit" (click)="unPublishCourse()">UNPUBLISH</button>
+    </div>
     <p class="course-description">{{ fullDesc }}</p>
     <div class="title-wrapper">
         <h4>Lessons</h4>

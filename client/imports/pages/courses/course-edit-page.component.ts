@@ -63,7 +63,7 @@ export class CourseEditPageComponent implements OnInit {
             var course = this.editCourseForm.value;
             course.createdAt = this.course.createdAt;
             course.authorID = this.course.authorID;
-            Meteor.call('Courses.edit', this._course_id, course);
+            Meteor.call('Courses.edit', {id: this._course_id, course});
             this.router.navigateByUrl('/courses/' + this._course_id);
         }
     }

@@ -8,5 +8,6 @@ export interface Course extends CollectionObject {
   language: string;
   authorID: string;
   date: string;
+  published: boolean;
   createdAt: Date;
 }

@@ -5,15 +5,20 @@ Meteor.methods({
         // console.log("Submitted form");
     },
 
-    'Courses.edit'(id, course){
+    'Courses.edit'({id, course}){
+        console.log(course);
         Courses.collection.update(id, course);
         // console.log("Submitted form");
     },
 
     'Courses.remove'(id){
         Courses.remove(id);
-
-        // console.log("Deleted");
+    },
+    'Courses.publish'(id){
+        let yeet = Courses.collection.update(id, {$set: {"published": true}});
+    },
+    'Courses.unpublish'(id){
+        Courses.collection.update(id, {$set: {"published": false}});
     }
 
 });

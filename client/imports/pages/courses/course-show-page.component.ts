@@ -153,9 +153,13 @@ export class CourseShowPageComponent implements OnInit {
           }
       }
     }
-    publish() {
-        this.courseObj.published = true;
-        Meteor.call('Courses.edit', {id: this._course_id, course: this.courseObj});
+    async publishCourse() {
+        await Meteor.callPromise('Courses.publish', this._course_id);
+        this.courseObj = Courses.findOne({_id: this._course_id});
+    }
+    async unPublishCourse() {
+        await Meteor.callPromise('Courses.unpublish', this._course_id);
+        this.courseObj = Courses.findOne({_id: this._course_id});
     }
 
     async updateUserArrays() {
