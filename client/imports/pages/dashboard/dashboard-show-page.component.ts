@@ -35,7 +35,7 @@ export class DashboardShowPageComponent implements OnInit {
         taughtCourseIDs.concat(Roles.getGroupsForUser(Meteor.user(), "admin"));
         // console.log(enrolledCourseIDs);
         // console.log(taughtCourseIDs);
-        this.enrolledCourseObjs = Courses.find({_id: {"$in": enrolledCourseIDs}}).fetch();
+        this.enrolledCourseObjs = Courses.find({_id: {"$in": enrolledCourseIDs}, published: true}).fetch();
         this.enrolledCourseObjs = this.enrolledCourseObjs.map(function(c) {
             let author = Meteor.users.findOne({_id: c.authorID})
             c.author = author ? author.profile.name : "??";

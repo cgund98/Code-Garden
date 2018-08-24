@@ -12,7 +12,7 @@ import { DashboardPageModule } from '../pages/dashboard/dashboard-page.module';
 import { UserPageModule } from '../pages/users/user-page.module';
 import { MiscCompsModule } from '../pages/misc/misc-comps.module';
 
-import {CourseAuthGuard, PrivateCourseAuthGuard} from './auth-guards.service';
+import {CourseAuthGuard, PrivateCourseAuthGuard, PublishedCourseAuthGuard} from './auth-guards.service';
 
 
 
@@ -41,6 +41,7 @@ import {CourseAuthGuard, PrivateCourseAuthGuard} from './auth-guards.service';
       { provide: APP_BASE_HREF, useValue : '/' },
       CourseAuthGuard,
       PrivateCourseAuthGuard,
+      PublishedCourseAuthGuard
   ]
 })
 

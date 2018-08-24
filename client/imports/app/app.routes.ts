@@ -17,21 +17,27 @@ import { ForgotPasswordPageComponent } from '../pages/users/forgot-password-page
 import { LogoutComponent } from '../pages/users/logout.component';
 import { DashboardShowPageComponent } from '../pages/dashboard/dashboard-show-page.component';
 
-import {CourseAuthGuard, PrivateCourseAuthGuard } from './auth-guards.service';
+import {CourseAuthGuard, PrivateCourseAuthGuard, PublishedCourseAuthGuard } from './auth-guards.service';
 
 export const routes: Route[] = [
     { path: '', component: DashboardShowPageComponent },
     { path: 'dashboard', component: DashboardShowPageComponent },
     { path: 'courses', component: CoursesShowPageComponent},
-    { path: 'courses/:_course_id', component: CourseShowPageComponent, canActivate: [PrivateCourseAuthGuard],
-},
-    { path: 'courses/:_course_id/edit', component: CourseEditPageComponent, canActivate: [CourseAuthGuard]
-},
-    { path: 'courses/:_course_id/lessons/:_lesson_id', component: LessonShowPageComponent, canActivate: [PrivateCourseAuthGuard], },
-    { path: 'courses/:_course_id/lessons/:_lesson_id/edit', component: LessonEditPageComponent, canActivate: [CourseAuthGuard]
-},
-    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent, canActivate: [CourseAuthGuard]
-},
+    { path: 'courses/:_course_id', component: CourseShowPageComponent,
+        canActivate: [PrivateCourseAuthGuard, PublishedCourseAuthGuard],
+    },
+    { path: 'courses/:_course_id/edit', component: CourseEditPageComponent,
+        canActivate: [CourseAuthGuard, PublishedCourseAuthGuard]
+    },
+    { path: 'courses/:_course_id/lessons/:_lesson_id', component: LessonShowPageComponent,
+        canActivate: [PrivateCourseAuthGuard, PublishedCourseAuthGuard],
+    },
+    { path: 'courses/:_course_id/lessons/:_lesson_id/edit', component: LessonEditPageComponent,
+        canActivate: [CourseAuthGuard, PublishedCourseAuthGuard]
+    },
+    { path: 'courses/:_course_id/create-lesson', component: LessonCreatePageComponent,
+        canActivate: [CourseAuthGuard, PublishedCourseAuthGuard]
+    },
     { path: 'create-course', component: CourseCreatePageComponent },
     { path: 'login', component: LoginPageComponent },
     { path: 'forgot-password', component: ForgotPasswordPageComponent },

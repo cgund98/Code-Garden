@@ -49,3 +49,27 @@ export class PrivateCourseAuthGuard implements CanActivate {
         return true;
     }
 }
+
+@Injectable()
+export class PublishedCourseAuthGuard implements CanActivate {
+
+    constructor(public router: Router) {
+        Meteor.subscribe('courses');
+    }
+
+    async canActivate(route: ActivatedRouteSnapshot): boolean {
+        // console.log("yeet");
+        let hasPerms = await Meteor.callPromise('roles.userHasPerms', {
+            targetUserId: Meteor.userId(),
+            course: route.params._course_id,
+            roles: ["admin", "owner"]
+        })
+        let pub = Courses.findOne({_id: route.params._course_id}).published;
+        // console.log(hasPerms);
+        if (!hasPerms && !pub) {
+          this.router.navigate(["/courses"]);
+          return false;
+        }
+        return true;
+    }
+}
