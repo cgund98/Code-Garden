@@ -38,13 +38,20 @@ export class CourseShowPageComponent implements OnInit {
 
     isEnrolled: boolean = false;
     isAdmin: boolean = false;
+    user: string;
 
     constructor(private route: ActivatedRoute, private router: Router, private zone: NgZone) {
-        Meteor.subscribe('courses');
+        this.subsc = Meteor.subscribe('courses');
         Meteor.subscribe('lessons');
     }
 
     ngOnInit() {
+        Tracker.autorun(() => {
+            if (!this.subsc.ready()) {
+                return;
+            }
+        })
+        this.user = Meteor.userId();
         this.sub = this.route.params.subscribe(params => {
             this._course_id = params['_course_id'];
         });

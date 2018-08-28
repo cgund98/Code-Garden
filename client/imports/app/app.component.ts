@@ -17,26 +17,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
     error: string;
     ready: boolean = false;
-    // navigationSubscription;
-    constructor(private router: Router, private zone: NgZone) {
-     //  this.navigationSubscription = this.router.events.subscribe((e: any) => {
-     // // If it is a NavigationEnd event re-initalise the component
-     // if (e instanceof NavigationEnd) {
-     //       this.ngOnInit();
-     //     }
-     //   });
-    }
+    constructor(private router: Router, private zone: NgZone) {}
 
     ngOnInit() {
         // particlesJS.load('particles-js', '/assets/particles.json', null);
         function checkForData(router) {
             console.log('Checking...');
             if (Meteor.user()) {
-            // if (Courses.find({}).fetch().length > 0 && Courses.find({}).fetch().length > 0) {
-                // console.log(Courses.find({}).fetch());
-                // var url = router.url;
-                // router.navigateByUrl('/create-course', {skipLocationChange: true}).then(()=>
-                // router.navigate([url]));
                 return true;
             }
             return false;
@@ -45,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
           return new Promise(resolve => setTimeout(resolve, ms));
         }
         async function waitForData(handles) {
-            for (var i=0; i < 200; i++ ) {
+            for (var i=0; i < 1000; i++ ) {
                 var ready = true;
                 Tracker.autorun(() => {
                   handles.map(handle => {
@@ -66,7 +53,8 @@ export class AppComponent implements OnInit, OnDestroy {
             this.ready = waitForData([cHandle, lHandle, lsHandle, spHandle]).then(function() {
                 var url = this.router.url;
                 // console.log(url);
-                this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+                let navUrl = url == '/' ? '/courses' : '/';
+                this.router.navigateByUrl(navUrl, {skipLocationChange: true}).then(()=>
                 this.router.navigate([url]));
             }.bind(this));
         }

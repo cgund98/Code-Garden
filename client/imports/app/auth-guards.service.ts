@@ -8,9 +8,16 @@ import { Courses } from '../../../both/collections/courses.collection';
 @Injectable()
 export class CourseAuthGuard implements CanActivate {
 
-    constructor(public router: Router) {}
+    constructor(public router: Router) {
+        sub = this.subscribe('courses');
+    }
 
     async canActivate(route: ActivatedRouteSnapshot): boolean {
+        Tracker.autorun(() => {
+            if (!sub.ready()) {
+                return true;
+            }
+        })
         // console.log("yeet");
         let hasPerms = await Meteor.callPromise('roles.userHasPerms', {
             targetUserId: Meteor.userId(),
@@ -30,10 +37,16 @@ export class CourseAuthGuard implements CanActivate {
 export class PrivateCourseAuthGuard implements CanActivate {
 
     constructor(public router: Router) {
-        Meteor.subscribe('courses');
+        sub = Meteor.subscribe('courses');
     }
 
     async canActivate(route: ActivatedRouteSnapshot): boolean {
+
+        Tracker.autorun(() => {
+            if (!sub.ready()) {
+                return true;
+            }
+        })
         // console.log("yeet");
         let hasPerms = await Meteor.callPromise('roles.userHasPerms', {
             targetUserId: Meteor.userId(),
@@ -54,10 +67,15 @@ export class PrivateCourseAuthGuard implements CanActivate {
 export class PublishedCourseAuthGuard implements CanActivate {
 
     constructor(public router: Router) {
-        Meteor.subscribe('courses');
+        sub = Meteor.subscribe('courses');
     }
 
     async canActivate(route: ActivatedRouteSnapshot): boolean {
+        Tracker.autorun(() => {
+            if (!sub.ready()) {
+                return true;
+            }
+        })
         // console.log("yeet");
         let hasPerms = await Meteor.callPromise('roles.userHasPerms', {
             targetUserId: Meteor.userId(),

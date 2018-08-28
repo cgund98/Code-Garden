@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import template from './courses-show-page.component.html';
 
+import { Course } from '../../../../both/models/course.model';
 import { Courses } from '../../../../both/collections/courses.collection';
 
 @Component({
@@ -12,7 +13,7 @@ import { Courses } from '../../../../both/collections/courses.collection';
 
 export class CoursesShowPageComponent implements OnInit {
     private sub: any;
-    courseObjs: Array<any>;
+    courseObjs: Array<Course> = [];
     p: number = 1;
 
     constructor() {
@@ -20,12 +21,14 @@ export class CoursesShowPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.courseObjs = Courses.find({private: false, published: true}).fetch();
-        this.courseObjs = this.courseObjs.map(function(c) {
-            let author = Meteor.users.findOne({_id: c.authorID})
-            c.author = author ? author.profile.name : "??";
-            return c;
-        });
+        this.populateCourses();
+    }
 
+    async populateCourses() {
+        this.courseObjs = Courses.find({private: false, published: true}).fetch();
+        for (let c of this.courseObjs) {
+            let author = await Meteor.callPromise('user.getName', c.authorID);
+            c.author = author ? author : "??";
+        }
     }
 }

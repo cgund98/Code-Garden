@@ -15,38 +15,41 @@ import template from './dashboard-show-page.component.html';
 
 export class DashboardShowPageComponent implements OnInit {
 
-    enrolledCourseObjs: Array<Course>;
-    taughtCourseObjs: Array<Course>;
+    enrolledCourseObjs: Array<Course> = [];
+    taughtCourseObjs: Array<Course> = [];
     p1: number = 1;
     p2: number = 1;
+    sub: any;
 
-    constructor() {
-        Meteor.subscribe("courses");
+    constructor(private router: Router) {
+        this.sub = Meteor.subscribe("courses");
     }
 
     ngOnInit() {
-        // console.log(Meteor.call('roles.getRolesForUser', {targetUserId: Meteor.userId()}));
-        // try {
-        //     var courses = Object.keys(Meteor.user().roles);
-        //     console.log(courses);
-        // } catch (err) {}
+        Tracker.autorun(() => {
+            if (this.sub.ready() && !Meteor.user()) {
+                this.router.navigate(["/login"]);
+            }
+        })
+        this.populateCourses();
+    }
+
+    async populateCourses() {
         enrolledCourseIDs = Roles.getGroupsForUser(Meteor.user(), "student");
         taughtCourseIDs = Roles.getGroupsForUser(Meteor.user(), "owner");
         taughtCourseIDs.concat(Roles.getGroupsForUser(Meteor.user(), "admin"));
-        // console.log(enrolledCourseIDs);
-        // console.log(taughtCourseIDs);
-        this.enrolledCourseObjs = Courses.find({_id: {"$in": enrolledCourseIDs}, published: true}).fetch();
-        this.enrolledCourseObjs = this.enrolledCourseObjs.map(function(c) {
-            let author = Meteor.users.findOne({_id: c.authorID})
-            c.author = author ? author.profile.name : "??";
-            return c;
-        });
+
         this.taughtCourseObjs = Courses.find({_id: {"$in": taughtCourseIDs}}).fetch();
-        this.taughtCourseObjs = this.taughtCourseObjs.map(function(c) {
-            let author = Meteor.users.findOne({_id: c.authorID})
-            c.author = author ? author.profile.name : "??";
-            return c;
-        });
+        for (let c of this.taughtCourseObjs) {
+            let author = await Meteor.callPromise('user.getName', c.authorID);
+            c.author = author ? author : "??";
+        }
+
+        this.enrolledCourseObjs = Courses.find({_id: {"$in": enrolledCourseIDs}, published: true}).fetch();
+        for (let c of this.enrolledCourseObjs) {
+            let author = await Meteor.callPromise('user.getName', c.authorID);
+            c.author = author ? author : "??";
+        }
     }
 
 }

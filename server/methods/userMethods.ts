@@ -20,5 +20,9 @@ Meteor.methods({
     },
     'user.updateUsername'({username}) {
         Meteor.users.update({_id: Meteor.userId()}, {$set: {"username": username}});
+    },
+    'user.getName'(id) {
+        // return Meteor.users.findOne({_id: id});
+        return Meteor.users.findOne({_id: id}).profile.name;
     }
 });

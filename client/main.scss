@@ -1336,6 +1336,7 @@ $duration: 1.4s;
 code {
     font-family: "Roboto Mono";
     font-size: 14px;
+    border-radius: 0px;
 }
 .user-section-wrapper {
     margin-top: 2em;
@@ -1601,7 +1602,7 @@ user-manage-card {
     div.summary-tab {
         h2 {
             font-weight: bold;
-            
+
         }
     }
 }
