@@ -9,7 +9,7 @@ import { Courses } from '../../../both/collections/courses.collection';
 export class CourseAuthGuard implements CanActivate {
 
     constructor(public router: Router) {
-        sub = this.subscribe('courses');
+        sub = Meteor.subscribe('courses');
     }
 
     async canActivate(route: ActivatedRouteSnapshot): boolean {
