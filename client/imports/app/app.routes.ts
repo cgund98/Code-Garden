@@ -17,6 +17,8 @@ import { ForgotPasswordPageComponent } from '../pages/users/forgot-password-page
 import { LogoutComponent } from '../pages/users/logout.component';
 import { DashboardShowPageComponent } from '../pages/dashboard/dashboard-show-page.component';
 
+import { NotFoundPageComponent } from '../pages/misc/not-found-page.component';
+
 import {CourseAuthGuard, PrivateCourseAuthGuard, PublishedCourseAuthGuard } from './auth-guards.service';
 
 export const routes: Route[] = [
@@ -44,5 +46,8 @@ export const routes: Route[] = [
     { path: 'signup', component: SignupPageComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'account', component: ManageAccountPageComponent },
+
+    {path: '404', component: NotFoundPageComponent},
+    {path: '**', component: NotFoundPageComponent}
 
 ];

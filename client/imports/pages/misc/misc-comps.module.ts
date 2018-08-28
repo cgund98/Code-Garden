@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { LessonShowPageComponent } from './lesson-show-page.component';
+
+import { NotFoundPageComponent } from './not-found-page.component';
 
 import { MISC_ELEMENTS_DECLARATIONS } from './';
 
@@ -9,15 +10,15 @@ import { MISC_ELEMENTS_DECLARATIONS } from './';
     BrowserModule,
   ],
   declarations: [
-    // LessonShowPageComponent,
+    NotFoundPageComponent,
     ...MISC_ELEMENTS_DECLARATIONS,
   ],
   entryComponents: [
-    // LessonShowPageComponent,
+    NotFoundPageComponent,
     ...MISC_ELEMENTS_DECLARATIONS,
   ],
   exports: [
-    // LessonShowPageComponent,
+    NotFoundPageComponent,
     ...MISC_ELEMENTS_DECLARATIONS,
   ]
 })
