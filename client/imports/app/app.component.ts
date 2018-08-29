@@ -5,6 +5,10 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { InjectUser } from 'angular2-meteor-accounts-ui';
 
+import {enableProdMode} from '@angular/core';
+
+enableProdMode();
+
 import { Courses } from '../../../both/collections/courses.collection';
 import template from './app.component.html';
 
