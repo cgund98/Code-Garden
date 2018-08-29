@@ -75,32 +75,9 @@ export class LessonSectionComponent implements OnInit {
 
        // console.log(this.progressObj);
    }
-   // ngAfterViewInit() {
-   //     console.log(this.editor);
-   //     this.editor.getEditor().setOptions({
-   //          enableBasicAutocompletion: true
-   //      });
-   //
-   //      this.editor.getEditor().commands.addCommand({
-   //          name: "showOtherCompletions",
-   //          bindKey: "Ctrl-s",
-   //          exec: function (editor) {
-   //
-   //          }
-   //      })
-   // }
 
    runCode() {
-       // if (this.outputs == "") {
-       //     this.ran = true;
-       //     this.success = true;
-       //     this.progressObj.sectionProgress = 1;
-       //     SectionProgresses.update(this.progressObj._id, { $set: {
-       //         sectionProgress: 1,
-       //     } });
-       //     return;
-       // }
-       this.http.post('http://localhost:8080/compile', {
+       this.http.post('http://' + window.location.hostname + ':8080/compile', {
            code: this.editorText,
            language: Meteor.settings.public.languages[this.language][0]
        }).subscribe(

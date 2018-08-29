@@ -1,5 +1,8 @@
 <main-hero title="Courses"></main-hero>
 <div class="container">
+    <div class="text-center">
+        <button class="add add-section card" *ngIf="user" type="button" [routerLink]="['/create-course']"><i class="fa fa-plus" aria-hidden="true"></i> Create Course</button>
+    </div>
     <div class="title-wrapper">
         <h4>Available Courses</h4>
     </div>

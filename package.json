@@ -32,7 +32,6 @@
     "quill-delta-to-html": "^0.8.4",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^5.5.6",
-    "thebluealliance": "^1.2.3",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {

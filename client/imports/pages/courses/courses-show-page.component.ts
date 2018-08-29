@@ -15,6 +15,7 @@ export class CoursesShowPageComponent implements OnInit {
     private sub: any;
     courseObjs: Array<Course> = [];
     p: number = 1;
+    user: string;
 
     constructor() {
         Meteor.subscribe('courses');
@@ -22,6 +23,7 @@ export class CoursesShowPageComponent implements OnInit {
 
     ngOnInit() {
         this.populateCourses();
+        this.user = Meteor.userId();
     }
 
     async populateCourses() {
